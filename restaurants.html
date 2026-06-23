@@ -1,78 +1,129 @@
-```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Restaurants</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Restaurants | Long Beach Resort</title>
 
 <style>
 
 body{
+font-family:Arial,sans-serif;
 background:#08111f;
 color:white;
-font-family:Arial;
-padding:30px;
+margin:0;
+}
+
+header{
+background:#0b1320;
+padding:20px;
+text-align:center;
 }
 
 h1{
 color:#d4af37;
-text-align:center;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
 }
 
 .restaurant{
 background:#122033;
-padding:20px;
-margin:20px 0;
 border-radius:15px;
+padding:25px;
+margin-bottom:20px;
 }
 
 .restaurant h2{
 color:#d4af37;
+margin-bottom:10px;
 }
 
-a{
-color:#d4af37;
+.badge{
+display:inline-block;
+background:#d4af37;
+color:black;
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+background:#d4af37;
+color:black;
+padding:12px 20px;
 text-decoration:none;
+border-radius:10px;
+font-weight:bold;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h1>Restaurants Directory</h1>
+<header>
+<h1>Long Beach Restaurants Directory</h1>
+<p>Food & Beverage Guide</p>
+</header>
+
+<div class="container">
 
 <div class="restaurant">
+<div class="badge">Main Restaurant</div>
 <h2>ALDENTE</h2>
-<p>Main Restaurant</p>
+<p>Main buffet restaurant serving breakfast, lunch and dinner.</p>
 </div>
 
 <div class="restaurant">
+<div class="badge">Main Restaurant</div>
 <h2>D'WHITE</h2>
-<p>Main Restaurant</p>
+<p>Main buffet restaurant with international cuisine.</p>
 </div>
 
 <div class="restaurant">
+<div class="badge">Buffet</div>
 <h2>BREEZE</h2>
-<p>International Buffet</p>
+<p>International buffet experience.</p>
 </div>
 
 <div class="restaurant">
+<div class="badge">Italian</div>
 <h2>Dolce Vita</h2>
-<p>Italian Restaurant</p>
+<p>Italian specialty restaurant.</p>
 </div>
 
 <div class="restaurant">
+<div class="badge">Asian</div>
 <h2>Openbill</h2>
-<p>Asian Restaurant</p>
+<p>Asian specialty restaurant.</p>
 </div>
 
 <div class="restaurant">
+<div class="badge">Seafood</div>
 <h2>Mary Sol</h2>
-<p>Seafood Restaurant</p>
+<p>Seafood dining experience.</p>
+</div>
+
+<div class="restaurant">
+<div class="badge">Mexican</div>
+<h2>Cactus</h2>
+<p>Mexican specialty restaurant.</p>
+</div>
+
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
 </div>
 
 </body>
 </html>
-```
