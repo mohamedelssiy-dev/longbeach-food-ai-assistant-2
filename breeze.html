@@ -21,8 +21,19 @@ padding:30px;
 text-align:center;
 }
 
+.category{
+display:inline-block;
+background:#d4af37;
+color:black;
+padding:8px 18px;
+border-radius:20px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
 h1{
 color:#d4af37;
+margin:10px 0;
 }
 
 .container{
@@ -47,7 +58,6 @@ margin-bottom:15px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
-margin-top:20px;
 }
 
 .info-box{
@@ -63,6 +73,7 @@ margin-bottom:10px;
 
 ul{
 line-height:1.8;
+padding-left:20px;
 }
 
 .back{
@@ -84,6 +95,10 @@ margin-top:20px;
 
 <header>
 
+<div class="category">
+MAIN RESTAURANT
+</div>
+
 <h1>BREEZE Restaurant</h1>
 
 <p>International Buffet Restaurant</p>
@@ -91,6 +106,36 @@ margin-top:20px;
 </header>
 
 <div class="container">
+
+<div class="card">
+
+<h2>Restaurant Information</h2>
+
+<div class="info">
+
+<div class="info-box">
+<h3>🍽 Restaurant Type</h3>
+<p>Main Restaurant</p>
+</div>
+
+<div class="info-box">
+<h3>🌍 Cuisine</h3>
+<p>International Buffet</p>
+</div>
+
+<div class="info-box">
+<h3>📱 Reservation</h3>
+<p>Required for Indian Lunch</p>
+</div>
+
+<div class="info-box">
+<h3>⭐ Premium Access</h3>
+<p>Included</p>
+</div>
+
+</div>
+
+</div>
 
 <div class="card">
 
@@ -147,7 +192,7 @@ margin-top:20px;
 <li>Late Breakfast: 10:30 - 11:30</li>
 <li>Indian Lunch Buffet: 13:00 - 15:00</li>
 <li>Dinner Buffet: 18:30 - 21:30</li>
-<li>Reservation required for Indian Lunch.</li>
+<li>Reservation available through Application.</li>
 <li>High Chairs available for children.</li>
 <li>Suitable for families.</li>
 <li>Black Wristband benefits available.</li>
@@ -162,7 +207,7 @@ margin-top:20px;
 <ul>
 <li>Included for Premium Rooms.</li>
 <li>Included for Premium Deluxe Rooms.</li>
-<li>Included for Black band Guests.</li>
+<li>Included for Black Wristband Guests.</li>
 <li>Other room categories: $10 per person.</li>
 </ul>
 
