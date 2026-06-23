@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Room Service | Long Beach Resort</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#08111f;
+color:white;
+margin:0;
+}
+
+header{
+background:#0b1320;
+padding:30px;
+text-align:center;
+}
+
+h1{
+color:#d4af37;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+}
+
+.search{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+font-size:16px;
+margin-bottom:25px;
+}
+
+.section{
+background:#122033;
+padding:25px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.section h2{
+color:#d4af37;
+margin-bottom:15px;
+}
+
+.item{
+padding:8px 0;
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.item:last-child{
+border-bottom:none;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+background:#d4af37;
+color:black;
+padding:12px 20px;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🛎️ Room Service</h1>
+
+<p>Long Beach Resort In-Room Dining</p>
+
+</header>
+
+<div class="container">
+
+<input
+type="text"
+class="search"
+id="search"
+placeholder="Search menu..."
+onkeyup="filterMenu()"
+>
+
+<div class="section">
+
+<h2>🍝 Italian Selection</h2>
+
+<div class="item">Lasagna</div>
+<div class="item">Penne Alfredo</div>
+<div class="item">Margherita Pizza</div>
+
+</div>
+
+<div class="section">
+
+<h2>🥢 Asian Selection</h2>
+
+<div class="item">Spring Roll</div>
+<div class="item">Sweet & Sour Chicken</div>
+<div class="item">Chicken Tao</div>
+<div class="item">Szechuan Beef</div>
+<div class="item">Korean Chicken Noodles</div>
+<div class="item">Korean Beef Noodles</div>
+<div class="item">Korean Seafood Noodles</div>
+
+</div>
+
+<div class="section">
+
+<h2>🦞 Seafood Selection</h2>
+
+<div class="item">Seafood Salad</div>
+<div class="item">Grilled Salmon Steak</div>
+<div class="item">Calamari Casserole</div>
+<div class="item">Mixed Seafood</div>
+<div class="item">Seafood Pasta</div>
+
+</div>
+
+<div class="section">
+
+<h2>🇮🇳 Indian Selection</h2>
+
+<div class="item">Murgh Wings Masala</div>
+<div class="item">Aloo Samosa</div>
+<div class="item">Murgh Tandoori</div>
+<div class="item">Murgh Jalfrezi</div>
+<div class="item">Machi Madras</div>
+<div class="item">Gosht Vindaloo</div>
+<div class="item">Chana Masala</div>
+<div class="item">Vegetable Curry</div>
+<div class="item">Dal Makhani</div>
+<div class="item">Murgh Biryani</div>
+
+</div>
+
+<div class="section">
+
+<h2>🌍 International Selection</h2>
+
+<div class="item">Chicken Caesar Salad</div>
+<div class="item">Fish & Chips</div>
+<div class="item">Grilled Beef Fillet</div>
+<div class="item">Beef Stroganoff</div>
+<div class="item">Creamy Tuscan Chicken</div>
+<div class="item">Chicken Supreme</div>
+<div class="item">Grilled Fish with Lemon Caper Sauce</div>
+
+</div>
+
+<div class="section">
+
+<h2>🇳🇺 Nubian Selection</h2>
+
+<div class="item">Mix Grill Meat</div>
+<div class="item">Chicken Shish Tawouk</div>
+<div class="item">Beef Kebab</div>
+<div class="item">Beef Tagine</div>
+<div class="item">Thareed Fattah</div>
+
+</div>
+
+<div class="section">
+
+<h2>🍰 Desserts Collection</h2>
+
+<div class="item">Molten Chocolate Cake</div>
+<div class="item">Crème Brûlée</div>
+<div class="item">Gulab Jamun</div>
+<div class="item">Umm Ali</div>
+<div class="item">Fruit Salad with Ice Cream</div>
+
+</div>
+
+<div class="section">
+
+<h2>☕ Beverages</h2>
+
+<div class="item">Espresso</div>
+<div class="item">Cappuccino</div>
+<div class="item">Tea</div>
+<div class="item">Soft Drinks</div>
+<div class="item">Fresh Juice</div>
+<div class="item">Mineral Water</div>
+
+</div>
+
+<div class="section">
+
+<h2>⭐ Signature Specials</h2>
+
+<div class="item">Classic Lobster Thermidor</div>
+<div class="item">Asian Style Lobster</div>
+<div class="item">Zinga</div>
+
+</div>
+
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
+</div>
+
+<script>
+
+function filterMenu(){
+
+let input =
+document.getElementById("search").value.toLowerCase();
+
+let items =
+document.getElementsByClassName("item");
+
+for(let i=0;i<items.length;i++){
+
+let text =
+items[i].innerText.toLowerCase();
+
+if(text.includes(input)){
+items[i].style.display="";
+}
+else{
+items[i].style.display="none";
+}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
