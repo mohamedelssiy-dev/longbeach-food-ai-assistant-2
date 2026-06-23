@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Food Assistant | Long Beach Resort</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#08111f;
+color:white;
+margin:0;
+}
+
+header{
+background:#0b1320;
+padding:30px;
+text-align:center;
+}
+
+h1{
+color:#d4af37;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px;
+text-align:center;
+}
+
+.card{
+background:#122033;
+padding:25px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+button{
+background:#d4af37;
+color:black;
+border:none;
+padding:15px 20px;
+margin:10px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+padding:20px;
+background:#0f1b2c;
+border-radius:10px;
+text-align:left;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+padding:12px 20px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>🤖 AI Food Assistant</h1>
+<p>Long Beach Resort</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Choose a Category</h2>
+
+<button onclick="showVegetarian()">
+🥗 Vegetarian
+</button>
+
+<button onclick="showSeafood()">
+🐟 Seafood
+</button>
+
+<button onclick="showGlutenFree()">
+🌾 Gluten Alert
+</button>
+
+<button onclick="showPremium()">
+⭐ Premium Restaurants
+</button>
+
+<div id="result">
+
+Welcome! Select a category above.
+
+</div>
+
+</div>
+
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
+</div>
+
+<script>
+
+function showVegetarian(){
+
+document.getElementById("result").innerHTML = `
+<h3>🥗 Vegetarian Options</h3>
+
+<ul>
+<li>Chana Masala (Breeze)</li>
+<li>Vegetable Curry (Breeze)</li>
+<li>Dal Makhani (Breeze)</li>
+<li>Sabzi Biryani (Breeze)</li>
+<li>Luhan Vegetables (Openbill)</li>
+<li>Korean Vegetable Noodles (Openbill)</li>
+</ul>
+`;
+
+}
+
+function showSeafood(){
+
+document.getElementById("result").innerHTML = `
+<h3>🐟 Seafood Restaurants</h3>
+
+<ul>
+<li>Mary Sol Seafood Restaurant</li>
+<li>Seafood Pasta</li>
+<li>Grilled Salmon Steak</li>
+<li>Mixed Seafood</li>
+<li>Calamari Casserole</li>
+</ul>
+`;
+
+}
+
+function showGlutenFree(){
+
+document.getElementById("result").innerHTML = `
+<h3>⚠️ Gluten Alert</h3>
+
+<p>
+Avoid:
+</p>
+
+<ul>
+<li>Aloo Samosa</li>
+<li>Umm Ali</li>
+<li>Oriental Sweets</li>
+<li>Orzo Soup</li>
+<li>Fish & Chips</li>
+</ul>
+`;
+
+}
+
+function showPremium(){
+
+document.getElementById("result").innerHTML = `
+<h3>⭐ Premium Benefits</h3>
+
+<ul>
+<li>Breeze Indian Lunch Included</li>
+<li>Specialty Restaurant Access</li>
+<li>Premium Room Benefits</li>
+<li>Premium Deluxe Benefits</li>
+</ul>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
