@@ -30,22 +30,28 @@ color:#d4af37;
 max-width:1000px;
 margin:auto;
 padding:30px;
-text-align:center;
 }
 
 .card{
 background:#122033;
 padding:25px;
 border-radius:15px;
-margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+font-size:16px;
+margin-bottom:15px;
 }
 
 button{
 background:#d4af37;
 color:black;
 border:none;
-padding:15px 20px;
-margin:10px;
+padding:12px 25px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
@@ -56,7 +62,7 @@ margin-top:20px;
 padding:20px;
 background:#0f1b2c;
 border-radius:10px;
-text-align:left;
+min-height:120px;
 }
 
 .back{
@@ -78,35 +84,25 @@ font-weight:bold;
 
 <header>
 <h1>🤖 AI Food Assistant</h1>
-<p>Long Beach Resort</p>
+<p>Ask about restaurants, allergies and menus</p>
 </header>
 
 <div class="container">
 
 <div class="card">
 
-<h2>Choose a Category</h2>
+<input
+id="question"
+type="text"
+placeholder="Example: vegetarian dishes"
+/>
 
-<button onclick="showVegetarian()">
-🥗 Vegetarian
-</button>
-
-<button onclick="showSeafood()">
-🐟 Seafood
-</button>
-
-<button onclick="showGlutenFree()">
-🌾 Gluten Alert
-</button>
-
-<button onclick="showPremium()">
-⭐ Premium Restaurants
+<button onclick="askAI()">
+Ask AI
 </button>
 
 <div id="result">
-
-Welcome! Select a category above.
-
+Welcome! Ask me about food, restaurants or allergies.
 </div>
 
 </div>
@@ -119,9 +115,18 @@ Welcome! Select a category above.
 
 <script>
 
-function showVegetarian(){
+function askAI(){
 
-document.getElementById("result").innerHTML = `
+let q=document.getElementById("question").value.toLowerCase();
+
+let result="";
+
+if(
+q.includes("vegetarian") ||
+q.includes("vegan")
+){
+
+result=`
 <h3>🥗 Vegetarian Options</h3>
 
 <ul>
@@ -136,15 +141,18 @@ document.getElementById("result").innerHTML = `
 
 }
 
-function showSeafood(){
+else if(
+q.includes("seafood")
+){
 
-document.getElementById("result").innerHTML = `
-<h3>🐟 Seafood Restaurants</h3>
+result=`
+<h3>🐟 Seafood Recommendations</h3>
+
+<p><strong>Mary Sol Restaurant</strong></p>
 
 <ul>
-<li>Mary Sol Seafood Restaurant</li>
-<li>Seafood Pasta</li>
 <li>Grilled Salmon Steak</li>
+<li>Seafood Pasta</li>
 <li>Mixed Seafood</li>
 <li>Calamari Casserole</li>
 </ul>
@@ -152,14 +160,14 @@ document.getElementById("result").innerHTML = `
 
 }
 
-function showGlutenFree(){
+else if(
+q.includes("gluten")
+){
 
-document.getElementById("result").innerHTML = `
+result=`
 <h3>⚠️ Gluten Alert</h3>
 
-<p>
 Avoid:
-</p>
 
 <ul>
 <li>Aloo Samosa</li>
@@ -172,18 +180,62 @@ Avoid:
 
 }
 
-function showPremium(){
+else if(
+q.includes("premium")
+){
 
-document.getElementById("result").innerHTML = `
+result=`
 <h3>⭐ Premium Benefits</h3>
 
 <ul>
 <li>Breeze Indian Lunch Included</li>
-<li>Specialty Restaurant Access</li>
-<li>Premium Room Benefits</li>
+<li>Premium Restaurant Access</li>
 <li>Premium Deluxe Benefits</li>
 </ul>
 `;
+
+}
+
+else if(
+q.includes("open")
+||
+q.includes("restaurant")
+){
+
+result=`
+<h3>🍽 Available Restaurants</h3>
+
+ALDENTE<br>
+D'WHITE<br>
+BREEZE<br>
+Dolce Vita<br>
+Openbill<br>
+Mary Sol<br>
+Alka Dollia<br>
+PODIUM
+`;
+
+}
+
+else{
+
+result=`
+<h3>🤖 AI Assistant</h3>
+
+Try asking:
+
+<ul>
+<li>vegetarian dishes</li>
+<li>seafood restaurant</li>
+<li>gluten allergy</li>
+<li>premium benefits</li>
+<li>restaurants</li>
+</ul>
+`;
+
+}
+
+document.getElementById("result").innerHTML=result;
 
 }
 
