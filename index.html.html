@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long Beach Food & Beverage AI Assistant</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#08111f;color:white}
+header{position:sticky;top:0;background:rgba(8,17,31,.92);padding:15px;text-align:center;z-index:999}
+.logo img{height:110px}
+#clock{color:#d4af37;margin-top:8px}
+.lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;font-weight:bold;cursor:pointer}
+.hero{height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('hotel1.jpg');
+background-size:cover;background-position:center}
+.hero h1{font-size:56px;color:#d4af37}
+.hero p{font-size:22px;margin:20px 0}
+.btn{display:inline-block;background:#d4af37;color:black;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold}
+.section{padding:70px 20px;text-align:center}
+.section h2{color:#d4af37;margin-bottom:25px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;max-width:1200px;margin:auto}
+.card{background:#122033;padding:25px;border-radius:18px;border:1px solid rgba(212,175,55,.2)}
+.card a{color:#d4af37;text-decoration:none}
+footer{background:#050b15;padding:30px;text-align:center}
+@media(max-width:768px){.hero h1{font-size:34px}.hero p{font-size:18px}.btn{display:block;width:260px;margin:10px auto}.logo img{height:80px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo"><img src="logo.png" alt="Long Beach"></div>
+<div id="clock"></div>
+<div class="lang">
+<button onclick="setLang('en')">🇺🇸 English</button>
+<button onclick="setLang('ar')">🇪🇬 العربية</button>
+<button onclick="setLang('de')">🇩🇪 Deutsch</button>
+<button onclick="setLang('ru')">🇷🇺 Русский</button>
+</div>
+</header>
+
+<section class="hero" id="hero">
+<div>
+<h1 id="title">Long Beach Food & Beverage AI Assistant</h1>
+<p id="subtitle">Luxury Dining Experience Powered by AI</p>
+
+<a class="btn" href="restaurants.html">🍽 Restaurants</a>
+<a class="btn" href="room-service.html">🛎️ Room Service</a>
+<a class="btn" href="ai-assistant.html">🤖 AI Assistant</a>
+<a class="btn" href="buffet.html">🍴 Today's Buffet</a>
+<a class="btn" href="premium.html">⭐ Premium Benefits</a>
+</div>
+</section>
+
+<section class="section">
+<h2 id="services">Guest Services</h2>
+<div class="cards">
+<div class="card"><a href="restaurants.html">🍽 Restaurants Directory</a></div>
+<div class="card"><a href="room-service.html">🛎️ Room Service</a></div>
+<div class="card"><a href="ai-assistant.html">🤖 AI Assistant</a></div>
+<div class="card"><a href="buffet.html">🍴 Today's Buffet</a></div>
+<div class="card"><a href="premium.html">⭐ Premium Benefits</a></div>
+</div>
+</section>
+
+<section class="section">
+<h2 id="featured">Featured Restaurants</h2>
+<div class="cards">
+<div class="card">ALDENTE</div>
+<div class="card">D'WHITE</div>
+<div class="card">BREEZE</div>
+<div class="card">OPENBILL</div>
+<div class="card">MARY SOL</div>
+<div class="card">PODIUM</div>
+</div>
+</section>
+
+<section class="section">
+<h2 id="stats">Long Beach Dining Experience</h2>
+<div class="cards">
+<div class="card">🍽 9 Restaurants</div>
+<div class="card">🌍 International Cuisines</div>
+<div class="card">🛎️ Room Service Available</div>
+<div class="card">⭐ Premium Benefits</div>
+</div>
+</section>
+
+<footer>Long Beach Food & Beverage AI Assistant</footer>
+
+<script>
+const imgs=['hotel1.jpg','hotel2.jpg','hotel3.jpg','hotel4.jpg','hotel5.jpg'];
+let i=0;
+setInterval(()=>{
+i=(i+1)%imgs.length;
+document.getElementById('hero').style.background=
+`linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('${imgs[i]}') center/cover`;
+},5000);
+
+function updateClock(){
+document.getElementById('clock').innerText=new Date().toLocaleString();
+}
+setInterval(updateClock,1000); updateClock();
+
+const txt={
+en:{t:'Long Beach Food & Beverage AI Assistant',s:'Luxury Dining Experience Powered by AI',g:'Guest Services',f:'Featured Restaurants',st:'Long Beach Dining Experience'},
+ar:{t:'مساعد لونج بيتش للأغذية والمشروبات',s:'تجربة ضيافة فاخرة مدعومة بالذكاء الاصطناعي',g:'خدمات النزلاء',f:'المطاعم المميزة',st:'تجربة الطعام في لونج بيتش'},
+de:{t:'Long Beach Speisen & Getränke Assistent',s:'Luxuriöses Gastronomieerlebnis mit KI',g:'Gästeservice',f:'Empfohlene Restaurants',st:'Long Beach Dining Erlebnis'},
+ru:{t:'Помощник Long Beach по питанию и напиткам',s:'Роскошный гастрономический сервис с ИИ',g:'Услуги для гостей',f:'Рекомендуемые рестораны',st:'Гастрономия Long Beach'}
+};
+function setLang(l){
+title.innerText=txt[l].t;
+subtitle.innerText=txt[l].s;
+services.innerText=txt[l].g;
+featured.innerText=txt[l].f;
+stats.innerText=txt[l].st;
+localStorage.setItem('lang',l);
+}
+setLang(localStorage.getItem('lang')||'en');
+</script>
+
+</body>
+</html>
