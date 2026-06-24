@@ -1,67 +1,219 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Restaurants | Long Beach Resort</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
-header{background:#0b1320;padding:20px;text-align:center}
-h1{color:#d4af37}
-.lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;cursor:pointer}
-.container{max-width:1200px;margin:auto;padding:20px}
-input{width:100%;padding:12px;border:none;border-radius:8px;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.card{background:#122033;padding:20px;border-radius:15px}
-.name{color:#d4af37;font-size:22px;font-weight:bold}
+
+body{
+font-family:Arial,sans-serif;
+background:#08111f;
+color:#fff;
+margin:0;
+}
+
+header{
+background:#0b1320;
+padding:20px;
+text-align:center;
+}
+
+h1{
+color:#d4af37;
+}
+
+.lang button{
+background:#d4af37;
+border:none;
+padding:8px 12px;
+margin:3px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+background:#122033;
+padding:20px;
+border-radius:15px;
+text-decoration:none;
+color:white;
+display:block;
+transition:.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px rgba(212,175,55,.3);
+}
+
+.name{
+color:#d4af37;
+font-size:22px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
 </style>
+
 </head>
+
 <body>
+
 <header>
+
 <h1 id="title">Restaurants Directory</h1>
+
 <div class="lang">
-<button onclick="setLang('en')">EN</button>
-<button onclick="setLang('ar')">AR</button>
-<button onclick="setLang('de')">DE</button>
-<button onclick="setLang('ru')">RU</button>
+<button onclick="setLang('en')">🇺🇸 EN</button>
+<button onclick="setLang('ar')">🇪🇬 AR</button>
+<button onclick="setLang('de')">🇩🇪 DE</button>
+<button onclick="setLang('ru')">🇷🇺 RU</button>
 </div>
+
 </header>
 
 <div class="container">
-<input id="search" placeholder="Search restaurant..." onkeyup="filterCards()">
+
+<input
+id="search"
+placeholder="Search restaurant..."
+onkeyup="filterCards()"
+/>
 
 <div class="grid" id="grid">
-<div class="card"><div class="name">ALDENTE</div><p>Italian Cuisine</p></div>
-<div class="card"><div class="name">D'WHITE</div><p>International Cuisine</p></div>
-<div class="card"><div class="name">BREEZE</div><p>Indian Cuisine</p></div>
-<div class="card"><div class="name">OPENBILL</div><p>Asian Cuisine</p></div>
-<div class="card"><div class="name">MARY SOL</div><p>Seafood Cuisine</p></div>
-<div class="card"><div class="name">ALKA DOLLIA</div><p>Nubian Cuisine • Beach Area • 75 Seats</p></div>
-<div class="card"><div class="name">PODIUM</div><p>International Cuisine</p></div>
-<div class="card"><div class="name">CACTUS</div><p>Mexican Cuisine</p></div>
+
+<a href="aldente.html" class="card">
+<div class="name">ALDENTE</div>
+<p>Italian Cuisine</p>
+</a>
+
+<a href="dwhite.html" class="card">
+<div class="name">D'WHITE</div>
+<p>International Cuisine</p>
+</a>
+
+<a href="breeze.html" class="card">
+<div class="name">BREEZE</div>
+<p>Indian Cuisine</p>
+</a>
+
+<a href="openbill.html" class="card">
+<div class="name">OPENBILL</div>
+<p>Asian Cuisine</p>
+</a>
+
+<a href="mary-sol.html" class="card">
+<div class="name">MARY SOL</div>
+<p>Seafood Cuisine</p>
+</a>
+
+<a href="alka-dollia.html" class="card">
+<div class="name">ALKA DOLLIA</div>
+<p>Nubian Cuisine • Beach Area • 75 Seats</p>
+</a>
+
+<a href="podium.html" class="card">
+<div class="name">PODIUM</div>
+<p>International Cuisine</p>
+</a>
+
+<a href="cactus.html" class="card">
+<div class="name">CACTUS</div>
+<p>Mexican Cuisine</p>
+</a>
+
 </div>
+
 </div>
 
 <script>
+
 const tr={
-en:{title:'Restaurants Directory',search:'Search restaurant...'},
-ar:{title:'دليل المطاعم',search:'ابحث عن مطعم...'},
-de:{title:'Restaurantverzeichnis',search:'Restaurant suchen...'},
-ru:{title:'Каталог ресторанов',search:'Поиск ресторана...'}
-};
-function setLang(l){
-localStorage.setItem('lang',l);
-title.innerText=tr[l].title;
-search.placeholder=tr[l].search;
+
+en:{
+title:'Restaurants Directory',
+search:'Search restaurant...'
+},
+
+ar:{
+title:'دليل المطاعم',
+search:'ابحث عن مطعم...'
+},
+
+de:{
+title:'Restaurantverzeichnis',
+search:'Restaurant suchen...'
+},
+
+ru:{
+title:'Каталог ресторанов',
+search:'Поиск ресторана...'
 }
-setLang(localStorage.getItem('lang')||'en');
+
+};
+
+function setLang(l){
+
+localStorage.setItem('lang',l);
+
+document.getElementById('title').innerText=
+tr[l].title;
+
+document.getElementById('search').placeholder=
+tr[l].search;
+
+}
+
+setLang(
+localStorage.getItem('lang') || 'en'
+);
 
 function filterCards(){
-let q=document.getElementById('search').value.toLowerCase();
-document.querySelectorAll('.card').forEach(c=>{
-c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
+
+let q=
+document.getElementById('search')
+.value.toLowerCase();
+
+document
+.querySelectorAll('.card')
+.forEach(card=>{
+
+card.style.display=
+card.innerText.toLowerCase().includes(q)
+? 'block'
+: 'none';
+
 });
+
 }
+
 </script>
+
 </body>
 </html>
