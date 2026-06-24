@@ -13,9 +13,13 @@ header{position:sticky;top:0;background:#0b1320;padding:15px;text-align:center;z
 .lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;font-weight:bold;cursor:pointer}
 .hero{height:80vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;
 background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('hotel1.jpg') center/cover}
-.hero h1{font-size:52px;color:#d4af37}
-.hero p{font-size:22px;margin:20px 0}
-.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold}
+
+/* تحسين حجم الخط ليكون متجاوباً مع الهواتف والشاشات الكبيرة */
+.hero h1{font-size: clamp(28px, 5vw, 52px);color:#d4af37;line-height:1.2}
+.hero p{font-size: clamp(16px, 2vw, 22px);margin:20px 0}
+
+.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold;transition:0.3s}
+.btn:hover{background:#b8962f}
 .section{padding:60px 20px;text-align:center}
 .section h2{color:#d4af37;margin-bottom:25px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1200px;margin:auto}
@@ -77,39 +81,54 @@ footer{background:#050b15;padding:30px;text-align:center}
 <footer id="footer">Long Beach Resort Food & Beverage AI Assistant</footer>
 
 <script>
+// تحديث القاموس ليشمل الاتجاه (dir) والترجمات الكاملة للكروت منعاً للمصطلحات الهجينة
 const txt={
-en:{title:'Long Beach Resort Food & Beverage AI Assistant',sub:'Luxury Dining Experience Powered by AI',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',locale:'en-US'},
-ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',sub:'تجربة ضيافة فاخرة مدعومة بالذكاء الاصطناعي',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',locale:'ar-EG'},
-de:{title:'Long Beach Resort Speisen & Getränke Assistent',sub:'Luxuriöses Gastronomieerlebnis mit KI',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',locale:'de-DE'},
-ru:{title:'Помощник Long Beach Resort по питанию и напиткам',sub:'Роскошный гастрономический сервис с ИИ',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',locale:'ru-RU'}
+en:{title:'Long Beach Resort Food & Beverage AI Assistant',sub:'Luxury Dining Experience Powered by AI',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',rDir:'Restaurants Directory',dir:'ltr',locale:'en-US'},
+ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',sub:'تجربة ضيافة فاخرة مدعومة بالذكاء الاصطناعي',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',rDir:'دليل المطاعم',dir:'rtl',locale:'ar-EG'},
+de:{title:'Long Beach Resort Speisen & Getränke Assistent',sub:'Luxuriöses Gastronomieerlebnis mit KI',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',rDir:'Restaurants Verzeichnis',dir:'ltr',locale:'de-DE'},
+ru:{title:'Помощник Long Beach Resort по питанию и напиткам',sub:'Роскошный гастрономический сервис с ИИ',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',rDir:'Каталог ресторанов',dir:'ltr',locale:'ru-RU'}
 };
 
 function setLang(l){
 localStorage.setItem('lang',l);
 let t=txt[l];
-title.innerText=t.title;
-subtitle.innerText=t.sub;
-services.innerText=t.srv;
-featured.innerText=t.feat;
-stats.innerText=t.stat;
-b1.innerHTML='🍽 '+t.r;
-b2.innerHTML='🛎️ '+t.rs;
-b3.innerHTML='🤖 '+t.ai;
-b4.innerHTML='🍴 '+t.bf;
-b5.innerHTML='⭐ '+t.pr;
-c1.innerText=t.r+' Directory';
-c2.innerText=t.rs;
-c3.innerText=t.ai;
-c4.innerText=t.bf;
-c5.innerText=t.pr;
-footer.innerText=t.title;
+
+// تعيين اتجاه الصفحة ولغتها برمجياً وديناميكياً
+document.documentElement.dir = t.dir;
+document.documentElement.lang = l;
+
+// استدعاء العناصر بالطريقة المعيارية الآمنة (document.getElementById)
+document.getElementById('title').innerText=t.title;
+document.getElementById('subtitle').innerText=t.sub;
+document.getElementById('services').innerText=t.srv;
+document.getElementById('featured').innerText=t.feat;
+document.getElementById('stats').innerText=t.stat;
+
+document.getElementById('b1').innerHTML='🍽 '+t.r;
+document.getElementById('b2').innerHTML='🛎️ '+t.rs;
+document.getElementById('b3').innerHTML='🤖 '+t.ai;
+document.getElementById('b4').innerHTML='🍴 '+t.bf;
+document.getElementById('b5').innerHTML='⭐ '+t.pr;
+
+document.getElementById('c1').innerText=t.rDir;
+document.getElementById('c2').innerText=t.rs;
+document.getElementById('c3').innerText=t.ai;
+document.getElementById('c4').innerText=t.bf;
+document.getElementById('c5').innerText=t.pr;
+
+document.getElementById('footer').innerText=t.title;
 updateClock();
 }
 
 function updateClock(){
 let l=localStorage.getItem('lang')||'en';
-clock.innerText=new Date().toLocaleString(txt[l].locale);
+const clockEl = document.getElementById('clock');
+if(clockEl) {
+    clockEl.innerText=new Date().toLocaleString(txt[l].locale);
 }
+}
+
+// تشغيل العداد وتحديد اللغة الافتراضية عند تحميل الصفحة
 setInterval(updateClock,1000);
 setLang(localStorage.getItem('lang')||'en');
 </script>
