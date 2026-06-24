@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room Service 2.0 | Long Beach Resort</title>
+<style>
+body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
+header{background:#0b1320;padding:25px;text-align:center}
+h1{color:#d4af37}
+.container{max-width:1100px;margin:auto;padding:20px}
+.card{background:#122033;padding:20px;border-radius:16px;margin-bottom:20px}
+label{display:block;margin:10px 0 5px}
+input,select,textarea{width:100%;padding:12px;border-radius:8px;border:none}
+button{background:#d4af37;color:#000;border:none;padding:14px 22px;border-radius:10px;font-weight:bold;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+#recommendations,#summary{background:#0f1b2c;padding:15px;border-radius:10px;min-height:120px}
+.back{display:inline-block;margin-top:15px;padding:10px 16px;background:#d4af37;color:#000;text-decoration:none;border-radius:10px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>🛎️ Room Service 2.0</h1>
+<p id="clock"></p>
+</header>
+
+<div class="container">
+<div class="grid">
+<div class="card">
+<h2>Guest Information</h2>
+<label>Guest Name</label><input id="guest">
+<label>Room Number</label><input id="room">
+<label>Number of Guests</label><input id="guests" type="number" value="2">
+
+<h2>Dining Preferences</h2>
+<label>Cuisine</label>
+<select id="cuisine" onchange="updateRecommendations()">
+<option>Indian</option>
+<option>Asian</option>
+<option>Seafood</option>
+<option>Italian</option>
+<option>Nubian</option>
+<option>International</option>
+<option>Mexican</option>
+</select>
+
+<label>Dietary Requirement</label>
+<select id="allergy">
+<option>None</option>
+<option>Vegetarian</option>
+<option>Vegan</option>
+<option>Gluten Free</option>
+<option>Dairy Free</option>
+<option>Shellfish Allergy</option>
+</select>
+
+<label>Delivery Time</label>
+<input id="time" type="time">
+
+<label>Special Request</label>
+<textarea id="request"></textarea>
+</div>
+
+<div class="card">
+<h2>Recommended Dishes</h2>
+<div id="recommendations"></div>
+
+<h2>Order Summary</h2>
+<div id="summary">Complete the form then click Generate Summary.</div>
+
+<br>
+<button onclick="generateSummary()">Generate Summary</button>
+<button onclick="submitOrder()">Submit Order</button>
+</div>
+</div>
+
+<a href="index.html" class="back">⬅ Back to Home</a>
+</div>
+
+<script>
+const menus={
+Indian:["Murgh Tandoori","Murgh Biryani","Dal Makhani","Chana Masala"],
+Asian:["Spring Roll","Chicken Tao","Sweet & Sour Chicken","Korean Noodles"],
+Seafood:["Grilled Salmon","Seafood Pasta","Mixed Seafood","Zinga"],
+Italian:["Lasagna","Penne Alfredo","Pizza Selection"],
+Nubian:["Mix Grill","Beef Tagine","Thareed Fattah"],
+International:["PODIUM Chef Selection","Grilled Chicken","Mixed Grill"],
+Mexican:["Tacos","Fajitas","Mexican Chicken"]
+};
+
+function updateRecommendations(){
+let c=document.getElementById("cuisine").value;
+document.getElementById("recommendations").innerHTML="<ul><li>"+menus[c].join("</li><li>")+"</li></ul>";
+}
+updateRecommendations();
+
+function generateSummary(){
+let html=`
+<b>Guest:</b> ${guest.value}<br>
+<b>Room:</b> ${room.value}<br>
+<b>Guests:</b> ${guests.value}<br>
+<b>Cuisine:</b> ${cuisine.value}<br>
+<b>Dietary:</b> ${allergy.value}<br>
+<b>Delivery:</b> ${time.value}<br><br>
+<b>Recommended Dishes:</b><br>${menus[cuisine.value].join("<br>")}
+`;
+summary.innerHTML=html;
+}
+
+function submitOrder(){
+generateSummary();
+summary.innerHTML += "<hr><h3>✅ Your order has been received.</h3><p>Room Service will contact you shortly.</p>";
+}
+
+function updateClock(){
+document.getElementById('clock').innerText=new Date().toLocaleString();
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+</body>
+</html>
