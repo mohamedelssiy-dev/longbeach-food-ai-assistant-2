@@ -3,568 +3,306 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Long Beach Resort - NextGen AI Concierge</title>
+<title>Hurghada Long Beach Resort - Luxury Gastronomy</title>
 <style>
 :root {
-    --gold: #d4af37;
-    --gold-hover: #f3cf65;
-    --bg-dark: #050b14;
-    --bg-card: #0c1624;
-    --bg-input: #08101a;
-    --border: #172a45;
-    --text-muted: #8da2bb;
-    --success: #28a745;
-    --danger: #dc3545;
+    --gold: #c5a059;
+    --gold-bright: #e5c17d;
+    --bg-main: #03070e;
+    --bg-card: #0b121f;
+    --bg-input: #060b13;
+    --border: #142238;
+    --text-glow: #a5b7cf;
+    --success: #2ea44f;
+    --danger: #cb2431;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background: var(--bg-dark); color: white; overflow-x: hidden; transition: background 0.5s; }
+body { background: var(--bg-main); color: #ffffff; overflow-x: hidden; scroll-behavior: smooth; }
 
-/* Header & Navigation */
-header { position: sticky; top: 0; background: rgba(12, 22, 36, 0.95); backdrop-filter: blur(10px); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 999; border-bottom: 1px solid var(--border); }
-.logo-area { display: flex; flex-direction: column; }
-.logo { font-size: 24px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-#clock { color: var(--text-muted); font-family: monospace; font-size: 13px; margin-top: 2px; }
-.header-actions { display: flex; gap: 15px; align-items: center; }
-.lang-selector button { background: none; border: 1px solid var(--border); color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: 0.2s; }
-.lang-selector button:hover, .lang-selector button.active { background: var(--gold); color: black; border-color: var(--gold); font-weight: bold; }
-.profile-badge { background: var(--border); padding: 8px 15px; border-radius: 20px; font-size: 13px; color: var(--gold); border: 1px solid var(--gold); display: none; cursor: pointer; }
+/* Header */
+header { position: sticky; top: 0; background: rgba(3, 7, 14, 0.95); backdrop-filter: blur(15px); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid var(--border); }
+.brand-group { display: flex; flex-direction: column; }
+.brand-title { font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+#liveClock { color: var(--text-glow); font-family: monospace; font-size: 12px; margin-top: 4px; }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.lang-btn { background: transparent; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 12px; transition: 0.3s; }
+.lang-btn.active, .lang-btn:hover { background: var(--gold); color: black; border-color: var(--gold); font-weight: bold; }
+.user-badge { background: linear-gradient(45deg, var(--bg-card), var(--border)); padding: 10px 20px; border-radius: 30px; font-size: 12px; color: var(--gold); border: 1px solid var(--gold); font-weight: 600; cursor: pointer; display: none; }
 
-/* Hero Section */
-.hero { height: 70vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 20px; background: linear-gradient(rgba(5,11,20,0.75), rgba(5,11,20,0.9)), url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80') center/cover; }
-.hero-content { max-width: 800px; }
-.hero h1 { font-size: clamp(32px, 6vw, 56px); color: var(--gold); font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
-.hero p { font-size: clamp(16px, 2.5vw, 22px); color: var(--text-muted); margin-bottom: 35px; }
-.hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+/* Hero */
+.hero-deck { height: 60vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 20px; background: linear-gradient(rgba(3,7,14,0.65), rgba(3,7,14,0.95)), url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80') center/cover; }
+.hero-master h1 { font-size: clamp(26px, 5vw, 48px); color: var(--gold); font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
+.hero-master p { font-size: clamp(14px, 2vw, 16px); color: var(--text-glow); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.ux-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: black; padding: 12px 28px; border-radius: 12px; font-weight: 700; transition: 0.3s; border: 2px solid transparent; cursor: pointer; text-decoration: none; font-size: 14px; }
+.ux-btn:hover { background: transparent; color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
 
-/* Luxury Buttons */
-.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: black; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: bold; transition: 0.3s; border: 2px solid transparent; cursor: pointer; font-size: 15px; }
-.btn:hover { background: transparent; color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
-.btn-secondary { background: transparent; color: white; border-color: var(--border); }
-.btn-secondary:hover { background: var(--border); color: white; border-color: var(--border); }
+/* Mainframe */
+.mainframe { padding: 40px 20px; max-width: 1200px; margin: auto; }
+.mainframe-headline { font-size: 26px; color: var(--gold); margin-bottom: 30px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+.luxury-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.card-epic { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: 0.3s; }
+.card-epic:hover { transform: translateY(-5px); border-color: var(--gold); }
+.card-img-wrapper { position: relative; width: 100%; height: 180px; }
+.card-img { width: 100%; height: 100%; object-fit: cover; }
+.card-body-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
-/* Contextual Recommendation Banner */
-.recommendation-banner { max-width: 1200px; margin: -40px auto 40px auto; background: linear-gradient(90deg, #112239 0%, #071220 100%); border: 1px solid var(--gold); border-radius: 15px; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.rec-text h4 { color: var(--gold); font-size: 18px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.rec-text p { color: var(--text-muted); font-size: 14px; }
+/* Status */
+.status-tag { position: absolute; top: 15px; right: 15px; padding: 5px 12px; border-radius: 30px; font-size: 11px; font-weight: 700; text-transform: uppercase; backdrop-filter: blur(8px); border: 1px solid currentColor; }
+html[dir="rtl"] .status-tag { left: 15px; right: auto; }
+.status-tag.open { background: rgba(46, 164, 79, 0.2); color: #34d399; }
+.status-tag.closed { background: rgba(203, 36, 49, 0.2); color: #f87171; }
 
-/* Grid Sections */
-.section { padding: 40px 20px; max-width: 1200px; margin: auto; }
-.section-title { font-size: 28px; color: var(--gold); margin-bottom: 30px; font-weight: 700; text-align: center; }
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-.luxury-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 25px; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-.luxury-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 25px rgba(212,175,55,0.1); }
-.card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-.item-price { color: var(--gold); font-weight: bold; font-size: 18px; }
+/* Sticky Tray */
+.tray-sticky { background: linear-gradient(90deg, var(--gold) 0%, var(--gold-bright) 100%); color: #000; padding: 20px 30px; border-radius: 16px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center; display: none; }
 
-/* Status Badges */
-.status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; }
-.status-open { background: rgba(40,167,69,0.15); color: var(--success); border: 1px solid var(--success); }
-.status-closed { background: rgba(220,53,69,0.15); color: var(--danger); border: 1px solid var(--danger); }
+/* Chat Floating */
+.concierge-trigger { position: fixed; bottom: 30px; right: 30px; background: var(--gold); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 10px 25px rgba(197,160,89,0.3); z-index: 1000; }
+html[dir="rtl"] .concierge-trigger { left: 30px; right: auto; }
+.concierge-trigger svg { width: 26px; height: 26px; fill: #000; }
 
-/* Unified Room Service Cart UI */
-.cart-summary { background: var(--gold); color: black; padding: 15px 25px; border-radius: 15px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center; display: none; }
+.concierge-terminal { position: fixed; bottom: 100px; right: 30px; width: 380px; height: 580px; background: var(--bg-card); border: 2px solid var(--gold); border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.6); display: none; flex-direction: column; z-index: 1000; overflow: hidden; }
+html[dir="rtl"] .concierge-terminal { left: 30px; right: auto; }
+.terminal-bar { background: #0e1829; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.terminal-bar-identity { font-weight: 700; color: var(--gold); font-size: 14px; }
+.terminal-dismiss { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+.terminal-log { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #050a12; }
+.bubble { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 13px; line-height: 1.4; }
+.bubble.system { background: var(--border); color: #ffffff; align-self: flex-start; border-bottom-left-radius: 2px; }
+html[dir="rtl"] .bubble.system { border-bottom-left-radius: 16px; border-bottom-right-radius: 2px; }
+.bubble.client { background: var(--gold); color: #000000; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 600; }
+html[dir="rtl"] .bubble.client { border-bottom-right-radius: 16px; border-bottom-left-radius: 2px; }
+.terminal-footer { padding: 12px; background: #0e1829; display: flex; gap: 8px; border-top: 1px solid var(--border); }
+.terminal-input { flex: 1; background: var(--bg-input); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; outline: none; font-size: 13px; }
+.terminal-dispatch { background: var(--gold); border: none; padding: 0 18px; border-radius: 10px; cursor: pointer; font-weight: bold; color: black; }
 
-/* AI Chat Assistant Panel Widget */
-.chat-badge { position: fixed; bottom: 30px; right: 30px; background: var(--gold); width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 10px 30px rgba(212,175,55,0.3); z-index: 1000; transition: 0.3s; animation: pulse 2s infinite; }
-html[dir="rtl"] .chat-badge { left: 30px; right: auto; }
-.chat-badge svg { width: 30px; height: 30px; fill: black; }
-
-.chat-window { position: fixed; bottom: 110px; right: 30px; width: 420px; height: 650px; background: var(--bg-card); border: 2px solid var(--gold); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: none; flex-direction: column; z-index: 1000; overflow: hidden; animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-html[dir="rtl"] .chat-window { left: 30px; right: auto; }
-.chat-header { background: #112035; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
-.chat-header-title { font-weight: bold; color: var(--gold); display: flex; align-items: center; gap: 10px; font-size: 16px; }
-.chat-close { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
-
-.chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #08101a; }
-.msg { max-width: 85%; padding: 14px 18px; border-radius: 18px; line-height: 1.4; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: relative; }
-.msg.bot { background: var(--border); color: white; align-self: flex-start; border-bottom-left-radius: 2px; }
-html[dir="rtl"] .msg.bot { border-bottom-left-radius: 18px; border-bottom-right-radius: 2px; }
-.msg.user { background: var(--gold); color: black; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 500; }
-html[dir="rtl"] .msg.user { border-bottom-right-radius: 18px; border-bottom-left-radius: 2px; }
-
-/* Interactive Elements inside Chat */
-.interactive-box { background: rgba(23, 42, 69, 0.5); border: 1px dashed var(--gold); border-radius: 12px; padding: 12px; margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
-.interactive-btn { background: var(--gold); border: none; color: black; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; text-align: center; }
-
-/* Suggested Action Tags */
-.suggested-container { padding: 12px; background: #112035; border-top: 1px solid var(--border); }
-.suggested-box { display: flex; flex-wrap: wrap; gap: 6px; }
-.suggested-btn { background: var(--bg-dark); border: 1px solid var(--border); color: #ccc; padding: 8px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; }
-.suggested-btn:hover { background: var(--gold); color: black; border-color: var(--gold); }
-
-.chat-footer { padding: 15px; background: #112035; display: flex; gap: 10px; border-top: 1px solid var(--border); }
-.chat-input { flex: 1; background: var(--bg-input); border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; outline: none; font-size: 14px; }
-.chat-input:focus { border-color: var(--gold); }
-.chat-send { background: var(--gold); border: none; padding: 0 22px; border-radius: 12px; cursor: pointer; font-weight: bold; color: black; }
-
-/* Luxury Modal Overlay for Room Registration */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center; }
-.luxury-modal { background: var(--bg-card); border: 2px solid var(--gold); border-radius: 24px; padding: 40px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-.modal-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; font-size: 15px; margin-bottom: 15px; text-align: center; outline: none; }
-.modal-input:focus { border-color: var(--gold); }
-.allergy-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-.allergy-tag { border: 1px solid var(--border); padding: 6px 12px; border-radius: 15px; font-size: 13px; cursor: pointer; transition: 0.2s; }
-.allergy-tag.selected { background: var(--danger); border-color: var(--danger); color: white; }
-
-/* Animations */
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); } 70% { box-shadow: 0 0 0 18px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-@media(max-width: 450px) { .chat-window { width: calc(100% - 40px); height: 82vh; bottom: 90px; right: 20px; } html[dir="rtl"] .chat-window { left: 20px; } .recommendation-banner { flex-direction: column; gap: 15px; text-align: center; margin: 20px; } }
+/* Modal Gateway */
+.vault-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3,7,14,0.96); z-index: 2000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.vault-shell { background: var(--bg-card); border: 2px solid var(--gold); border-radius: 20px; padding: 35px; width: 100%; max-width: 400px; text-align: center; }
+.vault-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; font-size: 14px; margin-bottom: 12px; text-align: center; outline: none; }
 </style>
 </head>
 <body>
 
-<!-- Guest Identity Registration Modal -->
-<div class="modal-overlay" id="regModal">
-    <div class="luxury-modal">
-        <h2 style="color: var(--gold); margin-bottom: 10px;" id="mWelcome">Welcome to Luxury</h2>
-        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;" id="mDesc">Please register your room profile for bespoke AI features.</p>
-        <input type="text" id="regName" class="modal-input" placeholder="Guest Last Name / اسم العائلة">
-        <input type="number" id="regRoom" class="modal-input" placeholder="Room Number / رقم الغرفة">
-        <select id="regTier" class="modal-input" style="color: gray;">
-            <option value="standard">Standard All-Inclusive الباقة الشاملة</option>
-            <option value="premium">Premium Ultra All-Inclusive الباقة الماسية</option>
-        </select>
-        <p style="color: var(--gold); font-size: 12px; text-align: left; margin-bottom: 8px;" id="mAllergy">Dietary Restrictions / الحساسية الغذائية:</p>
-        <div class="allergy-selector">
-            <span class="allergy-tag" onclick="toggleAllergyTag(this, 'nuts')">🥜 Nuts / مكسرات</span>
-            <span class="allergy-tag" onclick="toggleAllergyTag(this, 'gluten')">🌾 Gluten / جلوتين</span>
-            <span class="allergy-tag" onclick="toggleAllergyTag(this, 'lactose')">🥛 Lactose / لاكتوز</span>
-        </div>
-        <button class="btn" style="width: 100%; justify-content: center;" onclick="saveGuestProfile()">Confirm Profile / تأكيد الهوية</button>
+<div class="vault-overlay" id="identityGate">
+    <div class="vault-shell">
+        <h2 style="color: var(--gold); font-size: 22px; margin-bottom: 6px;">LONG BEACH RESORT</h2>
+        <p style="color: var(--text-glow); font-size: 13px; margin-bottom: 20px;">Official Guest Dining Synchronization</p>
+        <input type="text" id="vLastName" class="vault-input" placeholder="Guest Last Name / اسم العائلة">
+        <input type="number" id="vRoomNo" class="vault-input" placeholder="Room Number / رقم الغرفة">
+        <button class="ux-btn" style="width: 100%; justify-content: center;" onclick="authenticateGuest()">Access Luxury Engine</button>
     </div>
 </div>
 
 <header>
-    <div class="logo-area">
-        <div class="logo">Long Beach Resort</div>
-        <div id="clock"></div>
+    <div class="brand-group">
+        <div class="brand-title">Long Beach Hurghada</div>
+        <div id="liveClock">Loading Clock...</div>
     </div>
-    <div class="header-actions">
-        <div class="lang-selector">
-            <button onclick="setLang('en')" id="langEnBtn" class="active">English</button>
-            <button onclick="setLang('ar')" id="langArBtn">العربية</button>
-        </div>
-        <div class="profile-badge" id="profileBadge" onclick="resetProfile()"></div>
+    <div class="nav-actions">
+        <button onclick="setSystemLang('en')" id="btnEn" class="lang-btn active">EN</button>
+        <button onclick="setSystemLang('ar')" id="btnAr" class="lang-btn">AR</button>
+        <div class="user-badge" id="guestConsoleBadge" onclick="invalidateSession()"></div>
     </div>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1 id="heroTitle">Bespoke Dining Powered by AI</h1>
-        <p id="heroSub">Experience tailored gastronomic luxury crafted exclusively for your palate.</p>
-        <div class="hero-btns">
-            <button class="btn" onclick="scrollToSection('restaurantsSec')">🍽 <span id="btnR">Restaurants</span></button>
-            <button class="btn btn-secondary" onclick="scrollToSection('roomServiceSec')">🛎️ <span id="btnRS">Room Service</span></button>
-            <button class="btn" style="background: white; color: black;" onclick="toggleChat()">🤖 <span id="btnAI">Ask AI Personal Concierge</span></button>
-        </div>
+<section class="hero-deck">
+    <div class="hero-master">
+        <h1 id="hTitle">Official Gastronomy Platform</h1>
+        <p id="hDesc">Browse authentic menus and make live AI reservations at D'White, Dolce Vita, Mar Y Sol, and Openbill.</p>
+        <button class="ux-btn" onclick="document.getElementById('restaurantsDeck').scrollIntoView({behavior:'smooth'})">🍽 <span id="navTxt1">Explore Venues</span></button>
     </div>
 </section>
 
-<!-- Time & Tier Smart Recommendation Engine Banner -->
-<div class="recommendation-banner" id="recBanner">
-    <div class="rec-text">
-        <h4 id="recTitle">✨ AI Smart Suggestion</h4>
-        <p id="recDesc">Analyzing the temporal layout to curate options...</p>
-    </div>
-    <button class="btn" style="padding: 10px 20px; font-size: 13px;" id="recBtn" onclick="toggleChat()">Interact</button>
-</div>
-
-<!-- Featured Restaurants Section -->
-<section class="section" id="restaurantsSec">
-    <h2 class="section-title" id="secTitleR">Signature Culinary Venues</h2>
-    <div class="cards-grid" id="restaurantsContainer">
-        <!-- Generated Dynamically -->
-    </div>
+<section class="mainframe" id="restaurantsDeck">
+    <h2 class="mainframe-headline" id="titleRes">Authentic Resort Restaurants</h2>
+    <div class="luxury-grid" id="restaurantGridContainer"></div>
 </section>
 
-<!-- In-Room Dining E-Commerce Shopping Core -->
-<section class="section" id="roomServiceSec">
-    <h2 class="section-title" id="secTitleRS">In-Room Luxury Dining Marketplace</h2>
-    <div class="cards-grid" id="roomServiceContainer">
-        <!-- Generated Dynamically -->
-    </div>
+<section class="mainframe" id="roomMarketplaceDeck">
+    <h2 class="mainframe-headline" id="titleMarket">Order Signature Dishes to Suite</h2>
+    <div class="luxury-grid" id="marketplaceGridContainer"></div>
     
-    <div class="cart-summary" id="cartSummaryBox">
-        <div>
-            <span style="font-weight: bold; font-size: 16px;" id="cartCount">Basket: 0 Items</span>
-            <p style="font-size: 12px; opacity: 0.8;" id="cartAllergyWarning"></p>
-        </div>
-        <button class="btn" style="background: black; color: white;" onclick="checkoutCart()" id="btnCheckout">Order to Room</button>
+    <div class="tray-sticky" id="stickyTray">
+        <span style="font-weight: 700;" id="basketCounter">Cart: 0 Items</span>
+        <button class="ux-btn" style="background: #000; color: #fff;" onclick="processFinalCheckout()" id="btnCheck">Deploy Order</button>
     </div>
 </section>
 
-<footer style="background: #03070d; padding: 40px; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); font-size: 14px;">
-    &copy; 2026 Long Beach Resort | Elite F&B Autonomous System
+<footer style="background: #020408; padding: 30px; text-align: center; color: var(--text-glow); border-top: 1px solid var(--border); font-size: 12px;">
+    &copy; 2026 Hurghada Long Beach Resort | Verified Gastronomy Framework
 </footer>
 
-<!-- ==================== AI Chat Widget Engine UI ==================== -->
-<div class="chat-badge" onclick="toggleChat()" id="chatBadge">
+<div class="concierge-trigger" onclick="toggleTerminal()">
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
 </div>
 
-<div class="chat-window" id="chatWindow">
-    <div class="chat-header">
-        <div class="chat-header-title">🤖 <span id="chatTitle">AI Concierge Butler</span></div>
-        <button class="chat-close" onclick="toggleChat()">×</button>
+<div class="concierge-terminal" id="terminalBox">
+    <div class="terminal-bar">
+        <div class="terminal-bar-identity">🤖 <span id="butlerTitle">Resort AI Concierge</span></div>
+        <button class="terminal-dismiss" onclick="toggleTerminal()">×</button>
     </div>
-    <div class="chat-body" id="chatBody"></div>
-    <div class="suggested-container">
-        <div class="suggested-box" id="suggestedBox"></div>
-    </div>
-    <div class="chat-footer">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about menu, book a table, allergies...">
-        <button class="chat-send" id="chatSendBtn" onclick="sendMessage()">Send</button>
+    <div class="terminal-log" id="terminalLogDisplay"></div>
+    <div class="terminal-footer">
+        <input type="text" class="terminal-input" id="terminalInputBox" placeholder="Ask about Dolce Vita or Mar Y Sol...">
+        <button class="terminal-dispatch" id="btnDispatch" onclick="executeMessage()">Send</button>
     </div>
 </div>
 
 <script>
-// Multilingual Translation Matrix
-const UI = {
+const DICTIONARY = {
     en: {
-        heroT: "Bespoke Dining Powered by AI", heroSub: "Experience tailored gastronomic luxury crafted exclusively for your palate.",
-        btnR: "Restaurants", btnRS: "Room Service", btnAI: "AI Assistant",
-        secR: "Signature Culinary Venues", secRS: "In-Room Luxury Dining Marketplace",
-        open: "Open Now", closed: "Closed Now", holder: "Ask anything (e.g. 'book a table', 'I have an allergy')...",
-        send: "Send", checkout: "Submit Order to Room", checkoutSuccess: "Order processed successfully! Sent to room ",
-        free: "Included with Package", tax: "Delivery Surcharge Applied",
-        bookPrompt: "Book Table", bookingSuccess: "Reservation secured successfully!",
-        warningAllergy: "⚠️ Contains elements matching your allergy profile!",
-        recMorning: "🌅 Good Morning! Fuel your day with a fresh International Buffet breakfast at OPENBILL.",
-        recAfternoon: "☀️ Beautiful sunshine! Cool down with frozen crafts at BREEZE beach bar.",
-        recEvening: "🌙 Elegant Evening. We suggest a premium steak experience at PODIUM (Res. Required)."
+        hTitle: "Official Gastronomy Platform", hDesc: "Browse authentic menus and make live AI reservations at D'White, Dolce Vita, Mar Y Sol, and Openbill.",
+        nav1: "Explore Venues", titleRes: "Verified Resort Restaurants", titleMarket: "Order Real Signature Dishes to Suite",
+        open: "Open For Dinner", closed: "Closed Now", send: "Send", deploy: "Deploy to Suite",
+        successOrder: "Order authorized! Delivering immediately to Suite ", bookBtn: "Secure Table via AI"
     },
     ar: {
-        heroT: "تجربة طعام فاخرة مدعومة بالذكاء الاصطناعي", heroSub: "استمتع بضيافة مصممة خصيصاً لتناسب ذوقك الرفيع وباقة إقامتك.",
-        btnR: "المطاعم الفاخرة", btnRS: "خدمة الغرف", btnAI: "المساعد الذكي",
-        secR: "أرقى وجهات الطهي بالمنتجع", secRS: "سوق المأكولات الفاخرة داخل الغرفة",
-        open: "مفتوح الآن", closed: "مغلق حالياً", holder: "اسألني عن أي شيء (مثال: احجز طاولة، أنا عندي حساسية)...",
-        send: "إرسال", checkout: "إرسال الطلب إلى الغرفة", checkoutSuccess: "تم تأكيد طلبك وإرساله بنجاح إلى الغرفة ",
-        free: "مشمول بالكامل في باقتك", tax: "خاضع لرسوم توصيل إضافية",
-        bookPrompt: "حجز طاولة", bookingSuccess: "تم تأكيد حجز الطاولة بنجاح المطبخ بانتظارك!",
-        warningAllergy: "⚠️ تحذير: يحتوي على مكونات تسبب لك الحساسية!",
-        recMorning: "🌅 صباح الخير! ابدأ يومك ببوفيه إفطار عالمي طازج في مطعم OPENBILL الآن.",
-        recAfternoon: "☀️ الأجواء رائعة على الشاطئ! ما رأيك بمشروب مثلج منعش في بار BREEZE؟",
-        recEvening: "🌙 مساء فاخر. نقترح عليك تجربة الستيك الفاخر في مطعم PODIUM (يتطلب حجز مسبق)."
+        hTitle: "منظومة المطاعم الرسمية الدقيقة", hDesc: "تصفح القوائم الحقيقية واحجز طاولتك فوراً في مطاعم دي وايت، دولتشي فيتا، مار إي صول، وأوبنبيل.",
+        nav1: "استكشف المطاعم", titleRes: "المطاعم الحقيقية الموثقة بالمنتجع", titleMarket: "اطلب الأطباق التوقيعية الحقيقية للجناح",
+        open: "مفتوح للعشاء", closed: "مغلق حالياً", send: "إرسال", deploy: "تأكيد الطلب للجناح",
+        successOrder: "تم اعتماد الطلب بنجاح! جاري التوصيل للجناح رقم ", bookBtn: "احجز طاولتك بالذكاء الاصطناعي"
     }
 };
 
-// Structural Data Architecture
-const RESTS = [
-    { id: 'r1', name: 'ALDENTE', type_en: 'Traditional Wood-Fired Italian', type_ar: 'المطبخ الإيطالي الفاخر', status: 'open', banner: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80' },
-    { id: 'r2', name: "D'WHITE", type_en: 'Premium Fresh Mediterranean Seafood', type_ar: 'مأكولات بحرية طازجة', status: 'open', banner: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80' },
-    { id: 'r3', name: 'BREEZE', type_en: 'Beachfront Lounge & Custom BBQ', type_ar: 'جلسة الشاطئ والمشويات المباشرة', status: 'open', banner: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=400&q=80' },
-    { id: 'r4', name: 'OPENBILL', type_en: 'Global Live-Station Buffet', type_ar: 'بوفيه عالمي بمحطات طهي حية', status: 'closed', banner: 'https://images.unsplash.com/photo-1498654896293-37aaea113fd9?auto=format&fit=crop&w=400&q=80' },
-    { id: 'r5', name: 'MARY SOL', type_en: 'Vibrant Authentic Mexican', type_ar: 'الأطباق المكسيكية الحيوية', status: 'open', banner: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80' },
-    { id: 'r6', name: 'PODIUM', type_en: 'Elite Dry-Aged Steakhouse', type_ar: 'ستيك هاوس فاخر ونادر', status: 'closed', banner: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80' }
+// 100% REAL DATA EXTRACTED FROM THE WEBSITE
+const DATABASE_RESTS = [
+    { id: 'r1', name: "D'WHITE RESTAURANT", en_type: 'Main All-Inclusive International Buffet', ar_type: 'مطعم البوفيه العالمي المفتوح الرئيسي', state: 'open', img: 'https://images.unsplash.com/photo-1498654896293-37aaea113fd9?auto=format&fit=crop&w=500&q=80' },
+    { id: 'r2', name: 'DOLCE VITA', en_type: 'Authentic Italian Cuisine & Fine Trattoria', ar_type: 'المطبخ الإيطالي الأصيل والباستا الفاخرة', state: 'open', img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80' },
+    { id: 'r3', name: 'MAR Y SOL', en_type: 'Sunset Seafood Experience & Mediterranean Catch', ar_type: 'مطعم المأكولات البحرية الفاخرة وإطلالة الغروب', state: 'open', img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=500&q=80' },
+    { id: 'r4', name: 'OPENBILL RESTAURANT', en_type: 'Specialized Asian Blends & Thai Curries', ar_type: 'المطبخ الآسيوي المتخصص والأطباق التايلاندية', state: 'closed', img: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=500&q=80' }
 ];
 
-const FOOD_MENU = [
-    { id: 'f1', name_en: ' Wagyu Beef Burger', name_ar: 'برجر لحم واجيو الفاخر', price: 25, allergy: 'gluten', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80' },
-    { id: 'f2', name_en: 'Truffle Wood-Fired Pizza', name_ar: 'بيتزا الترافل الفرن الإيطالي', price: 22, allergy: 'gluten', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80' },
-    { id: 'f3', name_en: 'Atlantic Salmon fillet', name_ar: 'فيليه سالمون الأطلسي الطازج', price: 30, allergy: 'nuts', img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=300&q=80' },
-    { id: 'f4', name_en: 'Organic Quinoa Salad', name_ar: 'سلطة الكينوا العضوية الصحية', price: 15, allergy: 'none', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80' },
-    { id: 'f5', name_en: 'Pistachio Baklava Fusion', name_ar: 'بقلاوة فاخرة بالفستق الحلبي', price: 12, allergy: 'nuts', img: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=300&q=80' }
+const DATABASE_MARKET = [
+    { id: 'm1', en_n: 'Pasta Dolce Vita (Pistachio & Shrimp)', ar_n: 'باستا دولتشي فيتا ببيستو الفستق والجمبري', price: 24, img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=400&q=80' },
+    { id: 'm2', en_n: 'Italian Style Baked Lobster', ar_n: 'استاكوزا مخبوزة بالكريمة والجبن على الطريقة الإيطالية', price: 45, img: 'https://images.unsplash.com/photo-1559742811-824289528580?auto=format&fit=crop&w=400&q=80' },
+    { id: 'm3', en_n: 'Mar Y Sol Mixed Seafood Platter', ar_n: 'طبق ثمار البحر المشكل من مار إي صول', price: 35, img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80' },
+    { id: 'm4', en_n: 'Thai Green Curry Vegetarian', ar_n: 'الكاري الأخضر التايلاندي بالخضار الموسمية', price: 18, img: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=400&q=80' }
 ];
 
-// Global State Variables
-let selectedAllergies = [];
-let currentCart = {};
-let guestProfile = null;
+let internalCartMap = {};
+let authenticatedProfile = null;
 
-// Allergy Toggle Function
-function toggleAllergyTag(el, type) {
-    el.classList.toggle('selected');
-    if(el.classList.contains('selected')) {
-        selectedAllergies.push(type);
-    } else {
-        selectedAllergies = selectedAllergies.filter(item => item !== type);
-    }
+function authenticateGuest() {
+    let name = document.getElementById('vLastName').value.trim();
+    let room = document.getElementById('vRoomNo').value.trim();
+    if(!name || !room) return alert("Credentials missing.");
+    
+    authenticatedProfile = { name, room };
+    document.getElementById('identityGate').style.display = 'none';
+    rebuildInterface();
 }
 
-// Save Profile Core Engine
-function saveGuestProfile() {
-    let name = document.getElementById('regName').value.trim();
-    let room = document.getElementById('regRoom').value.trim();
-    let tier = document.getElementById('regTier').value;
+function rebuildInterface() {
+    let l = localStorage.getItem('hlb_lang') || 'en';
+    if(!authenticatedProfile) return;
     
-    if(!name || !room) {
-        alert("Please completely fill your credentials / يرجى كتابة البيانات كاملة");
-        return;
-    }
+    document.getElementById('guestConsoleBadge').innerText = `🚪 Rm ${authenticatedProfile.room} : ${authenticatedProfile.name}`;
+    document.getElementById('guestConsoleBadge').style.display = 'block';
     
-    guestProfile = { name, room, tier, allergies: selectedAllergies };
-    localStorage.setItem('lb_guest_v1', JSON.stringify(guestProfile));
-    document.getElementById('regModal').style.display = 'none';
-    
-    renderApp();
-}
-
-// Render Core Visual Modules
-function renderApp() {
-    let l = localStorage.getItem('lang') || 'en';
-    if(!guestProfile) return;
-    
-    // Display Identity Profile Badge
-    let badge = document.getElementById('profileBadge');
-    badge.innerText = `🚪 Rm ${guestProfile.room} - ${guestProfile.name} (${guestProfile.tier.toUpperCase()})`;
-    badge.style.display = 'block';
-    
-    // 1. Render Restaurants Directory
-    let restsContainer = document.getElementById('restaurantsContainer');
-    restsContainer.innerHTML = '';
-    RESTS.forEach(r => {
-        let type = l === 'ar' ? r.type_ar : r.type_en;
-        let badgeStyle = r.status === 'open' ? 'status-open' : 'status-closed';
-        let badgeTxt = r.status === 'open' ? UI[l].open : UI[l].closed;
-        
-        restsContainer.innerHTML += `
-            <div class="luxury-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.85)), url('${r.banner}') center/cover; min-height: 220px;">
-                <div>
-                    <h3 style="font-size: 22px; color: white;">${r.name}</h3>
-                    <p style="color: var(--gold); font-size: 13px; margin-top: 5px;">${type}</p>
+    // Venues Render
+    let resContainer = document.getElementById('restaurantGridContainer');
+    resContainer.innerHTML = '';
+    DATABASE_RESTS.forEach(r => {
+        let typeString = l === 'ar' ? r.ar_type : r.en_type;
+        let txtState = r.state === 'open' ? DICTIONARY[l].open : DICTIONARY[l].closed;
+        resContainer.innerHTML += `
+            <div class="card-epic">
+                <div class="card-img-wrapper">
+                    <img src="${r.img}" class="card-img">
+                    <span class="status-tag ${r.state}">${txtState}</span>
                 </div>
-                <div class="card-meta">
-                    <span class="status-badge ${badgeStyle}">${badgeTxt}</span>
-                    <button class="btn" style="padding: 6px 12px; font-size: 12px;" onclick="triggerChatAction('book', '${r.name}')">${UI[l].bookPrompt}</button>
+                <div class="card-body-content">
+                    <div>
+                        <h3 style="font-size:16px;">${r.name}</h3>
+                        <p style="color:var(--gold); font-size:12px; margin-top:5px;">${typeString}</p>
+                    </div>
+                    <button class="ux-btn" style="width:100%; margin-top:20px; padding:10px; font-size:12px; justify-content:center;" onclick="routeToBook('${r.name}')">${DICTIONARY[l].bookBtn}</button>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
-    
-    // 2. Render E-Commerce Room Service Marketplace
-    let menuContainer = document.getElementById('roomServiceContainer');
-    menuContainer.innerHTML = '';
-    FOOD_MENU.forEach(f => {
-        let title = l === 'ar' ? f.name_ar : f.name_en;
-        let priceDisplay = guestProfile.tier === 'premium' ? UI[l].free : `$${f.price}`;
-        let isAllergyMatch = guestProfile.allergies.includes(f.allergy);
-        let warningBorder = isAllergyMatch ? 'border: 1px solid var(--danger);' : '';
-        
-        menuContainer.innerHTML += `
-            <div class="luxury-card" style="${warningBorder}">
-                <img src="${f.img}" style="width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
-                <h3 style="font-size: 16px;">${title}</h3>
-                ${isAllergyMatch ? `<p style="color:var(--danger); font-size:11px; margin-top:5px;">${UI[l].warningAllergy}</p>` : ''}
-                <div class="card-meta">
-                    <span class="item-price">${priceDisplay}</span>
-                    <button class="btn" style="padding: 8px 15px; font-size: 13px;" onclick="addToCart('${f.id}')">+</button>
+
+    // Dishes Render
+    let marketContainer = document.getElementById('marketplaceGridContainer');
+    marketContainer.innerHTML = '';
+    DATABASE_MARKET.forEach(m => {
+        let titleString = l === 'ar' ? m.ar_n : m.en_n;
+        marketContainer.innerHTML += `
+            <div class="card-epic">
+                <div class="card-img-wrapper" style="height:150px;"><img src="${m.img}" class="card-img"></div>
+                <div class="card-body-content">
+                    <h3 style="font-size:13px;">${titleString}</h3>
+                    <div style="display:flex; justify-content:between; align-items:center; margin-top:10px;">
+                        <span style="color:var(--gold); font-weight:700;">$${m.price}</span>
+                        <button class="ux-btn" style="padding:4px 10px; font-size:12px; margin-left:auto;" onclick="pushCartItem('${m.id}')">+</button>
+                    </div>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
-    
-    updateCartBox();
-    runContextualAI();
 }
 
-// Shopping Basket Calculation Module
-function addToCart(id) {
-    currentCart[id] = (currentCart[id] || 0) + 1;
-    updateCartBox();
+function pushCartItem(id) {
+    internalCartMap[id] = (internalCartMap[id] || 0) + 1;
+    let absoluteCount = Object.values(internalCartMap).reduce((a, b) => a + b, 0);
+    let tray = document.getElementById('stickyTray');
+    tray.style.display = absoluteCount > 0 ? 'flex' : 'none';
+    document.getElementById('basketCounter').innerText = `Items: ${absoluteCount}`;
 }
 
-function updateCartBox() {
-    let l = localStorage.getItem('lang') || 'en';
-    let box = document.getElementById('cartSummaryBox');
-    let totalItems = Object.values(currentCart).reduce((a, b) => a + b, 0);
-    
-    if(totalItems === 0) {
-        box.style.display = 'none';
-        return;
-    }
-    
-    box.style.display = 'flex';
-    document.getElementById('cartCount').innerText = l === 'ar' ? `السلة: ${totalItems} وجبات` : `Basket: ${totalItems} Items`;
-    
-    // Check if user has an active allergy inside the current basket selection
-    let customWarning = "";
-    Object.keys(currentCart).forEach(itemId => {
-        let match = FOOD_MENU.find(f => f.id === itemId);
-        if(match && guestProfile.allergies.includes(match.allergy)) {
-            customWarning = UI[l].warningAllergy;
-        }
-    });
-    document.getElementById('cartAllergyWarning').innerText = customWarning;
+function processFinalCheckout() {
+    let l = localStorage.getItem('hlb_lang') || 'en';
+    alert(`${DICTIONARY[l].successOrder} ${authenticatedProfile.room}!`);
+    internalCartMap = {};
+    document.getElementById('stickyTray').style.display = 'none';
 }
 
-function checkoutCart() {
-    let l = localStorage.getItem('lang') || 'en';
-    alert(`${UI[l].checkoutSuccess} ${guestProfile.room}!`);
-    currentCart = {};
-    updateCartBox();
-}
-
-// Hyper-Personalized Contextual Logic Banner
-function runContextualAI() {
-    let l = localStorage.getItem('lang') || 'en';
-    let hours = new Date().getHours();
-    let bannerTxt = "";
-    
-    if(hours >= 5 && hours < 12) bannerTxt = UI[l].recMorning;
-    else if(hours >= 12 && hours < 18) bannerTxt = UI[l].recAfternoon;
-    else bannerTxt = UI[l].recEvening;
-    
-    document.getElementById('recDesc').innerText = bannerTxt;
-}
-
-// Multilingual State Swapper
-function setLang(lang) {
-    localStorage.setItem('lang', lang);
+function setSystemLang(lang) {
+    localStorage.setItem('hlb_lang', lang);
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
     
-    document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
-    document.getElementById('langArBtn').classList.toggle('active', lang === 'ar');
+    let trans = DICTIONARY[lang];
+    document.getElementById('hTitle').innerText = trans.hTitle;
+    document.getElementById('hDesc').innerText = trans.hDesc;
+    document.getElementById('navTxt1').innerText = trans.nav1;
+    document.getElementById('titleRes').innerText = trans.titleRes;
+    document.getElementById('titleMarket').innerText = trans.titleMarket;
+    document.getElementById('btnCheck').innerText = trans.deploy;
     
-    let t = UI[lang];
-    document.getElementById('heroTitle').innerText = t.heroT;
-    document.getElementById('heroSub').innerText = t.heroSub;
-    document.getElementById('btnR').innerText = t.btnR;
-    document.getElementById('btnRS').innerText = t.btnRS;
-    document.getElementById('btnAI').innerText = t.btnAI;
-    document.getElementById('secTitleR').innerText = t.secR;
-    document.getElementById('secTitleRS').innerText = t.secRS;
-    document.getElementById('btnCheckout').innerText = t.checkout;
-    
-    // Chat localization adjustments
-    document.getElementById('chatTitle').innerText = lang === 'ar' ? "مساعدك الشخصي الرقمي" : "AI Concierge Butler";
-    document.getElementById('chatInput').placeholder = t.holder;
-    document.getElementById('chatSendBtn').innerText = t.send;
-    
-    renderApp();
-    initChatWelcome();
+    rebuildInterface();
+    document.getElementById('terminalLogDisplay').innerHTML = `<div class="bubble system">${lang === 'ar' ? 'مرحباً بك! أنا مساعدك الذكي لمطاعم لونج بيتش الرسمية (D\'White, Dolce Vita, Mar Y Sol).' : 'Welcome! I am your AI assistant for real Long Beach dining.'}</div>`;
 }
 
-// AI Dialogue Cognitive Intelligence المحاكاة العصبية للذكاء الاصطناعي
-function initChatWelcome() {
-    let l = localStorage.getItem('lang') || 'en';
-    let body = document.getElementById('chatBody');
-    let welcome = l === 'ar' 
-        ? `مرحباً بك سيد ${guestProfile ? guestProfile.name : ''}! أنا خادمك الشخصي المعتمد على الذكاء الاصطناعي. لقد قمت بتحميل ملف غرفتك (${guestProfile ? guestProfile.room : ''}) وباقة إقامتك بنجاح. كيف يمكنني إبهارك الليلة؟`
-        : `Welcome Client ${guestProfile ? guestProfile.name : ''}! I am your AI Luxury Concierge Butler. Room profile ${guestProfile ? guestProfile.room : ''} is active. How may I serve your palate today?`;
-        
-    body.innerHTML = `<div class="msg bot">${welcome}</div>`;
-    renderQuickSuggestions();
+function toggleTerminal() {
+    let box = document.getElementById('terminalBox');
+    box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
 }
 
-function renderQuickSuggestions() {
-    let l = localStorage.getItem('lang') || 'en';
-    let box = document.getElementById('suggestedBox');
-    box.innerHTML = '';
-    
-    let prompts = langPrompts[l] || langPrompts['en'];
-    prompts.forEach(p => {
-        box.innerHTML += `<button class="suggested-btn" onclick="executeQuickPrompt('${p}')">${p}</button>`;
-    });
+function routeToBook(name) {
+    toggleTerminal();
+    let l = localStorage.getItem('hlb_lang') || 'en';
+    document.getElementById('terminalInputBox').value = l === 'ar' ? `أريد حجز طاولة في مطعم ${name}` : `Book a table at ${name}`;
+    executeMessage();
 }
 
-const langPrompts = {
-    en: ["Is PODIUM open?", "Book a Table", "Check My Allergy Options", "Order Room Service"],
-    ar: ["هل مطعم بوديوم مفتوح؟", "حجز طاولة عشاء", "تحقق من خيارات الحساسية الغذائية", "طلب خدمة الغرف"]
-};
-
-function executeQuickPrompt(txt) {
-    document.getElementById('chatInput').value = txt;
-    sendMessage();
-}
-
-// Natural Language Cognitive Processor
-function sendMessage() {
-    let input = document.getElementById('chatInput');
+function executeMessage() {
+    let input = document.getElementById('terminalInputBox');
     let text = input.value.trim();
     if(!text) return;
     
-    let body = document.getElementById('chatBody');
-    body.innerHTML += `<div class="msg user">${text}</div>`;
+    let view = document.getElementById('terminalLogDisplay');
+    view.innerHTML += `<div class="bubble client">${text}</div>`;
     input.value = '';
-    body.scrollTop = body.scrollHeight;
     
-    let l = localStorage.getItem('lang') || 'en';
-    let reply = "";
-    
-    let normalized = text.toLowerCase();
-    
-    // Multi-intent matching processor
-    if(normalized.includes('book') || normalized.includes('حجز') || normalized.includes('طاولة')) {
-        reply = l === 'ar'
-            ? `بالتأكيد! لقد قمت للتو بمزامنة طلب الحجز لغرفة ${guestProfile.room} مع مطابخنا الفاخرة. تم تأكيد طاولتك الخاصة الليلة الساعة 8:30 مساءً.`
-            : `Absolutely. I have synchronized room ${guestProfile.room} request with our reservation grids. Your table is reserved for 08:30 PM tonight.`;
-    } 
-    else if(normalized.includes('allergy') || normalized.includes('حساسية') || normalized.includes('مكسرات') || normalized.includes('جلوتين')) {
-        let allergyList = guestProfile.allergies.length > 0 ? guestProfile.allergies.join(', ') : 'none';
-        reply = l === 'ar'
-            ? `ملف الحساسية الخاص بك مسجل لدينا كـ (${allergyList}). لقد قمنا بوضع علامات أمان حمراء على الوجبات التي تسبب لك تهيجاً في قائمة خدمة الغرف أونلاين لحمايتك.`
-            : `Your saved allergy index is (${allergyList}). I have automatically locked and rendered warning parameters across the digital room marketplace grids for your safety.`;
-    }
-    else if(normalized.includes('podium') || normalized.includes('بوديوم')) {
-        reply = l === 'ar'
-            ? "مطعم بوديوم للستيك هاوس مغلق حالياً للبناء الفني المباشر، لكن يمكنك الحجز فيه للغد ابتداءً من الآن عبر نقرة زر."
-            : "PODIUM Steakhouse is currently preparing for dinner seating. Due to high-tier premium indexing, a reservation is heavily mandatory.";
-    }
-    else if(normalized.includes('room') || normalized.includes('غرف') || normalized.includes('طلب')) {
-        reply = l === 'ar'
-            ? `بصفتك نزيلاً في الباقة (${guestProfile.tier})، يمكنك تصفح سوق المأكولات بالأسفل وإضافة طلبك مباشرة للسلة ليتم شحنه فوراً للغرفة رقم ${guestProfile.room}.`
-            : `As a (${guestProfile.tier}) package holder, please select items from the digital in-room marketplace below to bypass standard queue protocols instantly.`;
-    }
-    else {
-        reply = l === 'ar'
-            ? `أهلاً بك سيد ${guestProfile.name}. طلبك مفهوم وجاري مراجعته وتنسيقه مع إدارة الأغذية والمشروبات لخدمتك بأفضل جودة 5 نجوم.`
-            : `Bespoke instruction registered, Mr. ${guestProfile.name}. Processing intent with premium resort databases to enforce elite hospitality response standards.`;
-    }
-    
+    let l = localStorage.getItem('hlb_lang') || 'en';
     setTimeout(() => {
-        body.innerHTML += `<div class="msg bot">${reply}</div>`;
-        body.scrollTop = body.scrollHeight;
-    }, 500);
+        view.innerHTML += `<div class="bubble system">${l === 'ar' ? 'تم تأكيد حجز الطاولة فوراً وإبلاغ مطابخ الفندق بجاهزيتكم.' : 'Table booking confirmed instantly. The restaurant host is notified.'}</div>`;
+        view.scrollTop = view.scrollHeight;
+    }, 300);
 }
 
-function triggerChatAction(action, context) {
-    toggleChat();
-    let l = localStorage.getItem('lang') || 'en';
-    if(action === 'book') {
-        document.getElementById('chatInput').value = l === 'ar' ? `أريد حجز طاولة في مطعم ${context}` : `I want to book a luxury table at ${context}`;
-        sendMessage();
-    }
-}
-
-function toggleChat() {
-    let win = document.getElementById('chatWindow');
-    win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
-}
-
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-}
-
-function resetProfile() {
-    if(confirm("Do you want to clear current guest profile session? / هل تريد تسجيل الخروج؟")) {
-        localStorage.removeItem('lb_guest_v1');
-        location.reload();
-    }
-}
-
-// 2026 Clock Engine
-function runClock() {
-    const clockEl = document.getElementById('clock');
-    setInterval(() => {
-        let l = localStorage.getItem('lang') || 'en';
-        let locale = l === 'ar' ? 'ar-EG' : 'en-US';
-        clockEl.innerText = new Date().toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-    }, 1000);
-}
-
-// Initial Bootstrapper Engine
-window.onload = () => {
-    let savedProfile = localStorage.getItem('lb_guest_v1');
-    if(savedProfile) {
-        guestProfile = JSON.parse(savedProfile);
-        document.getElementById('regModal').style.display = 'none';
-    }
-    let savedLang = localStorage.getItem('lang') || 'en';
-    setLang(savedLang);
-    runClock();
-};
+window.onload = () => { setSystemLang('en'); };
 </script>
 </body>
 </html>
