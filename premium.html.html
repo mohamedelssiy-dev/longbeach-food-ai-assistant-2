@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Benefits | Long Beach Resort</title>
+<style>
+body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
+header{background:#0b1320;padding:20px;text-align:center}
+h1{color:#d4af37}
+.lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;cursor:pointer}
+.container{max-width:1200px;margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:#122033;padding:20px;border-radius:15px}
+.card h2{color:#d4af37}
+</style>
+</head>
+<body>
+<header>
+<h1 id="title">Premium Benefits</h1>
+<div class="lang">
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('ar')">AR</button>
+<button onclick="setLang('de')">DE</button>
+<button onclick="setLang('ru')">RU</button>
+</div>
+</header>
+
+<div class="container">
+<div class="grid">
+<div class="card">
+<h2 id="p1">Premium Room Benefits</h2>
+<ul>
+<li>Priority Reservations</li>
+<li>Special Dining Privileges</li>
+<li>Selected Restaurant Access</li>
+</ul>
+</div>
+
+<div class="card">
+<h2 id="p2">Premium Deluxe Benefits</h2>
+<ul>
+<li>All Premium Benefits</li>
+<li>Additional Restaurant Access</li>
+<li>Exclusive Dining Experience</li>
+</ul>
+</div>
+
+<div class="card">
+<h2 id="p3">Included Restaurants</h2>
+<ul>
+<li>BREEZE</li>
+<li>MARY SOL</li>
+<li>OPENBILL</li>
+<li>PODIUM</li>
+<li>ALDENTE</li>
+</ul>
+</div>
+</div>
+</div>
+
+<script>
+const tr={
+en:{title:"Premium Benefits",a:"Premium Room Benefits",b:"Premium Deluxe Benefits",c:"Included Restaurants"},
+ar:{title:"مزايا بريميوم",a:"مزايا الغرفة بريميوم",b:"مزايا بريميوم ديلوكس",c:"المطاعم المشمولة"},
+de:{title:"Premium Vorteile",a:"Premium Zimmer Vorteile",b:"Premium Deluxe Vorteile",c:"Enthaltene Restaurants"},
+ru:{title:"Премиум преимущества",a:"Преимущества Premium Room",b:"Преимущества Premium Deluxe",c:"Включенные рестораны"}
+};
+function setLang(l){
+localStorage.setItem('lang',l);
+title.innerText=tr[l].title;
+p1.innerText=tr[l].a;
+p2.innerText=tr[l].b;
+p3.innerText=tr[l].c;
+}
+setLang(localStorage.getItem('lang')||'en');
+</script>
+</body>
+</html>
