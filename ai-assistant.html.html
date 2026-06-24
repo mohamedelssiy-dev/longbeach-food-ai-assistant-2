@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Assistant Multilingual</title>
+<style>
+body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
+header{background:#0b1320;padding:20px;text-align:center}
+h1{color:#d4af37}
+.lang button,button{background:#d4af37;color:#000;border:none;padding:10px 15px;border-radius:8px;margin:4px;cursor:pointer}
+.container{max-width:1000px;margin:auto;padding:20px}
+.card{background:#122033;padding:20px;border-radius:15px}
+input{width:100%;padding:12px;border:none;border-radius:8px;margin-bottom:10px}
+#result{background:#0f1b2c;padding:15px;border-radius:10px;min-height:150px;margin-top:10px}
+</style>
+</head>
+<body>
+<header>
+<h1 id="title">AI Assistant 2.0</h1>
+<p id="subtitle">Long Beach Food & Beverage Concierge</p>
+<div class="lang">
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('ar')">AR</button>
+<button onclick="setLang('de')">DE</button>
+<button onclick="setLang('ru')">RU</button>
+</div>
+</header>
+
+<div class="container">
+<div class="card">
+<input id="question" placeholder="Ask AI">
+<button id="askBtn" onclick="askAI()">Ask AI</button>
+<div id="result"></div>
+</div>
+</div>
+
+<script>
+const tr={
+en:{title:"AI Assistant 2.0",sub:"Long Beach Food & Beverage Concierge",ask:"Ask AI",welcome:"Welcome to Long Beach Food & Beverage AI Assistant."},
+ar:{title:"المساعد الذكي 2.0",sub:"مساعد لونج بيتش للأغذية والمشروبات",ask:"اسأل المساعد",welcome:"مرحباً بك في مساعد لونج بيتش للأغذية والمشروبات."},
+de:{title:"KI Assistent 2.0",sub:"Long Beach Gastronomie Concierge",ask:"KI Fragen",welcome:"Willkommen beim Long Beach Food & Beverage Assistent."},
+ru:{title:"ИИ Помощник 2.0",sub:"Консьерж питания Long Beach",ask:"Спросить ИИ",welcome:"Добро пожаловать в помощник Long Beach Food & Beverage."}
+};
+
+function setLang(lang){
+localStorage.setItem('lang',lang);
+title.innerText=tr[lang].title;
+subtitle.innerText=tr[lang].sub;
+askBtn.innerText=tr[lang].ask;
+question.placeholder=tr[lang].ask;
+result.innerHTML=tr[lang].welcome;
+}
+
+function askAI(){
+let q=question.value.toLowerCase();
+if(q.includes('seafood')) result.innerHTML='<h3>🦞 Mary Sol</h3>Grilled Salmon<br>Seafood Pasta';
+else if(q.includes('indian')) result.innerHTML='<h3>🇮🇳 Breeze</h3>Murgh Biryani<br>Dal Makhani';
+else if(q.includes('room service')) result.innerHTML='<h3>🛎️ Room Service</h3>Available with smart recommendations.';
+else if(q.includes('premium')) result.innerHTML='<h3>⭐ Premium Benefits</h3>Premium Restaurant Access';
+else result.innerHTML='Try: seafood, indian food, room service, premium benefits';
+}
+
+setLang(localStorage.getItem('lang')||'en');
+</script>
+</body>
+</html>
