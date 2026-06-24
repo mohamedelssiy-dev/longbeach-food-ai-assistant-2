@@ -7,20 +7,39 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Arial,sans-serif;background:#08111f;color:white}
-header{position:sticky;top:0;background:#0b1320;padding:15px;text-align:center;z-index:999}
+header{position:sticky;top:0;background:#0b1320;padding:15px;text-align:center;z-index:999;border-bottom:1px solid #122033;}
 .logo{font-size:28px;font-weight:bold;color:#d4af37}
 #clock{color:#d4af37;margin-top:8px}
 .lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;font-weight:bold;cursor:pointer}
+
+/* تم تثبيت الخلفية ومنع تحركها تماماً هنا */
 .hero{height:80vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;
-background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('hotel1.jpg') center/cover}
+background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; background-attachment: fixed;}
 .hero h1{font-size:52px;color:#d4af37}
-.hero p{font-size:22px;margin:20px 0}
-.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold}
+
+.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold;transition:0.3s;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(212,175,55,0.3)}
 .section{padding:60px 20px;text-align:center}
 .section h2{color:#d4af37;margin-bottom:25px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1200px;margin:auto}
-.card{background:#122033;padding:20px;border-radius:15px}
+.card{background:#122033;padding:20px;border-radius:15px;transition:0.3s;border:1px solid transparent;}
+.card:hover{border-color:#d4af37;transform:translateY(-3px)}
 footer{background:#050b15;padding:30px;text-align:center}
+
+/* تصميم المساعد الذكي الاحترافي المدمج المتناسق مع ألوانك */
+.ai-chat-toggle {position:fixed;bottom:25px;right:25px;background:#d4af37;color:#000;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;font-size:24px;box-shadow:0 5px 20px rgba(0,0,0,0.5);z-index:1000;display:flex;justify-content:center;align-items:center;}
+.ai-chat-window {position:fixed;bottom:95px;right:25px;width:350px;height:450px;background:#0b1320;border:2px solid #d4af37;border-radius:15px;z-index:1000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.7);}
+.ai-header {background:#122033;padding:15px;color:#d4af37;font-weight:bold;display:flex;justify-content:between;align-items:center;border-bottom:1px solid #d4af37;}
+.ai-body {flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;font-size:14px;}
+.ai-msg {padding:10px;border-radius:10px;max-width:80%;line-height:1.4;}
+.ai-msg.bot {background:#122033;color:#fff;align-self:flex-start;}
+.ai-msg.user {background:#d4af37;color:#000;font-weight:bold;align-self:flex-end;}
+.ai-footer {padding:10px;background:#122033;display:flex;gap:5px;}
+.ai-input {flex:1;background:#08111f;border:1px solid #d4af37;padding:10px;border-radius:8px;color:#fff;outline:none;}
+.ai-send {background:#d4af37;border:none;padding:10px 15px;border-radius:8px;cursor:pointer;font-weight:bold;}
+
+/* إضافة لمسة زيادة الأرباح المباشرة */
+.upsell-badge {background:rgba(212,175,55,0.1);border:1px dashed #d4af37;padding:8px;margin-top:10px;border-radius:8px;font-size:12px;color:#d4af37;display:block;text-decoration:none;}
 </style>
 </head>
 <body>
@@ -38,12 +57,13 @@ footer{background:#050b15;padding:30px;text-align:center}
 <section class="hero" id="hero">
 <div>
 <h1 id="title">Long Beach Resort Food & Beverage AI Assistant</h1>
-<p id="subtitle">Luxury Dining Experience Powered by AI</p>
+<div style="margin-top:25px;">
 <a class="btn" id="b1" href="restaurants.html">🍽 Restaurants</a>
 <a class="btn" id="b2" href="room-service.html">🛎️ Room Service</a>
-<a class="btn" id="b3" href="ai-assistant.html">🤖 AI Assistant</a>
+<a class="btn" id="b3" href="#" onclick="openAiWidget(event)">🤖 AI Assistant</a>
 <a class="btn" id="b4" href="buffet.html">🍴 Today's Buffet</a>
 <a class="btn" id="b5" href="premium.html">⭐ Premium Benefits</a>
+</div>
 </div>
 </section>
 
@@ -52,21 +72,23 @@ footer{background:#050b15;padding:30px;text-align:center}
 <div class="cards">
 <div class="card" id="c1">Restaurants Directory</div>
 <div class="card" id="c2">Room Service</div>
-<div class="card" id="c3">AI Assistant</div>
+<div class="card" id="c3" style="cursor:pointer;" onclick="openAiWidget(null)">AI Assistant</div>
 <div class="card" id="c4">Today's Buffet</div>
-<div class="card" id="c5">Premium Benefits</div>
+<div class="card" id="c5">Premium Benefits
+    <a href="premium.html" class="upsell-badge" id="up1">⚡ Upgrade to VIP Lounge Delivery (+$15)</a>
+</div>
 </div>
 </section>
 
 <section class="section">
 <h2 id="featured">Featured Restaurants</h2>
 <div class="cards">
-<div class="card">ALDENTE</div>
-<div class="card">D'WHITE</div>
-<div class="card">BREEZE</div>
-<div class="card">OPENBILL</div>
-<div class="card">MARY SOL</div>
-<div class="card">PODIUM</div>
+<div class="card">ALDENTE <span style="font-size:11px; display:block; color:#d4af37; margin-top:5px;">Italian Cuisine</span></div>
+<div class="card">D'WHITE <span style="font-size:11px; display:block; color:#d4af37; margin-top:5px;">Main Buffet</span></div>
+<div class="card">BREEZE <span style="font-size:11px; display:block; color:#d4af37; margin-top:5px;">Beach Grill</span></div>
+<div class="card">OPENBILL <span style="font-size:11px; display:block; color:#d4af37; margin-top:5px;">Asian Fusion</span></div>
+<div class="card">MARY SOL <span style="font-size:11px; display:block; color:#d4af37; margin-top:5px;">Seafood Premium</span></div>
+<div class="card">PODIUM <span style="font-size:11px; display:block; color:#d4af37; margin-top:5px;">Luxury Fine Dine</span></div>
 </div>
 </section>
 
@@ -74,21 +96,45 @@ footer{background:#050b15;padding:30px;text-align:center}
 <h2 id="stats">Long Beach Dining Experience</h2>
 </section>
 
+<button class="ai-chat-toggle" onclick="toggleAiWindow()">💬</button>
+<div class="ai-chat-window" id="aiWindow">
+    <div class="ai-header">
+        <span id="aiHeaderTitle">Resort Smart Assistant</span>
+        <button onclick="toggleAiWindow()" style="background:transparent; border:none; color:#d4af37; cursor:pointer; font-size:16px; float:right;">✕</button>
+    </div>
+    <div class="ai-body" id="aiMessages">
+        <div class="ai-msg bot" id="aiWelcome">Hello! Ask me about ALDENTE, D'WHITE, BREEZE, OPENBILL, MARY SOL, or PODIUM operating hours and menus.</div>
+    </div>
+    <div class="ai-footer">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Type your question..." onkeydown="if(event.key === 'Enter') askAiEngine()">
+        <button class="ai-send" onclick="askAiEngine()">➔</button>
+    </div>
+</div>
+
 <footer id="footer">Long Beach Resort Food & Beverage AI Assistant</footer>
 
 <script>
+// قاعدة بيانات المطاعم الستة المذكورة في كودك للبحث الفوري ذكياً
+const RESTAURANT_DATA = {
+    aldente: { en: "ALDENTE: Authentic Italian Pasta & Pizza. Open from 06:30 PM to 10:00 PM.", ar: "أل دنتي: مأكولات إيطالية فاخرة باستا وبيتزا. يفتح من 06:30 مساءً حتى 10:00 مساءً." },
+    dwhite: { en: "D'WHITE: Main Resort Buffet for Breakfast (07:00-10:00) and Dinner (18:30-21:30).", ar: "دي وايت: البوفيه الرئيسي للمنتجع للإفطار والعشاء." },
+    breeze: { en: "BREEZE: Refreshing Beach Grill, Snacks & Cocktails open all day until sunset.", ar: "بريز: مطعم المشويات الشاطئي، وجبات خفيفة ومشروبات طوال اليوم." },
+    openbill: { en: "OPENBILL: Premium Asian Fusion & Sushi specialized restaurant (19:00 - 22:00).", ar: "أوبن بيل: مطعم متخصص في المأكولات الآسيوية والسوشي الفاخر." },
+    marysol: { en: "MARY SOL: Mediterranean Seafood restaurant. Tip: Book a First-Row Sea Table via Room Service for extra premium luxury!", ar: "مار إي صول: مأكولات بحرية متوسطية طازجة. نصيحة: احجز طاولة صف أول على البحر عبر التطبيق!" },
+    podium: { en: "PODIUM: International International Fine Dining Elite Experience (Reservation Required).", ar: "بوديوم: تجربة عشاء عالمية فاخرة لصفوة النزلاء (تتطلب حجز مسبق)." }
+};
+
 const txt={
-en:{title:'Long Beach Resort Food & Beverage AI Assistant',sub:'Luxury Dining Experience Powered by AI',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',locale:'en-US'},
-ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',sub:'تجربة ضيافة فاخرة مدعومة بالذكاء الاصطناعي',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',locale:'ar-EG'},
-de:{title:'Long Beach Resort Speisen & Getränke Assistent',sub:'Luxuriöses Gastronomieerlebnis mit KI',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',locale:'de-DE'},
-ru:{title:'Помощник Long Beach Resort по питанию и напиткам',sub:'Роскошный гастрономический сервис с ИИ',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',locale:'ru-RU'}
+en:{title:'Long Beach Resort Food & Beverage AI Assistant',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',locale:'en-US', welcome: "Hello! Ask me about our restaurants or upgrading options.", holder: "Type your question...", up: "⚡ Upgrade to VIP Room Delivery (+$15)"},
+ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',locale:'ar-EG', welcome: "مرحباً بك! اسألني عن تفاصيل ومواعيد المطاعم أو ترقية طلبك.", holder: "اكتب سؤالك هنا...", up: "⚡ ترقية للتوصيل السريع الفاخر VIP (+$15)"},
+de:{title:'Long Beach Resort Speisen & Getränke Assistent',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',locale:'de-DE', welcome: "Hallo! Fragen Sie mich nach unseren Restaurants.", holder: "Frage eingeben...", up: "⚡ Auf VIP-Zimmerservice upgraden (+$15)"},
+ru:{title:'Помощник Long Beach Resort по питанию и напиткам',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',locale:'ru-RU', welcome: "Здравствуйте! Спросите меня о ресторанах.", holder: "Введите вопрос...", up: "⚡ Перейти на VIP-обслуживание (+$15)"}
 };
 
 function setLang(l){
 localStorage.setItem('lang',l);
 let t=txt[l];
 title.innerText=t.title;
-subtitle.innerText=t.sub;
 services.innerText=t.srv;
 featured.innerText=t.feat;
 stats.innerText=t.stat;
@@ -101,8 +147,10 @@ c1.innerText=t.r+' Directory';
 c2.innerText=t.rs;
 c3.innerText=t.ai;
 c4.innerText=t.bf;
-c5.innerText=t.pr;
+c5.innerHTML=t.pr + `<a href="premium.html" class="upsell-badge" id="up1">${t.up}</a>`;
 footer.innerText=t.title;
+document.getElementById('aiWelcome').innerText = t.welcome;
+document.getElementById('aiInput').placeholder = t.holder;
 updateClock();
 }
 
@@ -110,6 +158,45 @@ function updateClock(){
 let l=localStorage.getItem('lang')||'en';
 clock.innerText=new Date().toLocaleString(txt[l].locale);
 }
+
+function toggleAiWindow() {
+    const win = document.getElementById('aiWindow');
+    win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+}
+
+function openAiWidget(e) {
+    if(e) e.preventDefault();
+    document.getElementById('aiWindow').style.display = 'flex';
+}
+
+// محرك المساعد الذكي للبحث والبيع المتبادل
+function askAiEngine() {
+    const input = document.getElementById('aiInput');
+    const msg = input.value.trim().toLowerCase();
+    if(!msg) return;
+
+    const container = document.getElementById('aiMessages');
+    container.innerHTML += `<div class="ai-msg user">${input.value}</div>`;
+    input.value = '';
+
+    let lang = localStorage.getItem('lang') || 'en';
+    let reply = lang === 'ar' ? "أنا هنا لمساعدتك! يمكنك الاستفسار عن تفاصيل أي مطعم مثل ALDENTE أو حجز ترقية VIP لطلبك لزيادة الراحة." : "I'm here to guide you! You can ask about our 6 venues or how to instantly book a VIP ocean-view table upgrade.";
+
+    // فحص الكلمات المفتاحية الذكية بناء على المطاعم المتاحة في كودك
+    if(msg.includes('aldente') || msg.includes('دنتي')) reply = lang === 'ar' ? RESTAURANT_DATA.aldente.ar : RESTAURANT_DATA.aldente.en;
+    else if(msg.includes('white') || msg.includes('وايت')) reply = lang === 'ar' ? RESTAURANT_DATA.dwhite.ar : RESTAURANT_DATA.dwhite.en;
+    else if(msg.includes('breeze') || msg.includes('بريز')) reply = lang === 'ar' ? RESTAURANT_DATA.breeze.ar : RESTAURANT_DATA.breeze.en;
+    else if(msg.includes('openbill') || msg.includes('أوبن')) reply = lang === 'ar' ? RESTAURANT_DATA.openbill.ar : RESTAURANT_DATA.openbill.en;
+    else if(msg.includes('sol') || msg.includes('صول')) reply = lang === 'ar' ? RESTAURANT_DATA.marysol.ar : RESTAURANT_DATA.marysol.en;
+    else if(msg.includes('podium') || msg.includes('بوديوم')) reply = lang === 'ar' ? RESTAURANT_DATA.podium.ar : RESTAURANT_DATA.podium.en;
+    else if(msg.includes('vip') || msg.includes('ترقية') || msg.includes('upgrade')) reply = lang === 'ar' ? "👑 يمكنك ترقية طلبك الحالي للحصول على خدمة غرف VIP فائقة السرعة مع مقبلات مجانية مقابل 15$ فقط تضاف للفاتورة!" : "👑 Upgrade your experience now to VIP Room Service with high priority delivery and complimentary chef treats for only +$15 added to room bill.";
+
+    setTimeout(() => {
+        container.innerHTML += `<div class="ai-msg bot">${reply}</div>`;
+        container.scrollTop = container.scrollHeight;
+    }, 300);
+}
+
 setInterval(updateClock,1000);
 setLang(localStorage.getItem('lang')||'en');
 </script>
