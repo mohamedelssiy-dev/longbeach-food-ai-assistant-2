@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long Beach Resort Food & Beverage AI Assistant</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#08111f;color:white}
+header{position:sticky;top:0;background:#0b1320;padding:15px;text-align:center;z-index:999}
+.logo{font-size:28px;font-weight:bold;color:#d4af37}
+#clock{color:#d4af37;margin-top:8px}
+.lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;font-weight:bold;cursor:pointer}
+.hero{height:80vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('hotel1.jpg') center/cover}
+.hero h1{font-size:52px;color:#d4af37}
+.hero p{font-size:22px;margin:20px 0}
+.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold}
+.section{padding:60px 20px;text-align:center}
+.section h2{color:#d4af37;margin-bottom:25px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1200px;margin:auto}
+.card{background:#122033;padding:20px;border-radius:15px}
+footer{background:#050b15;padding:30px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Long Beach Resort</div>
+<div id="clock"></div>
+<div class="lang">
+<button onclick="setLang('en')">🇺🇸 English</button>
+<button onclick="setLang('ar')">🇪🇬 العربية</button>
+<button onclick="setLang('de')">🇩🇪 Deutsch</button>
+<button onclick="setLang('ru')">🇷🇺 Русский</button>
+</div>
+</header>
+
+<section class="hero" id="hero">
+<div>
+<h1 id="title">Long Beach Resort Food & Beverage AI Assistant</h1>
+<p id="subtitle">Luxury Dining Experience Powered by AI</p>
+<a class="btn" id="b1" href="restaurants.html">🍽 Restaurants</a>
+<a class="btn" id="b2" href="room-service.html">🛎️ Room Service</a>
+<a class="btn" id="b3" href="ai-assistant.html">🤖 AI Assistant</a>
+<a class="btn" id="b4" href="buffet.html">🍴 Today's Buffet</a>
+<a class="btn" id="b5" href="premium.html">⭐ Premium Benefits</a>
+</div>
+</section>
+
+<section class="section">
+<h2 id="services">Guest Services</h2>
+<div class="cards">
+<div class="card" id="c1">Restaurants Directory</div>
+<div class="card" id="c2">Room Service</div>
+<div class="card" id="c3">AI Assistant</div>
+<div class="card" id="c4">Today's Buffet</div>
+<div class="card" id="c5">Premium Benefits</div>
+</div>
+</section>
+
+<section class="section">
+<h2 id="featured">Featured Restaurants</h2>
+<div class="cards">
+<div class="card">ALDENTE</div>
+<div class="card">D'WHITE</div>
+<div class="card">BREEZE</div>
+<div class="card">OPENBILL</div>
+<div class="card">MARY SOL</div>
+<div class="card">PODIUM</div>
+</div>
+</section>
+
+<section class="section">
+<h2 id="stats">Long Beach Dining Experience</h2>
+</section>
+
+<footer id="footer">Long Beach Resort Food & Beverage AI Assistant</footer>
+
+<script>
+const txt={
+en:{title:'Long Beach Resort Food & Beverage AI Assistant',sub:'Luxury Dining Experience Powered by AI',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',locale:'en-US'},
+ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',sub:'تجربة ضيافة فاخرة مدعومة بالذكاء الاصطناعي',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',locale:'ar-EG'},
+de:{title:'Long Beach Resort Speisen & Getränke Assistent',sub:'Luxuriöses Gastronomieerlebnis mit KI',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',locale:'de-DE'},
+ru:{title:'Помощник Long Beach Resort по питанию и напиткам',sub:'Роскошный гастрономический сервис с ИИ',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',locale:'ru-RU'}
+};
+
+function setLang(l){
+localStorage.setItem('lang',l);
+let t=txt[l];
+title.innerText=t.title;
+subtitle.innerText=t.sub;
+services.innerText=t.srv;
+featured.innerText=t.feat;
+stats.innerText=t.stat;
+b1.innerHTML='🍽 '+t.r;
+b2.innerHTML='🛎️ '+t.rs;
+b3.innerHTML='🤖 '+t.ai;
+b4.innerHTML='🍴 '+t.bf;
+b5.innerHTML='⭐ '+t.pr;
+c1.innerText=t.r+' Directory';
+c2.innerText=t.rs;
+c3.innerText=t.ai;
+c4.innerText=t.bf;
+c5.innerText=t.pr;
+footer.innerText=t.title;
+updateClock();
+}
+
+function updateClock(){
+let l=localStorage.getItem('lang')||'en';
+clock.innerText=new Date().toLocaleString(txt[l].locale);
+}
+setInterval(updateClock,1000);
+setLang(localStorage.getItem('lang')||'en');
+</script>
+</body>
+</html>
