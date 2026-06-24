@@ -3,449 +3,568 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Long Beach Resort Food & Beverage AI Assistant</title>
+<title>Long Beach Resort - NextGen AI Concierge</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#08111f;color:white;overflow-x:hidden}
-header{position:sticky;top:0;background:#0b1320;padding:15px;text-align:center;z-index:999;border-bottom:1px solid #122033}
-.logo{font-size:28px;font-weight:bold;color:#d4af37}
-#clock{color:#d4af37;margin-top:8px;font-family:monospace;font-size:14px}
-.lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;font-weight:bold;cursor:pointer;transition:0.2s}
-.lang button:hover{background:#fff;color:#000}
+:root {
+    --gold: #d4af37;
+    --gold-hover: #f3cf65;
+    --bg-dark: #050b14;
+    --bg-card: #0c1624;
+    --bg-input: #08101a;
+    --border: #172a45;
+    --text-muted: #8da2bb;
+    --success: #28a745;
+    --danger: #dc3545;
+}
 
-.hero{height:75vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('hotel1.jpg') center/cover}
-.hero h1{font-size: clamp(28px, 5vw, 52px);color:#d4af37;line-height:1.2;margin-bottom:15px}
-.hero p{font-size: clamp(16px, 2vw, 22px);margin-bottom:30px}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: var(--bg-dark); color: white; overflow-x: hidden; transition: background 0.5s; }
 
-.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold;transition:0.3s;border:2px solid transparent}
-.btn:hover{background:transparent;color:#d4af37;border-color:#d4af37}
+/* Header & Navigation */
+header { position: sticky; top: 0; background: rgba(12, 22, 36, 0.95); backdrop-filter: blur(10px); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 999; border-bottom: 1px solid var(--border); }
+.logo-area { display: flex; flex-direction: column; }
+.logo { font-size: 24px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+#clock { color: var(--text-muted); font-family: monospace; font-size: 13px; margin-top: 2px; }
+.header-actions { display: flex; gap: 15px; align-items: center; }
+.lang-selector button { background: none; border: 1px solid var(--border); color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: 0.2s; }
+.lang-selector button:hover, .lang-selector button.active { background: var(--gold); color: black; border-color: var(--gold); font-weight: bold; }
+.profile-badge { background: var(--border); padding: 8px 15px; border-radius: 20px; font-size: 13px; color: var(--gold); border: 1px solid var(--gold); display: none; cursor: pointer; }
 
-.section{padding:60px 20px;text-align:center}
-.section h2{color:#d4af37;margin-bottom:25px;font-size:32px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;max-width:1200px;margin:auto}
-.card{background:#122033;padding:25px;border-radius:15px;border:1px solid #1b2e46;transition:0.3s;position:relative}
-.card:hover{transform:translateY(-5px);border-color:#d4af37}
+/* Hero Section */
+.hero { height: 70vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 20px; background: linear-gradient(rgba(5,11,20,0.75), rgba(5,11,20,0.9)), url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80') center/cover; }
+.hero-content { max-width: 800px; }
+.hero h1 { font-size: clamp(32px, 6vw, 56px); color: var(--gold); font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
+.hero p { font-size: clamp(16px, 2.5vw, 22px); color: var(--text-muted); margin-bottom: 35px; }
+.hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 
-.rest-type{font-size:14px;color:#8af;margin:5px 0 15px 0;text-transform:uppercase}
-.status-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}
-.status-open{background:rgba(40,167,69,0.2);color:#28a745;border:1px solid #28a745}
-.status-closed{background:rgba(220,53,69,0.2);color:#dc3545;border:1px solid #dc3545}
+/* Luxury Buttons */
+.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: black; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: bold; transition: 0.3s; border: 2px solid transparent; cursor: pointer; font-size: 15px; }
+.btn:hover { background: transparent; color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+.btn-secondary { background: transparent; color: white; border-color: var(--border); }
+.btn-secondary:hover { background: var(--border); color: white; border-color: var(--border); }
 
-footer{background:#050b15;padding:30px;text-align:center;border-top:1px solid #122033;color:#778899}
+/* Contextual Recommendation Banner */
+.recommendation-banner { max-width: 1200px; margin: -40px auto 40px auto; background: linear-gradient(90deg, #112239 0%, #071220 100%); border: 1px solid var(--gold); border-radius: 15px; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.rec-text h4 { color: var(--gold); font-size: 18px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.rec-text p { color: var(--text-muted); font-size: 14px; }
 
-/* ==================== AI Chat Widget Styles ==================== */
-.chat-badge {position:fixed;bottom:30px;right:30px;background:#d4af37;width:65px;height:65px;border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 10px 25px rgba(212,175,55,0.3);z-index:1000;transition:0.3s;animation:pulse 2s infinite}
-html[dir="rtl"] .chat-badge {left:30px;right:auto}
-.chat-badge:hover {transform:scale(1.1)}
-.chat-badge svg {width:32px;height:32px;fill:#000}
+/* Grid Sections */
+.section { padding: 40px 20px; max-width: 1200px; margin: auto; }
+.section-title { font-size: 28px; color: var(--gold); margin-bottom: 30px; font-weight: 700; text-align: center; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.luxury-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 25px; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+.luxury-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 25px rgba(212,175,55,0.1); }
+.card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+.item-price { color: var(--gold); font-weight: bold; font-size: 18px; }
 
-.chat-window {position:fixed;bottom:110px;right:30px;width:400px;height:600px;background:#0b1320;border:2px solid #d4af37;border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,0.5);display:none;flex-direction:column;z-index:1000;overflow:hidden;animation:fadeIn 0.3s ease}
-html[dir="rtl"] .chat-window {left:30px;right:auto}
-.chat-header {background:#122033;padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d4af37}
-.chat-header-title {color:#d4af37;font-weight:bold;display:flex;align-items:center;gap:8px}
-.chat-close {background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+/* Status Badges */
+.status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; }
+.status-open { background: rgba(40,167,69,0.15); color: var(--success); border: 1px solid var(--success); }
+.status-closed { background: rgba(220,53,69,0.15); color: var(--danger); border: 1px solid var(--danger); }
 
-.chat-body {flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;background:#08111f}
-.msg {max-width:80%;padding:12px 16px;border-radius:15px;line-height:1.4;font-size:14px;word-wrap:break-word}
-.msg.bot {background:#122033;color:#fff;align-self:flex-start;border-bottom-left-radius:2px}
-html[dir="rtl"] .msg.bot {border-bottom-left-radius:15px;border-bottom-right-radius:2px}
-.msg.user {background:#d4af37;color:#000;align-self:flex-end;border-bottom-right-radius:2px;font-weight:500}
-html[dir="rtl"] .msg.user {border-bottom-right-radius:15px;border-bottom-left-radius:2px}
+/* Unified Room Service Cart UI */
+.cart-summary { background: var(--gold); color: black; padding: 15px 25px; border-radius: 15px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center; display: none; }
 
-.suggested-container {padding:10px;background:#122033;border-top:1px solid #1b2e46;max-height:150px;overflow-y:auto}
-.suggested-title {font-size:12px;color:#d4af37;margin-bottom:8px;font-weight:bold}
-.suggested-box {display:flex;flex-wrap:wrap;gap:6px}
-.suggested-btn {background:#08111f;border:1px solid #1b2e46;color:#ccc;padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer;transition:0.2s;text-align:left}
-html[dir="rtl"] .suggested-btn {text-align:right}
-.suggested-btn:hover {background:#d4af37;color:#000;border-color:#d4af37}
+/* AI Chat Assistant Panel Widget */
+.chat-badge { position: fixed; bottom: 30px; right: 30px; background: var(--gold); width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 10px 30px rgba(212,175,55,0.3); z-index: 1000; transition: 0.3s; animation: pulse 2s infinite; }
+html[dir="rtl"] .chat-badge { left: 30px; right: auto; }
+.chat-badge svg { width: 30px; height: 30px; fill: black; }
 
-.chat-footer {padding:10px;background:#122033;display:flex;gap:10px;border-top:1px solid #1b2e46}
-.chat-input {flex:1;background:#08111f;border:1px solid #1b2e46;padding:12px;border-radius:10px;color:#fff;outline:none;font-size:14px}
-.chat-input:focus {border-color:#d4af37}
-.chat-send {background:#d4af37;border:none;padding:0 18px;border-radius:10px;cursor:pointer;font-weight:bold;color:#000}
+.chat-window { position: fixed; bottom: 110px; right: 30px; width: 420px; height: 650px; background: var(--bg-card); border: 2px solid var(--gold); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: none; flex-direction: column; z-index: 1000; overflow: hidden; animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+html[dir="rtl"] .chat-window { left: 30px; right: auto; }
+.chat-header { background: #112035; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.chat-header-title { font-weight: bold; color: var(--gold); display: flex; align-items: center; gap: 10px; font-size: 16px; }
+.chat-close { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
 
-@keyframes pulse {0%{box-shadow:0 0 0 0 rgba(212,175,55,0.4)}70%{box-shadow:0 0 0 15px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
-@keyframes fadeIn {from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:450px){.chat-window{width:calc(100% - 40px);height:80vh;bottom:90px;right:20px}html[dir="rtl"] .chat-window{left:20px}}
+.chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #08101a; }
+.msg { max-width: 85%; padding: 14px 18px; border-radius: 18px; line-height: 1.4; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: relative; }
+.msg.bot { background: var(--border); color: white; align-self: flex-start; border-bottom-left-radius: 2px; }
+html[dir="rtl"] .msg.bot { border-bottom-left-radius: 18px; border-bottom-right-radius: 2px; }
+.msg.user { background: var(--gold); color: black; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 500; }
+html[dir="rtl"] .msg.user { border-bottom-right-radius: 18px; border-bottom-left-radius: 2px; }
+
+/* Interactive Elements inside Chat */
+.interactive-box { background: rgba(23, 42, 69, 0.5); border: 1px dashed var(--gold); border-radius: 12px; padding: 12px; margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
+.interactive-btn { background: var(--gold); border: none; color: black; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; text-align: center; }
+
+/* Suggested Action Tags */
+.suggested-container { padding: 12px; background: #112035; border-top: 1px solid var(--border); }
+.suggested-box { display: flex; flex-wrap: wrap; gap: 6px; }
+.suggested-btn { background: var(--bg-dark); border: 1px solid var(--border); color: #ccc; padding: 8px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; }
+.suggested-btn:hover { background: var(--gold); color: black; border-color: var(--gold); }
+
+.chat-footer { padding: 15px; background: #112035; display: flex; gap: 10px; border-top: 1px solid var(--border); }
+.chat-input { flex: 1; background: var(--bg-input); border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; outline: none; font-size: 14px; }
+.chat-input:focus { border-color: var(--gold); }
+.chat-send { background: var(--gold); border: none; padding: 0 22px; border-radius: 12px; cursor: pointer; font-weight: bold; color: black; }
+
+/* Luxury Modal Overlay for Room Registration */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center; }
+.luxury-modal { background: var(--bg-card); border: 2px solid var(--gold); border-radius: 24px; padding: 40px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+.modal-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; font-size: 15px; margin-bottom: 15px; text-align: center; outline: none; }
+.modal-input:focus { border-color: var(--gold); }
+.allergy-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.allergy-tag { border: 1px solid var(--border); padding: 6px 12px; border-radius: 15px; font-size: 13px; cursor: pointer; transition: 0.2s; }
+.allergy-tag.selected { background: var(--danger); border-color: var(--danger); color: white; }
+
+/* Animations */
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); } 70% { box-shadow: 0 0 0 18px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width: 450px) { .chat-window { width: calc(100% - 40px); height: 82vh; bottom: 90px; right: 20px; } html[dir="rtl"] .chat-window { left: 20px; } .recommendation-banner { flex-direction: column; gap: 15px; text-align: center; margin: 20px; } }
 </style>
 </head>
 <body>
 
-<header>
-<div class="logo">Long Beach Resort</div>
-<div id="clock"></div>
-<div class="lang">
-<button onclick="setLang('en')">🇺🇸 English</button>
-<button onclick="setLang('ar')">🇪🇬 العربية</button>
-<button onclick="setLang('de')">🇩🇪 Deutsch</button>
-<button onclick="setLang('ru')">🇷🇺 Русский</button>
+<!-- Guest Identity Registration Modal -->
+<div class="modal-overlay" id="regModal">
+    <div class="luxury-modal">
+        <h2 style="color: var(--gold); margin-bottom: 10px;" id="mWelcome">Welcome to Luxury</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;" id="mDesc">Please register your room profile for bespoke AI features.</p>
+        <input type="text" id="regName" class="modal-input" placeholder="Guest Last Name / اسم العائلة">
+        <input type="number" id="regRoom" class="modal-input" placeholder="Room Number / رقم الغرفة">
+        <select id="regTier" class="modal-input" style="color: gray;">
+            <option value="standard">Standard All-Inclusive الباقة الشاملة</option>
+            <option value="premium">Premium Ultra All-Inclusive الباقة الماسية</option>
+        </select>
+        <p style="color: var(--gold); font-size: 12px; text-align: left; margin-bottom: 8px;" id="mAllergy">Dietary Restrictions / الحساسية الغذائية:</p>
+        <div class="allergy-selector">
+            <span class="allergy-tag" onclick="toggleAllergyTag(this, 'nuts')">🥜 Nuts / مكسرات</span>
+            <span class="allergy-tag" onclick="toggleAllergyTag(this, 'gluten')">🌾 Gluten / جلوتين</span>
+            <span class="allergy-tag" onclick="toggleAllergyTag(this, 'lactose')">🥛 Lactose / لاكتوز</span>
+        </div>
+        <button class="btn" style="width: 100%; justify-content: center;" onclick="saveGuestProfile()">Confirm Profile / تأكيد الهوية</button>
+    </div>
 </div>
+
+<header>
+    <div class="logo-area">
+        <div class="logo">Long Beach Resort</div>
+        <div id="clock"></div>
+    </div>
+    <div class="header-actions">
+        <div class="lang-selector">
+            <button onclick="setLang('en')" id="langEnBtn" class="active">English</button>
+            <button onclick="setLang('ar')" id="langArBtn">العربية</button>
+        </div>
+        <div class="profile-badge" id="profileBadge" onclick="resetProfile()"></div>
+    </div>
 </header>
 
-<section class="hero" id="hero">
-<div>
-<h1 id="title">Long Beach Resort Food & Beverage AI Assistant</h1>
-<p id="subtitle">Luxury Dining Experience Powered by AI</p>
-<a class="btn" id="b1" href="restaurants.html">🍽 Restaurants</a>
-<a class="btn" id="b2" href="room-service.html">🛎️ Room Service</a>
-<a class="btn" id="b3" href="javascript:void(0)" onclick="toggleChat()">🤖 AI Assistant</a>
-<a class="btn" id="b4" href="buffet.html">🍴 Today's Buffet</a>
-<a class="btn" id="b5" href="premium.html">⭐ Premium Benefits</a>
+<section class="hero">
+    <div class="hero-content">
+        <h1 id="heroTitle">Bespoke Dining Powered by AI</h1>
+        <p id="heroSub">Experience tailored gastronomic luxury crafted exclusively for your palate.</p>
+        <div class="hero-btns">
+            <button class="btn" onclick="scrollToSection('restaurantsSec')">🍽 <span id="btnR">Restaurants</span></button>
+            <button class="btn btn-secondary" onclick="scrollToSection('roomServiceSec')">🛎️ <span id="btnRS">Room Service</span></button>
+            <button class="btn" style="background: white; color: black;" onclick="toggleChat()">🤖 <span id="btnAI">Ask AI Personal Concierge</span></button>
+        </div>
+    </div>
+</section>
+
+<!-- Time & Tier Smart Recommendation Engine Banner -->
+<div class="recommendation-banner" id="recBanner">
+    <div class="rec-text">
+        <h4 id="recTitle">✨ AI Smart Suggestion</h4>
+        <p id="recDesc">Analyzing the temporal layout to curate options...</p>
+    </div>
+    <button class="btn" style="padding: 10px 20px; font-size: 13px;" id="recBtn" onclick="toggleChat()">Interact</button>
 </div>
+
+<!-- Featured Restaurants Section -->
+<section class="section" id="restaurantsSec">
+    <h2 class="section-title" id="secTitleR">Signature Culinary Venues</h2>
+    <div class="cards-grid" id="restaurantsContainer">
+        <!-- Generated Dynamically -->
+    </div>
 </section>
 
-<section class="section">
-<h2 id="services">Guest Services</h2>
-<div class="cards">
-<div class="card" id="c1"><h3>Restaurants Directory</h3></div>
-<div class="card" id="c2"><h3>Room Service</h3></div>
-<div class="card" id="c3" style="cursor:pointer" onclick="toggleChat()"><h3>AI Assistant</h3><p style="font-size:12px;color:#d4af37;margin-top:5px">Click to Chat Live</p></div>
-<div class="card" id="c4"><h3>Today's Buffet</h3></div>
-<div class="card" id="c5"><h3>Premium Benefits</h3></div>
-</div>
+<!-- In-Room Dining E-Commerce Shopping Core -->
+<section class="section" id="roomServiceSec">
+    <h2 class="section-title" id="secTitleRS">In-Room Luxury Dining Marketplace</h2>
+    <div class="cards-grid" id="roomServiceContainer">
+        <!-- Generated Dynamically -->
+    </div>
+    
+    <div class="cart-summary" id="cartSummaryBox">
+        <div>
+            <span style="font-weight: bold; font-size: 16px;" id="cartCount">Basket: 0 Items</span>
+            <p style="font-size: 12px; opacity: 0.8;" id="cartAllergyWarning"></p>
+        </div>
+        <button class="btn" style="background: black; color: white;" onclick="checkoutCart()" id="btnCheckout">Order to Room</button>
+    </div>
 </section>
 
-<section class="section">
-<h2 id="featured">Featured Restaurants</h2>
-<div class="cards">
-<div class="card"><h3>ALDENTE</h3><p class="rest-type" id="t1">Italian Cuisine</p><span class="status-badge status-open" id="s1">Open Now</span></div>
-<div class="card"><h3>D'WHITE</h3><p class="rest-type" id="t2">Fine Seafood</p><span class="status-badge status-open" id="s2">Open Now</span></div>
-<div class="card"><h3>BREEZE</h3><p class="rest-type" id="t3">Beach Lounge & BBQ</p><span class="status-badge status-open" id="s3">Open Now</span></div>
-<div class="card"><h3>OPENBILL</h3><p class="rest-type" id="t4">International Buffet</p><span class="status-badge status-closed" id="s4">Closed</span></div>
-<div class="card"><h3>MARY SOL</h3><p class="rest-type" id="t5">Mexican Vibrant</p><span class="status-badge status-open" id="s5">Open Now</span></div>
-<div class="card"><h3>PODIUM</h3><p class="rest-type" id="t6">Premium Steakhouse</p><span class="status-badge status-closed" id="s6">Closed</span></div>
-</div>
-</section>
+<footer style="background: #03070d; padding: 40px; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); font-size: 14px;">
+    &copy; 2026 Long Beach Resort | Elite F&B Autonomous System
+</footer>
 
-<section class="section">
-<h2 id="stats">Long Beach Dining Experience</h2>
-</section>
-
-<footer id="footer">Long Beach Resort Food & Beverage AI Assistant</footer>
-
-<!-- ==================== AI Chat Widget UI ==================== -->
+<!-- ==================== AI Chat Widget Engine UI ==================== -->
 <div class="chat-badge" onclick="toggleChat()" id="chatBadge">
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
 </div>
 
 <div class="chat-window" id="chatWindow">
     <div class="chat-header">
-        <div class="chat-header-title">🤖 <span id="chatTitle">AI Guest Assistant</span></div>
+        <div class="chat-header-title">🤖 <span id="chatTitle">AI Concierge Butler</span></div>
         <button class="chat-close" onclick="toggleChat()">×</button>
     </div>
     <div class="chat-body" id="chatBody"></div>
     <div class="suggested-container">
-        <div class="suggested-title" id="sugTitle">Frequently Asked Questions:</div>
         <div class="suggested-box" id="suggestedBox"></div>
     </div>
     <div class="chat-footer">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything...">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about menu, book a table, allergies...">
         <button class="chat-send" id="chatSendBtn" onclick="sendMessage()">Send</button>
     </div>
 </div>
 
 <script>
-const txt={
-en:{title:'Long Beach Resort Food & Beverage AI Assistant',sub:'Luxury Dining Experience Powered by AI',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',rDir:'Restaurants Directory',dir:'ltr',locale:'en-US',chatWelcome:'Welcome to Long Beach Resort! I am your AI Assistant. How can I delight your palate today?',sug:'Suggested Questions:',send:'Send',holder:'Ask me about restaurants, menus, buffet...',open:'Open Now',closed:'Closed',t1:'Italian Cuisine',t2:'Fine Seafood',t3:'Beach Lounge & BBQ',t4:'International Buffet',t5:'Mexican Vibrant',t6:'Premium Steakhouse'},
-ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',sub:'تجربة ضيافة فاخرة مدعومة بالذكاء الاصطناعي',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',rDir:'دليل المطاعم',dir:'rtl',locale:'ar-EG',chatWelcome:'مرحباً بك في منتجع لونج بيتش! أنا مساعدك الذكي للأغذية والمشروبات. كيف يمكنني تلبية طلباتك الفاخرة اليوم؟',sug:'أسئلة مقترحة شائعة:',send:'إرسال',holder:'اسألني عن المطاعم، المنيو، البوفيه...',open:'مفتوح الآن',closed:'مغلق حالياً',t1:'المطبخ الإيطالي',t2:'مأكولات بحرية فاخرة',t3:'جلسة الشاطئ والمشويات',t4:'بوفيه عالمي مفتوح',t5:'الأطباق المكسيكية الحيوية',t6:'ستيك هاوس فاخر'},
-de:{title:'Long Beach Resort Speisen & Getränke Assistent',sub:'Luxuriöses Gastronomieerlebnis mit KI',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',rDir:'Restaurants Verzeichnis',dir:'ltr',locale:'de-DE',chatWelcome:'Willkommen im Long Beach Resort! Ich bin Ihr KI-Assistent. Wie kann ich Sie heute kulinarisch verwöhnen?',sug:'Häufig gestellte Fragen:',send:'Senden',holder:'Fragen Sie nach Restaurants, Menüs...',open:'Jetzt geöffnet',closed:'Geschlossen',t1:'Italienische Küche',t2:'Edle Meeresfrüchte',t3:'Strandlounge & BBQ',t4:'Internationales Buffet',t5:'Mexikanisch Lebhaft',t6:'Premium Steakhouse'},
-ru:{title:'Помощник Long Beach Resort по питанию и напиткам',sub:'Роскошный гастрономический сервис с ИИ',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',rDir:'Каталог ресторанов',dir:'ltr',locale:'ru-RU',chatWelcome:'Добро пожаловать в Long Beach Resort! Я ваш ИИ-помощник. Чем я могу порадовать вас сегодня?',sug:'Популярные вопросы:',send:'Отправить',holder:'Спросите меня о ресторанах, меню...',open:'Открыто',closed:'Закрыто',t1:'Итальянская кухня',t2:'Изысканные морепродукты',t3:'Пляжный лаундж и барбекю',t4:'Международный буфет',t5:'Мексиканская кухня',t6:'Премиум Стейк-хаус'}
+// Multilingual Translation Matrix
+const UI = {
+    en: {
+        heroT: "Bespoke Dining Powered by AI", heroSub: "Experience tailored gastronomic luxury crafted exclusively for your palate.",
+        btnR: "Restaurants", btnRS: "Room Service", btnAI: "AI Assistant",
+        secR: "Signature Culinary Venues", secRS: "In-Room Luxury Dining Marketplace",
+        open: "Open Now", closed: "Closed Now", holder: "Ask anything (e.g. 'book a table', 'I have an allergy')...",
+        send: "Send", checkout: "Submit Order to Room", checkoutSuccess: "Order processed successfully! Sent to room ",
+        free: "Included with Package", tax: "Delivery Surcharge Applied",
+        bookPrompt: "Book Table", bookingSuccess: "Reservation secured successfully!",
+        warningAllergy: "⚠️ Contains elements matching your allergy profile!",
+        recMorning: "🌅 Good Morning! Fuel your day with a fresh International Buffet breakfast at OPENBILL.",
+        recAfternoon: "☀️ Beautiful sunshine! Cool down with frozen crafts at BREEZE beach bar.",
+        recEvening: "🌙 Elegant Evening. We suggest a premium steak experience at PODIUM (Res. Required)."
+    },
+    ar: {
+        heroT: "تجربة طعام فاخرة مدعومة بالذكاء الاصطناعي", heroSub: "استمتع بضيافة مصممة خصيصاً لتناسب ذوقك الرفيع وباقة إقامتك.",
+        btnR: "المطاعم الفاخرة", btnRS: "خدمة الغرف", btnAI: "المساعد الذكي",
+        secR: "أرقى وجهات الطهي بالمنتجع", secRS: "سوق المأكولات الفاخرة داخل الغرفة",
+        open: "مفتوح الآن", closed: "مغلق حالياً", holder: "اسألني عن أي شيء (مثال: احجز طاولة، أنا عندي حساسية)...",
+        send: "إرسال", checkout: "إرسال الطلب إلى الغرفة", checkoutSuccess: "تم تأكيد طلبك وإرساله بنجاح إلى الغرفة ",
+        free: "مشمول بالكامل في باقتك", tax: "خاضع لرسوم توصيل إضافية",
+        bookPrompt: "حجز طاولة", bookingSuccess: "تم تأكيد حجز الطاولة بنجاح المطبخ بانتظارك!",
+        warningAllergy: "⚠️ تحذير: يحتوي على مكونات تسبب لك الحساسية!",
+        recMorning: "🌅 صباح الخير! ابدأ يومك ببوفيه إفطار عالمي طازج في مطعم OPENBILL الآن.",
+        recAfternoon: "☀️ الأجواء رائعة على الشاطئ! ما رأيك بمشروب مثلج منعش في بار BREEZE؟",
+        recEvening: "🌙 مساء فاخر. نقترح عليك تجربة الستيك الفاخر في مطعم PODIUM (يتطلب حجز مسبق)."
+    }
 };
 
-// الـ Database الأساسية للمطابقة المحلية الفورية
-const aiDatabase = {
-    en: [
-        {q: "What restaurants are available?", a: "We feature 6 premium dining venues: ALDENTE (Italian), D'WHITE (Seafood), BREEZE (Beach BBQ), OPENBILL (International), MARY SOL (Mexican), and PODIUM (Steakhouse)."},
-        {q: "Is ALDENTE open now?", a: "Yes, ALDENTE Italian restaurant is open for dinner from 6:30 PM to 10:00 PM. Dress code is smart casual."},
-        {q: "Do I need a reservation for PODIUM?", a: "Yes, our Premium Steakhouse PODIUM requires a reservation 24 hours in advance. You can book it directly through me!"},
-        {q: "Which restaurant is best for seafood?", a: "D'WHITE is our specialized fine seafood restaurant, offering fresh daily catches with stunning sea views."},
-        {q: "Where can I get a drink near the beach?", a: "BREEZE Beach Lounge serves refreshing cocktails, fresh juices, and light snacks right on the sand from 9:00 AM until sunset."},
-        {q: "What is the dress code for restaurants?", a: "For dinner, the dress code is smart casual. Swimwear and sleeveless shirts for gentlemen are not permitted in indoor dining rooms."},
-        {q: "Are drinks included in the All-Inclusive package?", a: "Yes, local drinks, soft drinks, juices, coffee, and tea are fully included at all designated resort bars."},
-        {q: "Can I book a romantic private dinner?", a: "Absolutely! We can arrange a private candlelit dinner on the beach with a custom menu. Please let us know 24 hours in advance."},
-        {q: "What time does breakfast end?", a: "Breakfast is served at the main restaurant (OPENBILL) from 07:00 AM until 10:30 AM."},
-        {q: "Is there a late breakfast option?", a: "Yes, a late continental breakfast is available at the BREEZE lounge from 10:30 AM to 11:30 AM."},
-        {q: "Where can I eat Mexican food?", a: "MARY SOL serves authentic, vibrant Mexican dishes, open for dinner from 6:30 PM to 9:30 PM."},
-        {q: "Is ice cream available for kids?", a: "Yes! Complimentary ice cream is served for children at the pool bar from 12:00 PM to 5:00 PM daily."},
-        {q: "What are the bar opening hours?", a: "The Lobby Bar is open 24/7. Pool and Beach bars operate from 9:00 AM until sunset."},
-        {q: "Do you have local traditional dishes?", a: "Yes, our main buffet at OPENBILL features an authentic Oriental and local corner changing every evening."},
-        {q: "Can non-residents dine at the resort?", a: "Yes, outside guests can purchase a Day Pass or Evening Dining Pass at the reception desk."},
-        {q: "Is there live music during dinner?", a: "Yes, BREEZE and PODIUM feature live acoustic music and entertainment on alternating nights."},
-        {q: "What is the policy for kids in fine dining?", a: "Children are welcome in all restaurants, and we provide specialized high chairs and kid-friendly menus."},
-        {q: "Where can I get authentic Italian pizza?", a: "Our wood-fired traditional pizza is served daily at ALDENTE during lunch and dinner hours."},
-        {q: "Are premium imported drinks available?", a: "Imported premium spirits and luxury wines are available for an extra charge, or fully complimentary for Ultra All-Inclusive guests."},
-        {q: "Can I smoke in the restaurants?", a: "All indoor dining spaces are strictly non-smoking. Smoking is fully permitted in outdoor terraces and open bars."},
-        {q: "What is today's buffet theme?", a: "Tonight's theme at OPENBILL is 'Mediterranean Feast', featuring live cooking stations, fresh pastas, and a premium grill corner."},
-        {q: "What time is lunch served?", a: "Lunch buffet is open from 1:00 PM to 3:00 PM at the main OPENBILL restaurant."},
-        {q: "What time is dinner served?", a: "Dinner buffet is available from 6:30 PM to 9:30 PM at the main restaurant."},
-        {q: "Is sushi included in the buffet?", a: "Sushi is served twice a week during our spectacular 'Asian & Seafood Night' at the main buffet."},
-        {q: "Do you have a chocolate fountain?", a: "Yes, a premium Belgian chocolate fountain with fresh fruits is featured every Friday night during the dessert gala."},
-        {q: "Is there a live cooking station?", a: "Yes, we feature 4 live cooking stations for fresh pasta, grilled meats, custom stir-fry, and fresh crêpes daily."},
-        {q: "Can I take food from the buffet to my room?", a: "To ensure food safety standards, buffet items cannot be removed. However, you can order anything via Room Service 24/7!"},
-        {q: "Is there a kids' buffet area?", a: "Yes, OPENBILL has a dedicated kids' corner with lower tables, serving mini burgers, nuggets, pasta, and healthy purees."},
-        {q: "Do you offer healthy buffet options?", a: "Our green corner features organic salads, cold-pressed olive oils, steamed vegetables, and lean protein options daily."},
-        {q: "Is tea and coffee available during dinner?", a: "Yes, hot beverage stations are open, and our waiters will happily serve espresso, cappuccino, or tea directly to your table."},
-        {q: "How can I order room service?", a: "You can dial '0' on your room phone, or browse the digital menu on your TV and place an order directly. I can also send you the menu!"},
-        {q: "Is room service open 24 hours?", a: "Yes, our luxury in-room dining service operates 24 hours a day with hot and cold selections."},
-        {q: "Is room service free?", a: "Room service is subject to a nominal delivery fee for standard packages, and fully complimentary for our Royal Suite and Premium guests."},
-        {q: "Can I get breakfast delivered to my room?", a: "Yes! You can fill out the door-hanger menu before 3:00 AM, or order live in the morning. Served from 6:30 AM to 11:00 AM."},
-        {q: "What is the delivery time for room service?", a: "Standard delivery time is between 25 to 45 minutes, depending on your order selection."},
-        {q: "Can I order a bottle of wine to my room?", a: "Yes, we have an extensive in-room beverage list including premium wines, champagne, and spirits."},
-        {q: "Do you serve midnight snacks?", a: "Yes, our late-night room service menu includes burgers, hot soups, club sandwiches, and delicious desserts from midnight to 6:00 AM."},
-        {q: "Can I order a birthday cake to the room?", a: "Absolutely! We can deliver a customized surprise birthday or anniversary cake with sparkling wine. Please inform us 6 hours prior."},
-        {q: "Do rooms have a minibar?", a: "Yes, all rooms feature a fully stocked minibar replenished daily with soft drinks, beers, and snacks."},
-        {q: "Is minibar consumption free?", a: "Minibar contents are completely free and refilled daily for All-Inclusive and Premium guests."},
-        {q: "Do you have gluten-free options?", a: "Yes, we offer certified gluten-free bread, pastas, and desserts. Please inform your waiter or our chef at the buffet stations."},
-        {q: "Are there vegan dishes available?", a: "Every restaurant features designated plant-based, vegan, and dairy-free gourmet options clearly marked on the menu."},
-        {q: "Is all food served Halal?", a: "Yes, all meat and culinary ingredients used across Long Beach Resort are 100% certified Halal."},
-        {q: "I have a severe nut allergy, what should I do?", a: "Please notify our head chef upon arrival. We will tag your room profile and prepare your meals in an isolated, nut-free environment."},
-        {q: "Do you have lactose-free milk?", a: "Yes, almond, soy, oat, and lactose-free milk are readily available at all breakfast stations and coffee bars."},
-        {q: "Can you prepare special baby food?", a: "Our chefs will gladly blend fresh vegetables, rice, or chicken without salt or spices for your baby. Just request it at the restaurant."},
-        {q: "Do you offer low-sodium meals?", a: "Yes, we can prepare tailor-made meals following low-sodium or specific diabetic-friendly guidelines upon request."},
-        {q: "What are the Premium Benefits?", a: "Premium members enjoy exclusive 24/7 VIP lounge access, unlimited à la carte dining without reservation limits, and premium imported beverages."},
-        {q: "How can I upgrade to Premium?", a: "You can visit the Guest Relations desk in the lobby or simply ask me to request a call from our VIP manager to upgrade your room package."},
-        {q: "Is there a private beach bar for Premium guests?", a: "Yes, the 'GOLDEN HORIZON' is a private premium lounge and beach club restricted exclusively to Premium and Suite guests."}
-    ],
-    ar: [
-        {q: "ما هي المطاعم المتوفرة في المنتجع؟", a: "نضم 6 مطاعم فاخرة: الدنتي (إيطالي)، دي وايت (مأكولات بحرية)، بريز (مشويات على الشاطئ)، أوبن بيل (بوفيه عالمي)، ماري سول (مكسيكي)، وبوديوم (ستيك هاوس)."},
-        {q: "هل مطعم ALDENTE مفتوح الآن؟", a: "نعم، يفتح مطعم الدنتي الإيطالي للعشاء من الساعة 6:30 مساءً حتى 10:00 مساءً. زي الدخول كاجوال أنيق."},
-        {q: "هل أحتاج لحجز مسبق لمطعم PODIUM؟", a: "نعم، مطعم الستيك هاوس الفاخر بوديوم يتطلب حجزاً مسبقاً قبل 24 ساعة. يمكنك الحجز عبر محادثتي مباشرة!"},
-        {q: "ما هو أفضل مطعم للمأكولات البحرية؟", a: "مطعم D'WHITE هو مطعمنا المتخصص في المأكولات البحرية الفاخرة، ويقدم صيداً طازجاً يومياً مع إطلالة ساحرة على البحر."},
-        {q: "أين يمكنني تناول مشروب على الشاطئ؟", a: "يقدم بار ومطبخ BREEZE مشروبات كوكتيل منعشة وعصائر طازجة ووجبات خفيفة مباشرة على الرمال من 9:00 صباحاً وحتى غروب الشمس."},
-        {q: "ما هو كود الملابس المسموح به في المطاعم؟", a: "خلال فترة العشاء، يُشترط ارتداء ملابس كاجوال أنيقة. غير مسموح بملابس السباحة أو القمصان بدون أكمام للرجال داخل قاعات الطعام المغلقة."},
-        {q: "هل المشروبات مشمولة في الإقامة الشاملة؟", a: "نعم، المشروبات الغازية، العصائر الطازجة، القهوة، الشاي، والمشروبات المحلية مشمولة بالكامل في جميع بارات المنتجع المحددة."},
-        {q: "هل يمكنني حجز عشاء رومانسي خاص؟", a: "بالتأكيد! يمكننا تنظيم عشاء خاص على ضوء الشموع على الشاطئ مع قائمة طعام مخصصة. يرجى إبلاغنا قبل 24 ساعة."},
-        {q: "متى ينتهي بوفيه الإفطار؟", a: "يُقدم الإفطار في المطعم الرئيسي (OPENBILL) من الساعة 07:00 صباحاً وحتى 10:30 صباحاً."},
-        {q: "هل يتوفر خيار إفطار متأخر؟", a: "نعم، يتوفر إفطار كونتيننتال متأخر في صالة BREEZE من الساعة 10:30 صباحاً وحتى 11:30 صباحاً."},
-        {q: "أين يمكنني تناول الطعام المكسيكي؟", a: "يقدم مطعم MARY SOL الأطباق المكسيكية الأصلية والحيوية، ويفتح لوجبة العشاء من 6:30 مساءً إلى 9:30 مساءً."},
-        {q: "هل يتوفر آيس كريم للأطفال؟", a: "نعم! يتم تقديم الآيس كريم المجاني للأطفال في بار المسبح من الساعة 12:00 ظهراً وحتى 5:00 مساءً يومياً."},
-        {q: "ما هي مواعيد عمل البارات؟", a: "بار الردهة (Lobby Bar) مفتوح 24 ساعة طوال أيام الأسبوع. بارات المسبح والشاطئ تعمل من 9:00 صباحاً حتى غروب الشمس."},
-        {q: "هل تقدمون أطباقاً محلية وشرقية؟", a: "نعم، يحتوي البوفيه الرئيسي في OPENBILL على ركن شرقي ومحلي أصيل يتغير كل مساء."},
-        {q: "هل يمكن لغير النزلاء تناول الطعام في المنتجع؟", a: "نعم، يمكن للزوار الخارجيين شراء تذكرة يومية (Day Pass) أو تذكرة عشاء مسائية من مكتب الاستقبال."},
-        {q: "هل توجد موسيقى حية أثناء العشاء؟", a: "نعم، يقدم مطعما BREEZE و PODIUM عروضاً موسيقية حية وأجواء ترفيهية في ليالٍ بديلة."},
-        {q: "ما هي سياسة الأطفال في المطاعم الفاخرة؟", a: "الأطفال مرحب بهم في جميع المطاعم، ونوفر مقاعد مخصصة لهم وقوائم طعام مناسبة للأطفال."},
-        {q: "أين أجد البيتزا الإيطالية الأصلية؟", a: "يتم تقديم البيتزا التقليدية المخبوزة في فرن الحطب يومياً في مطعم ALDENTE خلال أوقات الغداء والعشاء."},
-        {q: "هل تتوفر مشروبات مستوردة فاخرة؟", a: "المشروبات المستوردة والخمور الفاخرة متوفرة مقابل رسوم إضافية، وتكون مجانية بالكامل لنزلاء تفويض Ultra All-Inclusive."},
-        {q: "هل التدخين مسموح داخل المطاعم؟", a: "جميع قاعات الطعام الداخلية لغير المدخنين تماماً. التدخين مسموح فقط في التراس الخارجي والبارات المفتوحة."},
-        {q: "ما هو موضوع البوفيه اليوم؟", a: "موضوع الليلة في OPENBILL هو 'وليمة البحر الأبيض المتوسط'، ويضم محطات طهي حية، باستا طازجة، وركن مشويات فاخر."},
-        {q: "في أي وقت يُقدم الغداء؟", a: "بوفيه الغداء مفتوح من الساعة 1:00 ظهراً وحتى 3:00 عصراً في مطعم أوبن بيل الرئيسي."},
-        {q: "في أي وقت يُقدم العشاء؟", a: "بوفيه العشاء متاح من الساعة 6:30 مساءً وحتى 9:30 مساءً في المطعم الرئيسي."},
-        {q: "هل السوشي مشمول في البوفيه؟", a: "يتم تقديم السوشي مرتين في الأسبوع خلال ليلة 'المأكولات البحرية والآسيوية' المميزة في البوفيه الرئيسي."},
-        {q: "هل لديكم نافورة شوكولاتة؟", a: "نعم، تتوفر نافورة شوكولاتة بلجيكية فاخرة مع الفواكه الطازجة والمارشميلو كل ليلة جمعة في مهرجان الحلويات."},
-        {q: "هل توجد محطات طهي مباشر؟", a: "نعم، لدينا 4 محطات طهي مباشر لتحضير الباستا الطازجة، اللحوم المشوية، والكراب الطازج يومياً أمام النزلاء."},
-        {q: "هل يمكنني أخذ طعام من البوفيه لغرفتي؟", a: "لضمان معايير سلامة الغذاء، لا يمكن نقل أطعمة البوفيه للغرف. لكن يمكنك طلب أي شيء عبر خدمة الغرف المتاحة 24 ساعة!"},
-        {q: "هل يوجد ركن بوفيه مخصص للأطفال؟", a: "نعم، يحتوي مطعم OPENBILL على ركن مخصص للأطفال بطاولات منخفضة، يقدم ميني برجر، ناجتس، باستا، وعصائر صحية."},
-        {q: "هل توجد خيارات طعام صحي في البوفيه?", a: "يوفر الركن الأخضر لدينا سلطات عضوية، زيت زيتون بكر ممتاز، خضار على البخار، وخيارات بروتين خالية من الدهون يومياً."},
-        {q: "هل يتوفر الشاي والقهوة أثناء العشاء؟", a: "نعم، محطات المشروبات الساخنة مفتوحة، ويسعد نادلينا تقديم الإسبريسو أو الكابتشينو أو الشاي إلى طاولتك مباشرة."},
-        {q: "كيف يمكنني طلب خدمة الغرف؟", a: "يمكنك الاتصال بالرقم '0' من هاتف الغرفة، أو تصفح المنيو الرقمي على شاشة التلفاز واطلب مباشرة. يمكنني أيضاً إرسال المنيو لك هنا!"},
-        {q: "هل خدمة الغرف متاحة 24 ساعة؟", a: "نعم، تعمل خدمة الطعام داخل الغرف على مدار 24 ساعة طوال اليوم وتضم خيارات ساخنة وباردة ومتنوعة."},
-        {q: "هل خدمة الغرف مجانية؟", a: "تخضع خدمة الغرف لرسوم توصيل رمزية للباقات العادية، ومجانية بالكامل للأجنحة الملكية ونزلاء باقة بريميوم."},
-        {q: "هل يمكنني طلب توصيل الإفطار للغرفة؟", a: "نعم! يمكنك تعليق قائمة الطعام على باب الغرفة قبل الساعة 3:00 صباحاً، أو الطلب هاتفياً في الصباح. الخدمة من 6:30 إلى 11:00 صباحاً."},
-        {q: "ما هو الوقت المستغرق لتوصيل طلب الغرفة؟", a: "الوقت القياسي للتوصيل يتراوح بين 25 إلى 45 دقيقة حسب الوجبات المختارة."},
-        {q: "هل يمكنني طلب زجاجة عصير فاخرة للغرفة؟", a: "نعم، لدينا قائمة مشروبات واسعة مخصصة للغرف تشمل المشروبات الفاخرة، العصائر الطبيعية، والمقرمشات."},
-        {q: "هل تقدمون وجبات خفيفة في منتصف الليل؟", a: "نعم، تتضمن قائمة منتصف الليل (من 12 ليلاً حتى 6 صباحاً) البرجر، الشوربة الساخنة، الكلوب ساندوتش، والحلويات اللذيذة."},
-        {q: "هل يمكنني طلب كعكة عيد ميلاد للغرفة؟", a: "بالتأكيد! يمكننا تنسيق كعكة عيد ميلاد أو ذكرى زواج مفاجئة وتوصيلها للغرفة. يرجى إبلاغنا قبل 6 ساعات."},
-        {q: "هل تحتوي الغرف على ميني بار?", a: "نعم، تحتوي جميع الغرف على ميني بار مجهز بالكامل ويتم إعادة تعبئته يومياً بالمشروبات الغازية والمياه والمأكولات الخفيفة."},
-        {q: "هل استهلاك الميني بار مجاني؟", a: "محتويات الميني بار مجانية بالكامل ويتم تجديدها يومياً لنزلاء الإقامة الشاملة وباقة بريميوم."},
-        {q: "هل توجد خيارات خالية من الجلوتين؟", a: "نعم، نوفر خبزاً وباستا وحلويات معتمدة خالية من الجلوتين. يرجى إبلاغ النادل أو الشيف المسؤول في البوفيه لتلبية طلبك بدقة."},
-        {q: "هل تتوفر أطباق نباتية (Vegan)؟", a: "يحتوي كل مطعم على خيارات نباتية بالكامل ومصنعة من مواد طبيعية خالية من الألبان، وهي موضحة بملصق خاص في المنيو."},
-        {q: "هل جميع الأطعمة المقدمة حلال؟", a: "نعم، جميع اللحوم والمكونات الغذائية المستخدمة في مطابخ منتجع لونج بيتش معتمدة ومذبوحة حسب الشريعة الإسلامية 100%."},
-        {q: "لدي حساسية شديدة من المكسرات، ماذا أفعل؟", a: "يرجى إبلاغ الشيف الرئيسي فور وصولك. سنقوم بوضع علامة تحذيرية على ملف غرفتك وإعداد وجباتك في مطبخ معزول تماماً عن المكسرات."},
-        {q: "هل يتوفر حليب خالي من اللاكتوز؟", a: "نعم، يتوفر حليب اللوز، الصويا، الشوفان، والحليب الخالي من اللاكتوز في جميع محطات الإفطار وبارات القهوة."},
-        {q: "هل يمكن إعداد طعام مخصص للأطفال الرضع؟", a: "يسعد طهاتنا هرس الخضروات الطازجة، الأرز، أو الدجاج بدون ملح أو بهارات لطفلك الرضيع مجاناً وبناءً على طلبك."},
-        {q: "هل توفرون وجبات منخفضة الصوديوم؟", a: "نعم، يمكننا إعداد وجبات مفصلة خصيصاً تتبع إرشادات خفض الأملاح أو مناسبة لمرضى السكري عند الطلب المسبق."},
-        {q: "ما هي مزايا باقة بريميوم؟", a: "يتمتع أعضاء بريميوم بالدخول الحصري لصالة VIP المتاحة 24 ساعة، وتناول العشاء اللامحدود في المطاعم المتخصصة بدون حد أقصى للحجوزات، ومشروبات مستوردة فاخرة."},
-        {q: "كيف يمكنني الترقية إلى باقة بريميوم؟", a: "يمكنك زيارة مكتب علاقات النزلاء (Guest Relations) في الردهة، أو اطلب مني الآن وسأرسل لمدير صالة VIP ليتصل بغرفتك فوراً للترقية."},
-        {q: "هل يوجد بار شاطئ خاص لنزلاء بريميوم؟", a: "نعم، بار ونادي الشاطئ 'GOLDEN HORIZON' هو منطقة فاخرة وحصرية مخصصة فقط لنزلاء باقة بريميوم والأجنحة الملكية."}
-    ]
-};
+// Structural Data Architecture
+const RESTS = [
+    { id: 'r1', name: 'ALDENTE', type_en: 'Traditional Wood-Fired Italian', type_ar: 'المطبخ الإيطالي الفاخر', status: 'open', banner: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'r2', name: "D'WHITE", type_en: 'Premium Fresh Mediterranean Seafood', type_ar: 'مأكولات بحرية طازجة', status: 'open', banner: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80' },
+    { id: 'r3', name: 'BREEZE', type_en: 'Beachfront Lounge & Custom BBQ', type_ar: 'جلسة الشاطئ والمشويات المباشرة', status: 'open', banner: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=400&q=80' },
+    { id: 'r4', name: 'OPENBILL', type_en: 'Global Live-Station Buffet', type_ar: 'بوفيه عالمي بمحطات طهي حية', status: 'closed', banner: 'https://images.unsplash.com/photo-1498654896293-37aaea113fd9?auto=format&fit=crop&w=400&q=80' },
+    { id: 'r5', name: 'MARY SOL', type_en: 'Vibrant Authentic Mexican', type_ar: 'الأطباق المكسيكية الحيوية', status: 'open', banner: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80' },
+    { id: 'r6', name: 'PODIUM', type_en: 'Elite Dry-Aged Steakhouse', type_ar: 'ستيك هاوس فاخر ونادر', status: 'closed', banner: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80' }
+];
 
-// توليد فروع ذكية ديناميكياً لتخطي عتبة الـ 100+ سؤال وجواب بالكامل ومستعدة لمحرك الكلمات المفتاحية
-function generateMorePrompts(lang) {
-    let base = aiDatabase[lang] || aiDatabase['en'];
-    let topics = lang === 'ar' ? [' المنيو', ' الأسعار', ' موعد فتح', ' كيفية حجز', ' خيارات الطعام في'] : [' Menu', ' Prices', ' Opening time', ' How to book', ' Food choices in'];
-    let rests = ['ALDENTE', "D'WHITE", 'BREEZE', 'OPENBILL', 'MARY SOL', 'PODIUM'];
-    
-    rests.forEach(r => {
-        topics.forEach(t => {
-            if(lang === 'ar') {
-                base.push({q: `أريد معرفة ${t} الخاص بمطعم ${r}`, a: `بالتأكيد! يمكنك تصفح تفاصيل ومحتويات ${t} لمطعم ${r} عبر شاشات العرض الرقمية أو بطلب الخدمة المباشرة من نادل المطعم. هل ترغب بأن أقوم بحجز طاولة لك هناك الآن؟`});
-                base.push({q: `هل يوجد ${t} في ${r}`, a: `نعم، كافة الـ ${t} متوفرة ومحدثة بشكل كامل في مطعم ${r}. تواصل مع طاقم الخدمة للحصول على أي طلب إضافي خاص.`});
-            } else {
-                base.push({q: `I want to know ${r} ${t}`, a: `Certainly! You can inspect all details regarding ${t} for ${r} via our digital monitors or directly from the captain. Would you like me to book a table for you there right away?`});
-                base.push({q: `Is there ${t} inside ${r}`, a: `Yes, all ${t} are fully available and customized inside ${r} to meet your standards. Feel free to ask the captain for further requirements.`});
-            }
-        });
-    });
-    return base;
-}
+const FOOD_MENU = [
+    { id: 'f1', name_en: ' Wagyu Beef Burger', name_ar: 'برجر لحم واجيو الفاخر', price: 25, allergy: 'gluten', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80' },
+    { id: 'f2', name_en: 'Truffle Wood-Fired Pizza', name_ar: 'بيتزا الترافل الفرن الإيطالي', price: 22, allergy: 'gluten', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80' },
+    { id: 'f3', name_en: 'Atlantic Salmon fillet', name_ar: 'فيليه سالمون الأطلسي الطازج', price: 30, allergy: 'nuts', img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=300&q=80' },
+    { id: 'f4', name_en: 'Organic Quinoa Salad', name_ar: 'سلطة الكينوا العضوية الصحية', price: 15, allergy: 'none', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80' },
+    { id: 'f5', name_en: 'Pistachio Baklava Fusion', name_ar: 'بقلاوة فاخرة بالفستق الحلبي', price: 12, allergy: 'nuts', img: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=300&q=80' }
+];
 
-const fullEnDb = generateMorePrompts('en');
-const fullArDb = generateMorePrompts('ar');
+// Global State Variables
+let selectedAllergies = [];
+let currentCart = {};
+let guestProfile = null;
 
-function getDb() {
-    let l = localStorage.getItem('lang') || 'en';
-    return (l === 'ar') ? fullArDb : fullEnDb;
-}
-
-function setLang(l){
-localStorage.setItem('lang',l);
-let t=txt[l];
-
-document.documentElement.dir = t.dir;
-document.documentElement.lang = l;
-
-document.getElementById('title').innerText=t.title;
-document.getElementById('subtitle').innerText=t.sub;
-document.getElementById('services').innerText=t.srv;
-document.getElementById('featured').innerText=t.feat;
-document.getElementById('stats').innerText=t.stat;
-
-document.getElementById('b1').innerHTML='🍽 '+t.r;
-document.getElementById('b2').innerHTML='🛎️ '+t.rs;
-document.getElementById('b3').innerHTML='🤖 '+t.ai;
-document.getElementById('b4').innerHTML='🍴 '+t.bf;
-document.getElementById('b5').innerHTML='⭐ '+t.pr;
-
-document.getElementById('c1').innerHTML='<h3>'+t.rDir+'</h3>';
-document.getElementById('c2').innerHTML='<h3>'+t.rs+'</h3>';
-document.getElementById('c4').innerHTML='<h3>'+t.bf+'</h3>';
-document.getElementById('c5').innerHTML='<h3>'+t.pr+'</h3>';
-
-document.getElementById('t1').innerText=t.t1; document.getElementById('t2').innerText=t.t2;
-document.getElementById('t3').innerText=t.t3; document.getElementById('t4').innerText=t.t4;
-document.getElementById('t5').innerText=t.t5; document.getElementById('t6').innerText=t.t6;
-
-document.getElementById('s1').innerText=t.open; document.getElementById('s2').innerText=t.open;
-document.getElementById('s3').innerText=t.open; document.getElementById('s4').innerText=t.closed;
-document.getElementById('s5').innerText=t.open; document.getElementById('s6').innerText=t.closed;
-
-document.getElementById('footer').innerText=t.title;
-document.getElementById('chatTitle').innerText=t.ai;
-document.getElementById('sugTitle').innerText=t.sug;
-document.getElementById('chatSendBtn').innerText=t.send;
-document.getElementById('chatInput').placeholder=t.holder;
-
-initChatWelcome();
-renderSuggestedQuestions();
-updateClock();
-}
-
-function updateClock(){
-let l=localStorage.getItem('lang')||'en';
-const clockEl = document.getElementById('clock');
-if(clockEl) { clockEl.innerText=new Date().toLocaleString(txt[l].locale); }
-}
-
-// ==================== AI Hybrid Chat Engine Functions ====================
-function toggleChat() {
-    const win = document.getElementById('chatWindow');
-    if(win.style.display === 'none' || win.style.display === '') {
-        win.style.display = 'flex';
-        initChatWelcome();
+// Allergy Toggle Function
+function toggleAllergyTag(el, type) {
+    el.classList.toggle('selected');
+    if(el.classList.contains('selected')) {
+        selectedAllergies.push(type);
     } else {
-        win.style.display = 'none';
+        selectedAllergies = selectedAllergies.filter(item => item !== type);
     }
 }
 
+// Save Profile Core Engine
+function saveGuestProfile() {
+    let name = document.getElementById('regName').value.trim();
+    let room = document.getElementById('regRoom').value.trim();
+    let tier = document.getElementById('regTier').value;
+    
+    if(!name || !room) {
+        alert("Please completely fill your credentials / يرجى كتابة البيانات كاملة");
+        return;
+    }
+    
+    guestProfile = { name, room, tier, allergies: selectedAllergies };
+    localStorage.setItem('lb_guest_v1', JSON.stringify(guestProfile));
+    document.getElementById('regModal').style.display = 'none';
+    
+    renderApp();
+}
+
+// Render Core Visual Modules
+function renderApp() {
+    let l = localStorage.getItem('lang') || 'en';
+    if(!guestProfile) return;
+    
+    // Display Identity Profile Badge
+    let badge = document.getElementById('profileBadge');
+    badge.innerText = `🚪 Rm ${guestProfile.room} - ${guestProfile.name} (${guestProfile.tier.toUpperCase()})`;
+    badge.style.display = 'block';
+    
+    // 1. Render Restaurants Directory
+    let restsContainer = document.getElementById('restaurantsContainer');
+    restsContainer.innerHTML = '';
+    RESTS.forEach(r => {
+        let type = l === 'ar' ? r.type_ar : r.type_en;
+        let badgeStyle = r.status === 'open' ? 'status-open' : 'status-closed';
+        let badgeTxt = r.status === 'open' ? UI[l].open : UI[l].closed;
+        
+        restsContainer.innerHTML += `
+            <div class="luxury-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.85)), url('${r.banner}') center/cover; min-height: 220px;">
+                <div>
+                    <h3 style="font-size: 22px; color: white;">${r.name}</h3>
+                    <p style="color: var(--gold); font-size: 13px; margin-top: 5px;">${type}</p>
+                </div>
+                <div class="card-meta">
+                    <span class="status-badge ${badgeStyle}">${badgeTxt}</span>
+                    <button class="btn" style="padding: 6px 12px; font-size: 12px;" onclick="triggerChatAction('book', '${r.name}')">${UI[l].bookPrompt}</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    // 2. Render E-Commerce Room Service Marketplace
+    let menuContainer = document.getElementById('roomServiceContainer');
+    menuContainer.innerHTML = '';
+    FOOD_MENU.forEach(f => {
+        let title = l === 'ar' ? f.name_ar : f.name_en;
+        let priceDisplay = guestProfile.tier === 'premium' ? UI[l].free : `$${f.price}`;
+        let isAllergyMatch = guestProfile.allergies.includes(f.allergy);
+        let warningBorder = isAllergyMatch ? 'border: 1px solid var(--danger);' : '';
+        
+        menuContainer.innerHTML += `
+            <div class="luxury-card" style="${warningBorder}">
+                <img src="${f.img}" style="width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
+                <h3 style="font-size: 16px;">${title}</h3>
+                ${isAllergyMatch ? `<p style="color:var(--danger); font-size:11px; margin-top:5px;">${UI[l].warningAllergy}</p>` : ''}
+                <div class="card-meta">
+                    <span class="item-price">${priceDisplay}</span>
+                    <button class="btn" style="padding: 8px 15px; font-size: 13px;" onclick="addToCart('${f.id}')">+</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    updateCartBox();
+    runContextualAI();
+}
+
+// Shopping Basket Calculation Module
+function addToCart(id) {
+    currentCart[id] = (currentCart[id] || 0) + 1;
+    updateCartBox();
+}
+
+function updateCartBox() {
+    let l = localStorage.getItem('lang') || 'en';
+    let box = document.getElementById('cartSummaryBox');
+    let totalItems = Object.values(currentCart).reduce((a, b) => a + b, 0);
+    
+    if(totalItems === 0) {
+        box.style.display = 'none';
+        return;
+    }
+    
+    box.style.display = 'flex';
+    document.getElementById('cartCount').innerText = l === 'ar' ? `السلة: ${totalItems} وجبات` : `Basket: ${totalItems} Items`;
+    
+    // Check if user has an active allergy inside the current basket selection
+    let customWarning = "";
+    Object.keys(currentCart).forEach(itemId => {
+        let match = FOOD_MENU.find(f => f.id === itemId);
+        if(match && guestProfile.allergies.includes(match.allergy)) {
+            customWarning = UI[l].warningAllergy;
+        }
+    });
+    document.getElementById('cartAllergyWarning').innerText = customWarning;
+}
+
+function checkoutCart() {
+    let l = localStorage.getItem('lang') || 'en';
+    alert(`${UI[l].checkoutSuccess} ${guestProfile.room}!`);
+    currentCart = {};
+    updateCartBox();
+}
+
+// Hyper-Personalized Contextual Logic Banner
+function runContextualAI() {
+    let l = localStorage.getItem('lang') || 'en';
+    let hours = new Date().getHours();
+    let bannerTxt = "";
+    
+    if(hours >= 5 && hours < 12) bannerTxt = UI[l].recMorning;
+    else if(hours >= 12 && hours < 18) bannerTxt = UI[l].recAfternoon;
+    else bannerTxt = UI[l].recEvening;
+    
+    document.getElementById('recDesc').innerText = bannerTxt;
+}
+
+// Multilingual State Swapper
+function setLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+    document.getElementById('langArBtn').classList.toggle('active', lang === 'ar');
+    
+    let t = UI[lang];
+    document.getElementById('heroTitle').innerText = t.heroT;
+    document.getElementById('heroSub').innerText = t.heroSub;
+    document.getElementById('btnR').innerText = t.btnR;
+    document.getElementById('btnRS').innerText = t.btnRS;
+    document.getElementById('btnAI').innerText = t.btnAI;
+    document.getElementById('secTitleR').innerText = t.secR;
+    document.getElementById('secTitleRS').innerText = t.secRS;
+    document.getElementById('btnCheckout').innerText = t.checkout;
+    
+    // Chat localization adjustments
+    document.getElementById('chatTitle').innerText = lang === 'ar' ? "مساعدك الشخصي الرقمي" : "AI Concierge Butler";
+    document.getElementById('chatInput').placeholder = t.holder;
+    document.getElementById('chatSendBtn').innerText = t.send;
+    
+    renderApp();
+    initChatWelcome();
+}
+
+// AI Dialogue Cognitive Intelligence المحاكاة العصبية للذكاء الاصطناعي
 function initChatWelcome() {
     let l = localStorage.getItem('lang') || 'en';
-    const body = document.getElementById('chatBody');
-    if(body.children.length === 0) {
-        body.innerHTML = `<div class="msg bot">${txt[l].chatWelcome}</div>`;
-    }
+    let body = document.getElementById('chatBody');
+    let welcome = l === 'ar' 
+        ? `مرحباً بك سيد ${guestProfile ? guestProfile.name : ''}! أنا خادمك الشخصي المعتمد على الذكاء الاصطناعي. لقد قمت بتحميل ملف غرفتك (${guestProfile ? guestProfile.room : ''}) وباقة إقامتك بنجاح. كيف يمكنني إبهارك الليلة؟`
+        : `Welcome Client ${guestProfile ? guestProfile.name : ''}! I am your AI Luxury Concierge Butler. Room profile ${guestProfile ? guestProfile.room : ''} is active. How may I serve your palate today?`;
+        
+    body.innerHTML = `<div class="msg bot">${welcome}</div>`;
+    renderQuickSuggestions();
 }
 
-function renderSuggestedQuestions() {
-    const box = document.getElementById('suggestedBox');
+function renderQuickSuggestions() {
+    let l = localStorage.getItem('lang') || 'en';
+    let box = document.getElementById('suggestedBox');
     box.innerHTML = '';
-    let db = getDb();
     
-    // سحب 5 أسئلة عشوائية لعرضها في صندوق الاقتراحات السريع
-    let shuffled = db.sort(() => 0.5 - Math.random()).slice(0, 5);
-    
-    shuffled.forEach(item => {
-        let btn = document.createElement('button');
-        btn.className = 'suggested-btn';
-        btn.innerText = item.q;
-        btn.onclick = () => {
-            document.getElementById('chatInput').value = item.q;
-            sendMessage();
-        };
-        box.appendChild(btn);
+    let prompts = langPrompts[l] || langPrompts['en'];
+    prompts.forEach(p => {
+        box.innerHTML += `<button class="suggested-btn" onclick="executeQuickPrompt('${p}')">${p}</button>`;
     });
 }
 
-// دالة دمج الـ Hybrid الفعالة: محرك مرن محلي + سحابة ذكاء اصطناعي واقعي
-async function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const body = document.getElementById('chatBody');
+const langPrompts = {
+    en: ["Is PODIUM open?", "Book a Table", "Check My Allergy Options", "Order Room Service"],
+    ar: ["هل مطعم بوديوم مفتوح؟", "حجز طاولة عشاء", "تحقق من خيارات الحساسية الغذائية", "طلب خدمة الغرف"]
+};
+
+function executeQuickPrompt(txt) {
+    document.getElementById('chatInput').value = txt;
+    sendMessage();
+}
+
+// Natural Language Cognitive Processor
+function sendMessage() {
+    let input = document.getElementById('chatInput');
     let text = input.value.trim();
     if(!text) return;
-
-    // عرض سؤال المستخدم
+    
+    let body = document.getElementById('chatBody');
     body.innerHTML += `<div class="msg user">${text}</div>`;
     input.value = '';
     body.scrollTop = body.scrollHeight;
-
-    // توليد كرت "جاري التفكير..." مؤقتاً
-    let typingId = "typing_" + Date.now();
-    body.innerHTML += `<div class="msg bot" id="${typingId}">...</div>`;
-    body.scrollTop = body.scrollHeight;
-
-    let currentDb = getDb();
-    let cleanText = text.toLowerCase().replace(/[?؟.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-    let textWords = cleanText.split(/\s+/).filter(w => w.length > 2);
-
-    // [المرحلة 1] محرك البحث المرن عبر الكلمات المفتاحية الذكية لمعالجة الصياغات المختلفة محلياً
-    let localMatch = currentDb.find(item => {
-        let cleanQ = item.q.toLowerCase().replace(/[?؟.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-        let qWords = cleanQ.split(/\s+/);
-        
-        // حساب الكلمات المشتركة بين سؤال النزيل والسؤال المخزن
-        let matches = textWords.filter(word => qWords.includes(word)).length;
-        
-        // إذا تطابقت كلمتان رئيسيتان (مثل: الدنتي + مفتوح) يعتبر التطابق صحيحاً ويُجيب فوراً
-        return matches >= 2 || cleanText.includes(cleanQ) || cleanQ.includes(cleanText);
-    });
-
-    if (localMatch) {
-        setTimeout(() => {
-            document.getElementById(typingId).innerText = localMatch.a;
-            body.scrollTop = body.scrollHeight;
-            renderSuggestedQuestions();
-        }, 400);
-    } else {
-        // [المرحلة 2] في حال لم يطابق محلياً، ينتقل تلقائياً للذكاء الاصطناعي الفعلي (الـ API الخلفي الآمن)
-        try {
-            // استبدل هذا المسار بمسار سيرفر الـ Backend الخاص بك (مثل Node.js أو Python) المستضيف لـ Gemini / OpenAI
-            const response = await fetch('https://your-secure-backend-api.com/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    message: text,
-                    lang: localStorage.getItem('lang') || 'en'
-                })
-            });
-            
-            const data = await response.json();
-            document.getElementById(typingId).innerText = data.reply;
-        } catch (error) {
-            // رد بديل آمن وسلس لضمان بقاء تجربة النزيل فاخرة ولا تنكسر في حال عدم وجود إنترنت
-            let l = localStorage.getItem('lang') || 'en';
-            document.getElementById(typingId).innerText = (l === 'ar')
-                ? "سؤال رائع! قمت بتوجيه استفسارك المخصص فوراً إلى إدارة الأغذية والمشروبات لخدمتك بدقة متناهية."
-                : "Splendid question! I have instantly routed your inquiry to our Food & Beverage desk to assist you with absolute precision.";
-        }
+    
+    let l = localStorage.getItem('lang') || 'en';
+    let reply = "";
+    
+    let normalized = text.toLowerCase();
+    
+    // Multi-intent matching processor
+    if(normalized.includes('book') || normalized.includes('حجز') || normalized.includes('طاولة')) {
+        reply = l === 'ar'
+            ? `بالتأكيد! لقد قمت للتو بمزامنة طلب الحجز لغرفة ${guestProfile.room} مع مطابخنا الفاخرة. تم تأكيد طاولتك الخاصة الليلة الساعة 8:30 مساءً.`
+            : `Absolutely. I have synchronized room ${guestProfile.room} request with our reservation grids. Your table is reserved for 08:30 PM tonight.`;
+    } 
+    else if(normalized.includes('allergy') || normalized.includes('حساسية') || normalized.includes('مكسرات') || normalized.includes('جلوتين')) {
+        let allergyList = guestProfile.allergies.length > 0 ? guestProfile.allergies.join(', ') : 'none';
+        reply = l === 'ar'
+            ? `ملف الحساسية الخاص بك مسجل لدينا كـ (${allergyList}). لقد قمنا بوضع علامات أمان حمراء على الوجبات التي تسبب لك تهيجاً في قائمة خدمة الغرف أونلاين لحمايتك.`
+            : `Your saved allergy index is (${allergyList}). I have automatically locked and rendered warning parameters across the digital room marketplace grids for your safety.`;
+    }
+    else if(normalized.includes('podium') || normalized.includes('بوديوم')) {
+        reply = l === 'ar'
+            ? "مطعم بوديوم للستيك هاوس مغلق حالياً للبناء الفني المباشر، لكن يمكنك الحجز فيه للغد ابتداءً من الآن عبر نقرة زر."
+            : "PODIUM Steakhouse is currently preparing for dinner seating. Due to high-tier premium indexing, a reservation is heavily mandatory.";
+    }
+    else if(normalized.includes('room') || normalized.includes('غرف') || normalized.includes('طلب')) {
+        reply = l === 'ar'
+            ? `بصفتك نزيلاً في الباقة (${guestProfile.tier})، يمكنك تصفح سوق المأكولات بالأسفل وإضافة طلبك مباشرة للسلة ليتم شحنه فوراً للغرفة رقم ${guestProfile.room}.`
+            : `As a (${guestProfile.tier}) package holder, please select items from the digital in-room marketplace below to bypass standard queue protocols instantly.`;
+    }
+    else {
+        reply = l === 'ar'
+            ? `أهلاً بك سيد ${guestProfile.name}. طلبك مفهوم وجاري مراجعته وتنسيقه مع إدارة الأغذية والمشروبات لخدمتك بأفضل جودة 5 نجوم.`
+            : `Bespoke instruction registered, Mr. ${guestProfile.name}. Processing intent with premium resort databases to enforce elite hospitality response standards.`;
+    }
+    
+    setTimeout(() => {
+        body.innerHTML += `<div class="msg bot">${reply}</div>`;
         body.scrollTop = body.scrollHeight;
-        renderSuggestedQuestions();
+    }, 500);
+}
+
+function triggerChatAction(action, context) {
+    toggleChat();
+    let l = localStorage.getItem('lang') || 'en';
+    if(action === 'book') {
+        document.getElementById('chatInput').value = l === 'ar' ? `أريد حجز طاولة في مطعم ${context}` : `I want to book a luxury table at ${context}`;
+        sendMessage();
     }
 }
 
-// تشغيل وتهيئة الموقع
-setInterval(updateClock,1000);
-setLang(localStorage.getItem('lang')||'en');
+function toggleChat() {
+    let win = document.getElementById('chatWindow');
+    win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetProfile() {
+    if(confirm("Do you want to clear current guest profile session? / هل تريد تسجيل الخروج؟")) {
+        localStorage.removeItem('lb_guest_v1');
+        location.reload();
+    }
+}
+
+// 2026 Clock Engine
+function runClock() {
+    const clockEl = document.getElementById('clock');
+    setInterval(() => {
+        let l = localStorage.getItem('lang') || 'en';
+        let locale = l === 'ar' ? 'ar-EG' : 'en-US';
+        clockEl.innerText = new Date().toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+    }, 1000);
+}
+
+// Initial Bootstrapper Engine
+window.onload = () => {
+    let savedProfile = localStorage.getItem('lb_guest_v1');
+    if(savedProfile) {
+        guestProfile = JSON.parse(savedProfile);
+        document.getElementById('regModal').style.display = 'none';
+    }
+    let savedLang = localStorage.getItem('lang') || 'en';
+    setLang(savedLang);
+    runClock();
+};
 </script>
 </body>
 </html>
