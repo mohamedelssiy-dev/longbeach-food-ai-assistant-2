@@ -3,22 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BREEZE Restaurant | Long Beach Resort</title>
 
 <style>
-body{
-font-family:Arial,sans-serif;
-background:#08111f;
-color:#fff;
-margin:0;
-}
+body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
 
-header{
-background:#0b1320;
-padding:25px;
-text-align:center;
-}
+header{background:#0b1320;padding:25px;text-align:center}
+h1{color:#d4af37;margin:10px 0}
 
 .category{
 display:inline-block;
@@ -27,31 +18,21 @@ color:#000;
 padding:8px 18px;
 border-radius:20px;
 font-weight:bold;
-margin-bottom:10px;
 }
 
-h1{color:#d4af37;margin:10px 0}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:25px;
-}
+.container{max-width:1200px;margin:auto;padding:20px}
 
 .card{
 background:#122033;
-padding:25px;
+padding:20px;
 border-radius:15px;
 margin-bottom:20px;
 }
 
-.card h2{
-color:#d4af37;
-margin-bottom:10px;
-}
+.card h2{color:#d4af37}
 
 .menu-item{
-padding:10px 0;
+padding:8px 0;
 border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
@@ -81,6 +62,7 @@ font-weight:bold;
 <body>
 
 <header>
+
 <div class="category" id="cat">MAIN RESTAURANT</div>
 <h1>BREEZE Restaurant</h1>
 <p id="sub">International Buffet & Indian Cuisine</p>
@@ -91,51 +73,43 @@ font-weight:bold;
 <button onclick="setLang('de')">DE</button>
 <button onclick="setLang('ru')">RU</button>
 </div>
+
 </header>
 
 <div class="container">
 
+<!-- INFO -->
 <div class="card">
 <h2 id="info">Restaurant Information</h2>
-
-<div class="menu-item" id="time1">🍳 Breakfast 07:00–10:30</div>
-<div class="menu-item" id="time2">☕ Late Breakfast 10:30–11:30</div>
-<div class="menu-item" id="time3">🍛 Indian Lunch 13:00–15:00</div>
-<div class="menu-item" id="time4">🍽 Dinner Buffet 18:30–21:30</div>
+<div class="menu-item" id="b1">🍳 Breakfast 07:00–10:30</div>
+<div class="menu-item" id="b2">☕ Late Breakfast 10:30–11:30</div>
+<div class="menu-item" id="b3">🍛 Indian Lunch 13:00–15:00</div>
+<div class="menu-item" id="b4">🍽 Dinner Buffet 18:30–21:30</div>
 </div>
 
+<!-- MENU -->
 <div class="card">
 <h2 id="menu">Indian Lunch Menu</h2>
 
-<div class="menu-item">Murgh Tandoori — Grilled chicken with Indian spices</div>
-<div class="menu-item">Murgh Biryani — Spiced chicken rice with saffron</div>
-<div class="menu-item">Dal Makhani — Black lentils cooked with butter & cream</div>
-<div class="menu-item">Chana Masala — Chickpeas in spicy tomato sauce</div>
-<div class="menu-item">Vegetable Curry — Mixed vegetables in curry sauce</div>
-<div class="menu-item">Gosht Vindaloo — Spicy beef curry</div>
-<div class="menu-item">Gulab Jamun — Sweet milk dumplings in syrup</div>
+<div id="menuList"></div>
 </div>
 
+<!-- ALLERGIES -->
 <div class="card">
-<h2 id="allergy">Food Allergy Information</h2>
-<div class="menu-item">Dairy</div>
-<div class="menu-item">Gluten</div>
-<div class="menu-item">Fish</div>
-<div class="menu-item">Shellfish</div>
-<div class="menu-item">Coconut</div>
-<div class="menu-item">Spicy</div>
-<div class="menu-item">Vegetarian</div>
-<div class="menu-item">Vegan</div>
+<h2 id="allergyTitle">Food Allergy Information</h2>
+<div id="allergyList"></div>
 </div>
 
+<!-- RESERVATION -->
 <div class="card">
 <h2 id="reserve">Reservation Policy</h2>
-<p id="reserveText">Indian Lunch: Reservation Required.</p>
+<p id="reserveText"></p>
 </div>
 
+<!-- PREMIUM -->
 <div class="card">
 <h2 id="premium">Premium Benefits</h2>
-<p id="premiumText">Included for Premium Rooms and Premium Deluxe Rooms.</p>
+<p id="premiumText"></p>
 </div>
 
 <a href="restaurants.html" class="back" id="back">⬅ Back to Restaurants</a>
@@ -144,7 +118,7 @@ font-weight:bold;
 
 <script>
 
-const tr = {
+const data = {
 
 en:{
 cat:"MAIN RESTAURANT",
@@ -156,7 +130,28 @@ reserve:"Reservation Policy",
 reserveText:"Indian Lunch: Reservation Required.",
 premium:"Premium Benefits",
 premiumText:"Included for Premium Rooms and Premium Deluxe Rooms.",
-back:"⬅ Back to Restaurants"
+back:"⬅ Back to Restaurants",
+
+menuList:[
+"Murgh Tandoori — Grilled chicken with Indian spices",
+"Murgh Biryani — Chicken rice with saffron",
+"Dal Makhani — Black lentils with butter & cream",
+"Chana Masala — Chickpeas in tomato sauce",
+"Vegetable Curry — Mixed vegetables curry",
+"Gosht Vindaloo — Spicy beef curry",
+"Gulab Jamun — Sweet milk dessert"
+],
+
+allergy:[
+"Dairy","Gluten","Fish","Shellfish","Coconut","Spicy","Vegetarian","Vegan"
+],
+
+infoBars:[
+"🍳 Breakfast 07:00–10:30",
+"☕ Late Breakfast 10:30–11:30",
+"🍛 Indian Lunch 13:00–15:00",
+"🍽 Dinner Buffet 18:30–21:30"
+]
 },
 
 ar:{
@@ -166,10 +161,31 @@ info:"معلومات المطعم",
 menu:"قائمة الغداء الهندي",
 allergy:"معلومات الحساسية الغذائية",
 reserve:"سياسة الحجز",
-reserveText:"الغداء الهندي يتطلب حجزًا مسبقًا.",
+reserveText:"الغداء الهندي يتطلب حجز مسبق.",
 premium:"مزايا بريميوم",
 premiumText:"مشمول لغرف بريميوم وبريميوم ديلوكس.",
-back:"⬅ العودة للمطاعم"
+back:"⬅ العودة للمطاعم",
+
+menuList:[
+"مرغ تندوري — دجاج مشوي بتوابل هندية",
+"مرغ برياني — أرز بالدجاج والزعفران",
+"دال ماخاني — عدس أسود بالزبدة والكريمة",
+"تشانا ماسالا — حمص بصلصة طماطم",
+"كاري خضار — خضار مشكلة",
+"غوشت فيندالو — لحم بقري حار",
+"جولاب جامون — حلوى حليب"
+],
+
+allergy:[
+"ألبان","جلوتين","أسماك","محاريات","جوز الهند","حار","نباتي","نباتي صرف"
+],
+
+infoBars:[
+"🍳 الإفطار 07:00–10:30",
+"☕ إفطار متأخر 10:30–11:30",
+"🍛 الغداء الهندي 13:00–15:00",
+"🍽 العشاء 18:30–21:30"
+]
 },
 
 de:{
@@ -182,7 +198,28 @@ reserve:"Reservierungsrichtlinie",
 reserveText:"Indisches Mittagessen erfordert Reservierung.",
 premium:"Premium Vorteile",
 premiumText:"Für Premium Zimmer enthalten.",
-back:"⬅ Zurück zu Restaurants"
+back:"⬅ Zurück",
+
+menuList:[
+"Hühnchen Tandoori — Gegrillt mit Gewürzen",
+"Hühnchen Biryani — Reis mit Safran",
+"Dal Makhani — Schwarze Linsen mit Butter",
+"Kichererbsen Curry",
+"Gemüse Curry",
+"Rind Vindaloo — Scharfes Rindfleisch",
+"Gulab Jamun — Süßspeise"
+],
+
+allergy:[
+"Milch","Gluten","Fisch","Meeresfrüchte","Kokos","Scharf","Vegetarisch","Vegan"
+],
+
+infoBars:[
+"🍳 Frühstück 07:00–10:30",
+"☕ Spätes Frühstück 10:30–11:30",
+"🍛 Mittagessen 13:00–15:00",
+"🍽 Abendessen 18:30–21:30"
+]
 },
 
 ru:{
@@ -194,25 +231,61 @@ allergy:"Информация об аллергии",
 reserve:"Правила бронирования",
 reserveText:"Индийский обед требует бронирования.",
 premium:"Премиум преимущества",
-premiumText:"Включено для Premium комнат.",
-back:"⬅ Назад к ресторанам"
+premiumText:"Включено для Premium номеров.",
+back:"⬅ Назад",
+
+menuList:[
+"Тандури курица",
+"Курица бирьяни",
+"Дал махани",
+"Чана масала",
+"Овощное карри",
+"Говядина виндалу",
+"Десерт Гулаб Джамун"
+],
+
+allergy:[
+"Молочные","Глютен","Рыба","Морепродукты","Кокос","Острое","Вегетарианское","Веганское"
+],
+
+infoBars:[
+"🍳 Завтрак 07:00–10:30",
+"☕ Поздний завтрак 10:30–11:30",
+"🍛 Обед 13:00–15:00",
+"🍽 Ужин 18:30–21:30"
+]
 }
 
 };
 
 function setLang(l){
+
 localStorage.setItem("lang",l);
 
-cat.innerText = tr[l].cat;
-sub.innerText = tr[l].sub;
-info.innerText = tr[l].info;
-menu.innerText = tr[l].menu;
-allergy.innerText = tr[l].allergy;
-reserve.innerText = tr[l].reserve;
-reserveText.innerText = tr[l].reserveText;
-premium.innerText = tr[l].premium;
-premiumText.innerText = tr[l].premiumText;
-back.innerText = tr[l].back;
+let d = data[l];
+
+cat.innerText = d.cat;
+sub.innerText = d.sub;
+info.innerText = d.info;
+menu.innerText = d.menu;
+allergyTitle.innerText = d.allergyTitle || d.allergy;
+reserve.innerText = d.reserve;
+reserveText.innerText = d.reserveText;
+premium.innerText = d.premium;
+premiumText.innerText = d.premiumText;
+back.innerText = d.back;
+
+document.getElementById("menuList").innerHTML =
+d.menuList.map(i=>`<div class="menu-item">${i}</div>`).join("");
+
+document.getElementById("allergyList").innerHTML =
+d.allergy.map(i=>`<span class="menu-item">${i}</span>`).join("");
+
+document.getElementById("b1").innerText = d.infoBars[0];
+document.getElementById("b2").innerText = d.infoBars[1];
+document.getElementById("b3").innerText = d.infoBars[2];
+document.getElementById("b4").innerText = d.infoBars[3];
+
 }
 
 setLang(localStorage.getItem("lang") || "en");
