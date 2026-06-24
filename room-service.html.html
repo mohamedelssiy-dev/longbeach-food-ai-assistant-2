@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room Service Multilingual</title>
+<style>
+body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
+header{background:#0b1320;padding:20px;text-align:center}
+h1{color:#d4af37}
+.lang button,button{background:#d4af37;color:#000;border:none;padding:10px 15px;border-radius:8px;margin:4px;cursor:pointer}
+.container{max-width:1000px;margin:auto;padding:20px}
+.card{background:#122033;padding:20px;border-radius:15px}
+label{display:block;margin-top:10px}
+input,select,textarea{width:100%;padding:10px;border:none;border-radius:8px}
+#clock{margin-top:10px}
+</style>
+</head>
+<body>
+<header>
+<h1 id="title">Room Service 2.0</h1>
+<div id="clock"></div>
+<div class="lang">
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('ar')">AR</button>
+<button onclick="setLang('de')">DE</button>
+<button onclick="setLang('ru')">RU</button>
+</div>
+</header>
+
+<div class="container">
+<div class="card">
+<label id="l1">Guest Name</label><input>
+<label id="l2">Room Number</label><input>
+<label id="l3">Number of Guests</label><input type="number" value="2">
+<label id="l4">Delivery Time</label><input type="time">
+<label id="l5">Special Request</label><textarea></textarea>
+<br><br>
+<button id="submit">Submit Order</button>
+</div>
+</div>
+
+<script>
+const t={
+en:{title:"Room Service 2.0",l1:"Guest Name",l2:"Room Number",l3:"Number of Guests",l4:"Delivery Time",l5:"Special Request",submit:"Submit Order",locale:"en-US"},
+ar:{title:"خدمة الغرف 2.0",l1:"اسم النزيل",l2:"رقم الغرفة",l3:"عدد الأشخاص",l4:"وقت التوصيل",l5:"طلبات خاصة",submit:"إرسال الطلب",locale:"ar-EG"},
+de:{title:"Zimmerservice 2.0",l1:"Gastname",l2:"Zimmernummer",l3:"Anzahl Gäste",l4:"Lieferzeit",l5:"Besondere Wünsche",submit:"Bestellung senden",locale:"de-DE"},
+ru:{title:"Обслуживание номеров 2.0",l1:"Имя гостя",l2:"Номер комнаты",l3:"Количество гостей",l4:"Время доставки",l5:"Особые пожелания",submit:"Отправить заказ",locale:"ru-RU"}
+};
+function setLang(lang){
+localStorage.setItem('lang',lang);
+let x=t[lang];
+title.innerText=x.title;
+l1.innerText=x.l1;l2.innerText=x.l2;l3.innerText=x.l3;l4.innerText=x.l4;l5.innerText=x.l5;
+submit.innerText=x.submit;
+updateClock();
+}
+function updateClock(){
+let lang=localStorage.getItem('lang')||'en';
+clock.innerText=new Date().toLocaleString(t[lang].locale);
+}
+setLang(localStorage.getItem('lang')||'en');
+setInterval(updateClock,1000);
+</script>
+</body>
+</html>
