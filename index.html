@@ -8,7 +8,6 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:#f4f7f6;color:#222}
 
-/* هيدر متطابق مع ألوان هوية المنتجع الرسمية */
 header{position:sticky;top:0;background:#0a2240;padding:20px 15px;text-align:center;z-index:999;border-bottom:3px solid #c5a059;box-shadow: 0 4px 12px rgba(0,0,0,0.15);}
 .logo{font-size:26px;font-weight:700;color:#c5a059;text-transform:uppercase;letter-spacing:1px;}
 #clock{color:#ffffff;margin-top:8px;font-size:14px;font-weight:500;}
@@ -16,30 +15,39 @@ header{position:sticky;top:0;background:#0a2240;padding:20px 15px;text-align:cen
 .lang button{background:#c5a059;color:#fff;border:none;padding:8px 14px;margin:3px;border-radius:4px;font-weight:600;cursor:pointer;transition:0.2s;}
 .lang button:hover{background:#b38f4b;}
 
-/* قسم الهيرو مع مظهر التعتيم الفاخر المتناسق وبأبعاد ثابتة للـ 5 صور */
-.hero{height:75vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;
-position: relative; transition: background-image 1.2s ease-in-out; background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;}
+/* نظام الطبقات المزدوجة لضمان انتقال الصور بنعومة فائقة وسلاسة سينمائية */
+.hero{height:75vh;position: relative; overflow: hidden; display:flex; justify-content:center; align-items:center; text-align:center; padding:20px;}
+.hero-bg{position: absolute; top:0; left:0; width:100%; height:100%; background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; transition: opacity 1.5s ease-in-out; z-index: 1;}
+.hero-bg::after{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(rgba(10,34,64,0.55),rgba(10,34,64,0.55));}
 .hero-content{position: relative; z-index: 2; max-width:800px;}
 .hero h1{font-size:46px;color:#ffffff;text-shadow: 2px 2px 8px rgba(0,0,0,0.7);font-weight:700;}
 
-/* الأزرار الذهبية والزرقاء المستوحاة من موقع الفندق */
 .btn{display:inline-block;background:#c5a059;color:#fff;text-decoration:none;padding:14px 26px;margin:8px;border-radius:4px;font-weight:600;text-transform:uppercase;font-size:14px;transition:0.3s;box-shadow: 0 4px 6px rgba(0,0,0,0.15);}
 .btn:hover{background:#0a2240;color:#c5a059;transform:translateY(-2px);box-shadow:0 6px 15px rgba(197,160,89,0.4)}
 .btn#b3 {background:#0a2240;color:#c5a059;border:1px solid #c5a059;}
 .btn#b3:hover {background:#c5a059;color:#fff;}
 
-/* الأقسام والكروت بالخلفية الفاتحة النظيفة */
-.section{padding:70px 20px;text-align:center;max-width:1300px;margin:auto;}
-.section h2{color:#0a2240;margin-bottom:35px;font-size:32px;font-weight:600;position:relative;padding-bottom:15px;}
-.section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:#c5a059;}
+.section{padding:50px 20px;text-align:center;max-width:1200px;margin:auto;}
+.section h2{color:#0a2240;margin-bottom:30px;font-size:28px;font-weight:600;position:relative;padding-bottom:12px;}
+.section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:50px;height:3px;background:#c5a059;}
 
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px;margin-top:20px;}
-.card{background:#ffffff;color:#0a2240;padding:30px 20px;border-radius:4px;font-weight:600;font-size:18px;box-shadow:0 5px 15px rgba(0,0,0,0.05);transition:0.3s;border-top:4px solid #0a2240;}
-.card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(10,34,64,0.15);border-top-color:#c5a059;}
+/* الكروت البيضاوية الأنيقة المحددة على حجم الكلمات فقط */
+.cards{display:flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;}
+.card{display: inline-block; background:#ffffff; color:#0a2240; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; box-shadow:0 4px 10px rgba(0,0,0,0.06); transition:0.3s; border: 1.5px solid #0a2240;}
+.card:hover{transform:translateY(-3px); box-shadow:0 6px 15px rgba(10,34,64,0.15); border-color:#c5a059; color:#c5a059;}
+.card span {font-size: 11px; font-weight: 400; color: #777; margin-left: 5px;}
+
+/* الميزة الجديدة: لوحة التوصية الديناميكية المربحة من الشيف */
+.chef-special-box {background: #ffffff; border: 2px solid #c5a059; border-radius: 12px; padding: 25px; margin: 20px auto; max-width: 600px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; text-align: left; gap: 20px;}
+.chef-info {flex: 1;}
+.chef-tag {background: #c5a059; color: #fff; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 3px; display: inline-block; margin-bottom: 8px; text-transform: uppercase;}
+.chef-title {font-size: 20px; color: #0a2240; font-weight: 700; margin-bottom: 5px;}
+.chef-desc {font-size: 14px; color: #555;}
+.chef-order-btn {background: #0a2240; color: #c5a059; border: 1px solid #0a2240; padding: 10px 18px; font-weight: bold; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 13px; transition: 0.2s;}
+.chef-order-btn:hover {background: #c5a059; color: #fff; border-color: #c5a059;}
 
 footer{background:#0a2240;color:#fff;padding:35px;text-align:center;border-top:4px solid #c5a059;font-size:14px;}
 
-/* واجهة المساعد الذكي بألوان الفندق الرسمية */
 .ai-chat-toggle {position:fixed;bottom:25px;right:25px;background:#c5a059;color:#fff;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;font-size:26px;box-shadow:0 5px 20px rgba(0,0,0,0.3);z-index:1000;display:flex;justify-content:center;align-items:center;transition:0.3s;}
 .ai-chat-toggle:hover {transform:scale(1.05);background:#0a2240;color:#c5a059;}
 .ai-chat-window {position:fixed;bottom:95px;right:25px;width:360px;height:480px;background:#ffffff;border:1px solid #0a2240;border-top:5px solid #c5a059;border-radius:8px;z-index:1000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,0.2);}
@@ -53,12 +61,11 @@ footer{background:#0a2240;color:#fff;padding:35px;text-align:center;border-top:4
 .ai-input:focus{border-color:#c5a059;}
 .ai-send {background:#c5a059;color:#fff;border:none;padding:10px 18px;border-radius:4px;cursor:pointer;font-weight:bold;}
 
-/* التنبيه التسويقي لزيادة الأرباح */
-.upsell-badge {background:rgba(197,160,89,0.15);border:1px dashed #c5a059;padding:10px;margin-top:15px;border-radius:4px;font-size:13px;color:#0a2240;display:block;text-decoration:none;font-weight:600;transition:0.2s;}
-.upsell-badge:hover {background:#c5a059;color:#fff;}
+.upsell-badge {background:rgba(197,160,89,0.1); border:1px dashed #c5a059; padding:4px 12px; margin-top:5px; border-radius:20px; font-size:11px; color:#0a2240; display:inline-block; text-decoration:none; font-weight:600;}
 </style>
 </head>
 <body>
+
 <header>
 <div class="logo">Long Beach Resort Hurghada</div>
 <div id="clock"></div>
@@ -71,6 +78,10 @@ footer{background:#0a2240;color:#fff;padding:35px;text-align:center;border-top:4
 </header>
 
 <section class="hero" id="hero">
+<!-- طبقتين خلفية لضمان التلاشي والتبديل الناعم للصور التلقائية -->
+<div class="hero-bg" id="bg1" style="opacity: 1;"></div>
+<div class="hero-bg" id="bg2" style="opacity: 0;"></div>
+
 <div class="hero-content">
 <h1 id="title">Long Beach Resort Food & Beverage AI Assistant</h1>
 <div style="margin-top:30px;">
@@ -83,6 +94,18 @@ footer{background:#0a2240;color:#fff;padding:35px;text-align:center;border-top:4
 </div>
 </section>
 
+<!-- الميزة الجديدة: التوصية الذكية المتغيرة للمطعم لزيادة الأرباح -->
+<section class="section" style="padding-bottom:10px;">
+    <div class="chef-special-box">
+        <div class="chef-info">
+            <span class="chef-tag" id="dishTag">Chef's Live Recommendation</span>
+            <div class="chef-title" id="dishTitle">Loading Fresh Special...</div>
+            <div class="chef-desc" id="dishDesc">Tailored high-margin delicacies for our guests.</div>
+        </div>
+        <a href="room-service.html" class="chef-order-btn" id="dishBtn">Order Now</a>
+    </div>
+</section>
+
 <section class="section">
 <h2 id="services">Guest Services</h2>
 <div class="cards">
@@ -90,21 +113,19 @@ footer{background:#0a2240;color:#fff;padding:35px;text-align:center;border-top:4
 <div class="card" id="c2">Room Service</div>
 <div class="card" id="c3" style="cursor:pointer;" onclick="openAiWidget(null)">AI Assistant</div>
 <div class="card" id="c4">Today's Buffet</div>
-<div class="card" id="c5">Premium Benefits
-    <a href="premium.html" class="upsell-badge" id="up1">⚡ Upgrade to VIP Lounge Delivery (+$15)</a>
-</div>
+<div class="card" id="c5">Premium Benefits <a href="premium.html" class="upsell-badge" id="up1">⚡ VIP Delivery (+$15)</a></div>
 </div>
 </section>
 
 <section class="section">
 <h2 id="featured">Featured Restaurants</h2>
 <div class="cards">
-<div class="card">ALDENTE <span style="font-size:12px; display:block; color:#c5a059; margin-top:5px; font-weight:400;">Italian Cuisine</span></div>
-<div class="card">D'WHITE <span style="font-size:12px; display:block; color:#c5a059; margin-top:5px; font-weight:400;">Main Buffet</span></div>
-<div class="card">BREEZE <span style="font-size:12px; display:block; color:#c5a059; margin-top:5px; font-weight:400;">Beach Grill</span></div>
-<div class="card">OPENBILL <span style="font-size:12px; display:block; color:#c5a059; margin-top:5px; font-weight:400;">Asian Fusion</span></div>
-<div class="card">MARY SOL <span style="font-size:12px; display:block; color:#c5a059; margin-top:5px; font-weight:400;">Seafood Premium</span></div>
-<div class="card">PODIUM <span style="font-size:12px; display:block; color:#c5a059; margin-top:5px; font-weight:400;">Luxury Fine Dine</span></div>
+<div class="card">ALDENTE <span>(Italian)</span></div>
+<div class="card">D'WHITE <span>(Main Buffet)</span></div>
+<div class="card">BREEZE <span>(Beach Grill)</span></div>
+<div class="card">OPENBILL <span>(Asian Fusion)</span></div>
+<div class="card">MARY SOL <span>(Seafood)</span></div>
+<div class="card">PODIUM <span>(Fine Dining)</span></div>
 </div>
 </section>
 
@@ -130,25 +151,61 @@ footer{background:#0a2240;color:#fff;padding:35px;text-align:center;border-top:4
 <footer id="footer">Long Beach Resort Food & Beverage AI Assistant</footer>
 
 <script>
-// الـ 5 صور الخاصة بك للتناوب التلقائي
-const imagesList = [
-    'hotel1.jpg',
-    'hotel2.jpg',
-    'hotel3.jpg',
-    'hotel4.jpg',
-    'hotel5.jpg'
-];
-let currentImageIndex = 0;
+// الـ 5 صور الخاصة بك
+const imagesList = ['hotel1.jpg', 'hotel2.jpg', 'hotel3.jpg', 'hotel4.jpg', 'hotel5.jpg'];
+let currentImgIdx = 0;
 
+// نظام تبديل سلس للغاية عبر طبقتين متقاطعتين
 function rotateHeroImages() {
-    const heroSection = document.getElementById('hero');
-    currentImageIndex = (currentImageIndex + 1) % imagesList.length;
-    // تم الحفاظ على طبقة التعتيم الفاخرة لتناسب الهوية الرسمية للموقع وتظهر العناوين بنقاء
-    heroSection.style.backgroundImage = `linear-gradient(rgba(10,34,64,0.55),rgba(10,34,64,0.55)), url('${imagesList[currentImageIndex]}')`;
+    const bg1 = document.getElementById('bg1');
+    const bg2 = document.getElementById('bg2');
+    
+    currentImgIdx = (currentImgIdx + 1) % imagesList.length;
+    const nextImg = imagesList[currentImgIdx];
+
+    if (bg1.style.opacity == 1) {
+        bg2.style.backgroundImage = `url('${nextImg}')`;
+        bg2.style.opacity = 1;
+        bg1.style.opacity = 0;
+    } else {
+        bg1.style.backgroundImage = `url('${nextImg}')`;
+        bg1.style.opacity = 1;
+        bg2.style.opacity = 0;
+    }
 }
-// تشغيل تدوير الصور فورا كل 5 ثواني
+document.getElementById('bg1').style.backgroundImage = `url('${imagesList[0]}')`;
 setInterval(rotateHeroImages, 5000);
-rotateHeroImages(); // تشغيل فوري عند التحميل الأول
+
+// ميزة التوصية الحية الذكية بحسب التوقيت الفعلي لزيادة مبيعات الغرف والأرباح
+function updateChefRecommendation() {
+    const hours = new Date().getHours();
+    let lang = localStorage.getItem('lang') || 'en';
+    
+    const recommendations = {
+        morning: {
+            en: { title: "🍳 Royal Floating Breakfast Basket", desc: "Served directly in your private pool with premium bakery & fresh salmon. Only $25.", tag: "Morning VIP Special" },
+            ar: { title: "🍳 سلة الفطور الملكي العائم", desc: "تُقدم مباشرة في مسبحك الخاص مع المخبوزات الطازجة والسلمون الفاخر. بـ 25$ فقط.", tag: "تميز صباحي VIP" }
+        },
+        afternoon: {
+            en: { title: "🍹 Tropical Seafood Platter & Cocktails", desc: "Fresh Catch from the Red Sea delivered straight to your beachfront sunbed from MARY SOL. Only $35.", tag: "Beachside Luxury" },
+            ar: { title: "🍹 طبق ثمار البحر الاستوائي المنعش", desc: "صيد طازج من البحر الأحمر يصلك لسرير الشاطئ الخاص بك مباشرة من مطعم مار إي صول. بـ 35$.", tag: "فخامة شاطئية" }
+        },
+        evening: {
+            en: { title: "🥩 Wagyu Beef Steak - Elite Fine Dining", desc: "Exclusive cut prepared by our executive chef at PODIUM with gold leaf garnish. Only $55.", tag: "Elite Dinner Special" },
+            ar: { title: "🥩 ستيك لحم الواغيو الفاخر - بوديوم", desc: "قطعة لحم حصرية يجهزها كبير الطهاة في مطعم بوديوم بلمسة ذهبية صالحة للأكل. بـ 55$.", tag: "عشاء النخبة الفاخر" }
+        }
+    };
+
+    let period = "evening";
+    if (hours >= 5 && hours < 12) period = "morning";
+    else if (hours >= 12 && hours < 17) period = "afternoon";
+
+    const data = recommendations[period][lang];
+    document.getElementById('dishTag').innerText = data.tag;
+    document.getElementById('dishTitle').innerText = data.title;
+    document.getElementById('dishDesc').innerText = data.desc;
+    document.getElementById('dishBtn').innerText = lang === 'ar' ? "اطلب الآن" : "Order Now";
+}
 
 const RESTAURANT_DATA = {
     aldente: { en: "ALDENTE: Authentic Italian Pasta & Pizza. Open from 06:30 PM to 10:00 PM.", ar: "أل دنتي: مأكولات إيطالية فاخرة باستا وبيتزا. يفتح من 06:30 مساءً حتى 10:00 مساءً." },
@@ -160,10 +217,10 @@ const RESTAURANT_DATA = {
 };
 
 const txt={
-en:{title:'Long Beach Resort Food & Beverage AI Assistant',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',locale:'en-US', welcome: "Hello! Ask me about our restaurants or upgrading options.", holder: "Type your question...", up: "⚡ Upgrade to VIP Room Delivery (+$15)"},
-ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',locale:'ar-EG', welcome: "مرحباً بك! اسألني عن تفاصيل ومواعيد المطاعم أو ترقية طلبك.", holder: "اكتب سؤالك هنا...", up: "⚡ ترقية للتوصيل السريع الفاخر VIP (+$15)"},
-de:{title:'Long Beach Resort Speisen & Getränke Assistent',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',locale:'de-DE', welcome: "Hallo! Fragen Sie mich nach unseren Restaurants.", holder: "Frage eingeben...", up: "⚡ Auf VIP-Zimmerservice upgraden (+$15)"},
-ru:{title:'Помощник Long Beach Resort по питанию и напиткам',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',locale:'ru-RU', welcome: "Здравствуйте! Спросите меня о ресторанах.", holder: "Введите вопрос...", up: "⚡ Перейти на VIP-обслуживание (+$15)"}
+en:{title:'Long Beach Resort Food & Beverage AI Assistant',srv:'Guest Services',feat:'Featured Restaurants',stat:'Long Beach Dining Experience',r:'Restaurants',rs:'Room Service',ai:'AI Assistant',bf:"Today's Buffet",pr:'Premium Benefits',locale:'en-US', welcome: "Hello! Ask me about our restaurants or upgrading options.", holder: "Type your question...", up: "⚡ VIP Delivery (+$15)"},
+ar:{title:'مساعد لونج بيتش ريزورت للأغذية والمشروبات',srv:'خدمات النزلاء',feat:'المطاعم المميزة',stat:'تجربة الطعام في لونج بيتش',r:'المطاعم',rs:'خدمة الغرف',ai:'المساعد الذكي',bf:'بوفيه اليوم',pr:'مزايا بريميوم',locale:'ar-EG', welcome: "مرحباً بك! اسألني عن تفاصيل ومواعيد المطاعم أو ترقية طلبك.", holder: "اكتب سؤالك هنا...", up: "⚡ توصيل VIP سريع (+$15)"},
+de:{title:'Long Beach Resort Speisen & Getränke Assistent',srv:'Gästeservice',feat:'Empfohlene Restaurants',stat:'Long Beach Dining Erlebnis',r:'Restaurants',rs:'Zimmerservice',ai:'KI Assistent',bf:'Heutiges Buffet',pr:'Premium Vorteile',locale:'de-DE', welcome: "Hallo! Fragen Sie mich nach unseren Restaurants.", holder: "Frage eingeben...", up: "⚡ VIP Service (+$15)"},
+ru:{title:'Помощник Long Beach Resort по питанию и напиткам',srv:'Услуги для гостей',feat:'Рекомендуемые рестораны',stat:'Гастрономия Long Beach',r:'Рестораны',rs:'Обслуживание номеров',ai:'ИИ Помощник',bf:'Буфет сегодня',pr:'Премиум преимущества',locale:'ru-RU', welcome: "Здравствуйте! Спросите меня о ресторанах.", holder: "Введите вопрос...", up: "⚡ VIP доставка (+$15)"}
 };
 
 function setLang(l){
@@ -182,11 +239,12 @@ c1.innerText=t.r+' Directory';
 c2.innerText=t.rs;
 c3.innerText=t.ai;
 c4.innerText=t.bf;
-c5.innerHTML=t.pr + `<a href="premium.html" class="upsell-badge" id="up1">${t.up}</a>`;
+c5.innerHTML=t.pr + ` <a href="premium.html" class="upsell-badge" id="up1">${t.up}</a>`;
 footer.innerText=t.title;
 document.getElementById('aiWelcome').innerText = t.welcome;
 document.getElementById('aiInput').placeholder = t.holder;
 updateClock();
+updateChefRecommendation();
 }
 
 function updateClock(){
