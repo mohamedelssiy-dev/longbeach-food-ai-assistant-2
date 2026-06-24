@@ -12,9 +12,11 @@ header{position:sticky;top:0;background:#0b1320;padding:15px;text-align:center;z
 #clock{color:#d4af37;margin-top:8px}
 .lang button{background:#d4af37;border:none;padding:8px 12px;margin:3px;border-radius:8px;font-weight:bold;cursor:pointer}
 
-/* تم تثبيت الخلفية ومنع تحركها تماماً هنا */
+/* تصميم قسم الهيرو بعد ضبط انتقال الـ 5 صور ناعماً وتثبيتها */
 .hero{height:80vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;
-background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; background-attachment: fixed;}
+position: relative; transition: background-image 1.5s ease-in-out; background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;}
+.hero-content{position: relative; z-index: 2;}
+
 .hero h1{font-size:52px;color:#d4af37}
 
 .btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:14px 22px;margin:5px;border-radius:10px;font-weight:bold;transition:0.3s;}
@@ -26,7 +28,6 @@ background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('https://images.
 .card:hover{border-color:#d4af37;transform:translateY(-3px)}
 footer{background:#050b15;padding:30px;text-align:center}
 
-/* تصميم المساعد الذكي الاحترافي المدمج المتناسق مع ألوانك */
 .ai-chat-toggle {position:fixed;bottom:25px;right:25px;background:#d4af37;color:#000;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;font-size:24px;box-shadow:0 5px 20px rgba(0,0,0,0.5);z-index:1000;display:flex;justify-content:center;align-items:center;}
 .ai-chat-window {position:fixed;bottom:95px;right:25px;width:350px;height:450px;background:#0b1320;border:2px solid #d4af37;border-radius:15px;z-index:1000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.7);}
 .ai-header {background:#122033;padding:15px;color:#d4af37;font-weight:bold;display:flex;justify-content:between;align-items:center;border-bottom:1px solid #d4af37;}
@@ -38,7 +39,6 @@ footer{background:#050b15;padding:30px;text-align:center}
 .ai-input {flex:1;background:#08111f;border:1px solid #d4af37;padding:10px;border-radius:8px;color:#fff;outline:none;}
 .ai-send {background:#d4af37;border:none;padding:10px 15px;border-radius:8px;cursor:pointer;font-weight:bold;}
 
-/* إضافة لمسة زيادة الأرباح المباشرة */
 .upsell-badge {background:rgba(212,175,55,0.1);border:1px dashed #d4af37;padding:8px;margin-top:10px;border-radius:8px;font-size:12px;color:#d4af37;display:block;text-decoration:none;}
 </style>
 </head>
@@ -55,7 +55,7 @@ footer{background:#050b15;padding:30px;text-align:center}
 </header>
 
 <section class="hero" id="hero">
-<div>
+<div class="hero-content">
 <h1 id="title">Long Beach Resort Food & Beverage AI Assistant</h1>
 <div style="margin-top:25px;">
 <a class="btn" id="b1" href="restaurants.html">🍽 Restaurants</a>
@@ -114,7 +114,23 @@ footer{background:#050b15;padding:30px;text-align:center}
 <footer id="footer">Long Beach Resort Food & Beverage AI Assistant</footer>
 
 <script>
-// قاعدة بيانات المطاعم الستة المذكورة في كودك للبحث الفوري ذكياً
+// تم إضافة الـ 5 صور الخاصة بك كاملة هنا لتتناوب تلقائياً
+const imagesList = [
+    'hotel1.jpg',
+    'hotel2.jpg',
+    'hotel3.jpg',
+    'hotel4.jpg',
+    'hotel5.jpg'
+];
+let currentImageIndex = 0;
+
+function rotateHeroImages() {
+    const heroSection = document.getElementById('hero');
+    currentImageIndex = (currentImageIndex + 1) % imagesList.length;
+    heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)), url('${imagesList[currentImageIndex]}')`;
+}
+setInterval(rotateHeroImages, 5000);
+
 const RESTAURANT_DATA = {
     aldente: { en: "ALDENTE: Authentic Italian Pasta & Pizza. Open from 06:30 PM to 10:00 PM.", ar: "أل دنتي: مأكولات إيطالية فاخرة باستا وبيتزا. يفتح من 06:30 مساءً حتى 10:00 مساءً." },
     dwhite: { en: "D'WHITE: Main Resort Buffet for Breakfast (07:00-10:00) and Dinner (18:30-21:30).", ar: "دي وايت: البوفيه الرئيسي للمنتجع للإفطار والعشاء." },
@@ -169,7 +185,6 @@ function openAiWidget(e) {
     document.getElementById('aiWindow').style.display = 'flex';
 }
 
-// محرك المساعد الذكي للبحث والبيع المتبادل
 function askAiEngine() {
     const input = document.getElementById('aiInput');
     const msg = input.value.trim().toLowerCase();
@@ -182,7 +197,6 @@ function askAiEngine() {
     let lang = localStorage.getItem('lang') || 'en';
     let reply = lang === 'ar' ? "أنا هنا لمساعدتك! يمكنك الاستفسار عن تفاصيل أي مطعم مثل ALDENTE أو حجز ترقية VIP لطلبك لزيادة الراحة." : "I'm here to guide you! You can ask about our 6 venues or how to instantly book a VIP ocean-view table upgrade.";
 
-    // فحص الكلمات المفتاحية الذكية بناء على المطاعم المتاحة في كودك
     if(msg.includes('aldente') || msg.includes('دنتي')) reply = lang === 'ar' ? RESTAURANT_DATA.aldente.ar : RESTAURANT_DATA.aldente.en;
     else if(msg.includes('white') || msg.includes('وايت')) reply = lang === 'ar' ? RESTAURANT_DATA.dwhite.ar : RESTAURANT_DATA.dwhite.en;
     else if(msg.includes('breeze') || msg.includes('بريز')) reply = lang === 'ar' ? RESTAURANT_DATA.breeze.ar : RESTAURANT_DATA.breeze.en;
