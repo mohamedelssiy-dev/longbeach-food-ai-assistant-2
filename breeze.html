@@ -3,23 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>BREEZE Restaurant | Long Beach Resort</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#08111f;color:#fff;margin:0}
-header{background:#0b1320;padding:25px;text-align:center}
-h1{color:#d4af37}
-.category{display:inline-block;background:#d4af37;color:#000;padding:8px 18px;border-radius:20px;font-weight:bold}
-.lang button,.back{background:#d4af37;color:#000;border:none;padding:10px 14px;border-radius:8px;margin:3px;text-decoration:none}
-.container{max-width:1200px;margin:auto;padding:20px}
-.card{background:#122033;padding:20px;border-radius:15px;margin-bottom:20px}
-.card h2{color:#d4af37}
+body{
+font-family:Arial,sans-serif;
+background:#08111f;
+color:#fff;
+margin:0;
+}
+
+header{
+background:#0b1320;
+padding:25px;
+text-align:center;
+}
+
+.category{
+display:inline-block;
+background:#d4af37;
+color:#000;
+padding:8px 18px;
+border-radius:20px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+h1{color:#d4af37;margin:10px 0}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:25px;
+}
+
+.card{
+background:#122033;
+padding:25px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.card h2{
+color:#d4af37;
+margin-bottom:10px;
+}
+
+.menu-item{
+padding:10px 0;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.lang button{
+background:#d4af37;
+border:none;
+padding:8px 12px;
+margin:3px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.back{
+display:inline-block;
+margin-top:15px;
+padding:12px 18px;
+background:#d4af37;
+color:#000;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
 </style>
 </head>
+
 <body>
+
 <header>
 <div class="category" id="cat">MAIN RESTAURANT</div>
 <h1>BREEZE Restaurant</h1>
 <p id="sub">International Buffet & Indian Cuisine</p>
+
 <div>
 <button onclick="setLang('en')">EN</button>
 <button onclick="setLang('ar')">AR</button>
@@ -29,19 +94,38 @@ h1{color:#d4af37}
 </header>
 
 <div class="container">
+
 <div class="card">
 <h2 id="info">Restaurant Information</h2>
-<p>🍳 Breakfast 07:00–10:30<br>☕ Late Breakfast 10:30–11:30<br>🍛 Indian Lunch 13:00–15:00<br>🍽 Dinner Buffet 18:30–21:30</p>
+
+<div class="menu-item" id="time1">🍳 Breakfast 07:00–10:30</div>
+<div class="menu-item" id="time2">☕ Late Breakfast 10:30–11:30</div>
+<div class="menu-item" id="time3">🍛 Indian Lunch 13:00–15:00</div>
+<div class="menu-item" id="time4">🍽 Dinner Buffet 18:30–21:30</div>
 </div>
 
 <div class="card">
 <h2 id="menu">Indian Lunch Menu</h2>
-<p>Murgh Tandoori • Murgh Biryani • Dal Makhani • Chana Masala • Vegetable Curry • Gosht Vindaloo</p>
+
+<div class="menu-item">Murgh Tandoori — Grilled chicken with Indian spices</div>
+<div class="menu-item">Murgh Biryani — Spiced chicken rice with saffron</div>
+<div class="menu-item">Dal Makhani — Black lentils cooked with butter & cream</div>
+<div class="menu-item">Chana Masala — Chickpeas in spicy tomato sauce</div>
+<div class="menu-item">Vegetable Curry — Mixed vegetables in curry sauce</div>
+<div class="menu-item">Gosht Vindaloo — Spicy beef curry</div>
+<div class="menu-item">Gulab Jamun — Sweet milk dumplings in syrup</div>
 </div>
 
 <div class="card">
 <h2 id="allergy">Food Allergy Information</h2>
-<p>Dairy • Gluten • Fish • Shellfish • Coconut • Spicy • Vegetarian • Vegan</p>
+<div class="menu-item">Dairy</div>
+<div class="menu-item">Gluten</div>
+<div class="menu-item">Fish</div>
+<div class="menu-item">Shellfish</div>
+<div class="menu-item">Coconut</div>
+<div class="menu-item">Spicy</div>
+<div class="menu-item">Vegetarian</div>
+<div class="menu-item">Vegan</div>
 </div>
 
 <div class="card">
@@ -55,23 +139,85 @@ h1{color:#d4af37}
 </div>
 
 <a href="restaurants.html" class="back" id="back">⬅ Back to Restaurants</a>
+
 </div>
 
 <script>
-const tr={
-en:{cat:'MAIN RESTAURANT',sub:'International Buffet & Indian Cuisine',info:'Restaurant Information',menu:'Indian Lunch Menu',allergy:'Food Allergy Information',reserve:'Reservation Policy',reserveText:'Indian Lunch: Reservation Required.',premium:'Premium Benefits',premiumText:'Included for Premium Rooms and Premium Deluxe Rooms.',back:'⬅ Back to Restaurants'},
-ar:{cat:'المطعم الرئيسي',sub:'بوفيه عالمي ومأكولات هندية',info:'معلومات المطعم',menu:'قائمة الغداء الهندي',allergy:'معلومات الحساسية الغذائية',reserve:'سياسة الحجز',reserveText:'الغداء الهندي يتطلب حجزاً.',premium:'مزايا بريميوم',premiumText:'مشمول لغرف بريميوم وبريميوم ديلوكس.',back:'⬅ العودة للمطاعم'},
-de:{cat:'HAUPTRESTAURANT',sub:'Internationales Buffet & Indische Küche',info:'Restaurantinformationen',menu:'Indisches Mittagsmenü',allergy:'Allergieinformationen',reserve:'Reservierungsrichtlinie',reserveText:'Indisches Mittagessen erfordert Reservierung.',premium:'Premium Vorteile',premiumText:'Für Premium Zimmer und Premium Deluxe enthalten.',back:'⬅ Zur Restaurants'},
-ru:{cat:'ГЛАВНЫЙ РЕСТОРАН',sub:'Международный буфет и индийская кухня',info:'Информация о ресторане',menu:'Индийское обеденное меню',allergy:'Информация об аллергиях',reserve:'Правила бронирования',reserveText:'Индийский обед требует бронирования.',premium:'Премиум преимущества',premiumText:'Включено для Premium и Premium Deluxe.',back:'⬅ Назад к ресторанам'}
-};
-function setLang(l){
-localStorage.setItem('lang',l);
-let t=tr[l];
-cat.innerText=t.cat; sub.innerText=t.sub; info.innerText=t.info; menu.innerText=t.menu;
-allergy.innerText=t.allergy; reserve.innerText=t.reserve; reserveText.innerText=t.reserveText;
-premium.innerText=t.premium; premiumText.innerText=t.premiumText; back.innerText=t.back;
+
+const tr = {
+
+en:{
+cat:"MAIN RESTAURANT",
+sub:"International Buffet & Indian Cuisine",
+info:"Restaurant Information",
+menu:"Indian Lunch Menu",
+allergy:"Food Allergy Information",
+reserve:"Reservation Policy",
+reserveText:"Indian Lunch: Reservation Required.",
+premium:"Premium Benefits",
+premiumText:"Included for Premium Rooms and Premium Deluxe Rooms.",
+back:"⬅ Back to Restaurants"
+},
+
+ar:{
+cat:"المطعم الرئيسي",
+sub:"بوفيه عالمي ومأكولات هندية",
+info:"معلومات المطعم",
+menu:"قائمة الغداء الهندي",
+allergy:"معلومات الحساسية الغذائية",
+reserve:"سياسة الحجز",
+reserveText:"الغداء الهندي يتطلب حجزًا مسبقًا.",
+premium:"مزايا بريميوم",
+premiumText:"مشمول لغرف بريميوم وبريميوم ديلوكس.",
+back:"⬅ العودة للمطاعم"
+},
+
+de:{
+cat:"HAUPTRESTAURANT",
+sub:"Internationales Buffet & Indische Küche",
+info:"Restaurantinformationen",
+menu:"Indisches Mittagsmenü",
+allergy:"Allergieinformationen",
+reserve:"Reservierungsrichtlinie",
+reserveText:"Indisches Mittagessen erfordert Reservierung.",
+premium:"Premium Vorteile",
+premiumText:"Für Premium Zimmer enthalten.",
+back:"⬅ Zurück zu Restaurants"
+},
+
+ru:{
+cat:"ГЛАВНЫЙ РЕСТОРАН",
+sub:"Международный буфет и индийская кухня",
+info:"Информация о ресторане",
+menu:"Индийское меню",
+allergy:"Информация об аллергии",
+reserve:"Правила бронирования",
+reserveText:"Индийский обед требует бронирования.",
+premium:"Премиум преимущества",
+premiumText:"Включено для Premium комнат.",
+back:"⬅ Назад к ресторанам"
 }
-setLang(localStorage.getItem('lang')||'en');
+
+};
+
+function setLang(l){
+localStorage.setItem("lang",l);
+
+cat.innerText = tr[l].cat;
+sub.innerText = tr[l].sub;
+info.innerText = tr[l].info;
+menu.innerText = tr[l].menu;
+allergy.innerText = tr[l].allergy;
+reserve.innerText = tr[l].reserve;
+reserveText.innerText = tr[l].reserveText;
+premium.innerText = tr[l].premium;
+premiumText.innerText = tr[l].premiumText;
+back.innerText = tr[l].back;
+}
+
+setLang(localStorage.getItem("lang") || "en");
+
 </script>
+
 </body>
 </html>
