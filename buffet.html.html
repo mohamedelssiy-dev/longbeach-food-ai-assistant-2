@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buffet Today | Long Beach Resort</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#08111f;
+color:white;
+margin:0;
+}
+
+header{
+background:#0b1320;
+padding:25px;
+text-align:center;
+}
+
+h1{color:#d4af37;margin:0}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+.day{
+background:#122033;
+padding:25px;
+border-radius:15px;
+margin-top:20px;
+display:none;
+}
+
+.day h2{color:#d4af37}
+
+.back{
+display:inline-block;
+margin-top:20px;
+padding:12px 18px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+.lang button{
+background:#d4af37;
+border:none;
+padding:8px 12px;
+margin:3px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1 id="title">Buffet Today</h1>
+
+<div class="lang">
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('ar')">AR</button>
+<button onclick="setLang('de')">DE</button>
+<button onclick="setLang('ru')">RU</button>
+</div>
+</header>
+
+<div class="container">
+
+<div id="sat" class="day">
+<h2>Saturday</h2>
+<ul>
+<li>San German Soup</li>
+<li>Seafood Soup</li>
+<li>Majboos Rice with Chicken</li>
+</ul>
+</div>
+
+<div id="sun" class="day">
+<h2>Sunday</h2>
+<ul>
+<li>Indian Lentil Soup</li>
+<li>Chicken Biryani</li>
+<li>Seafood Rice</li>
+</ul>
+</div>
+
+<div id="mon" class="day">
+<h2>Monday</h2>
+<ul>
+<li>Pumpkin Soup</li>
+<li>Chicken Tortilla Soup</li>
+<li>Paella Rice</li>
+</ul>
+</div>
+
+<div id="tue" class="day">
+<h2>Tuesday</h2>
+<ul>
+<li>Kabsa Rice with Beef</li>
+<li>Shish Tawook</li>
+<li>Egyptian Beef Fattah</li>
+</ul>
+</div>
+
+<div id="wed" class="day">
+<h2>Wednesday</h2>
+<ul>
+<li>Bisque Soup</li>
+<li>French Onion Soup</li>
+<li>Beef Kamounia</li>
+</ul>
+</div>
+
+<div id="thu" class="day">
+<h2>Thursday</h2>
+<ul>
+<li>Tom Yam Soup</li>
+<li>Chicken Lasagna</li>
+<li>Fresh Fish with Saffron</li>
+</ul>
+</div>
+
+<div id="fri" class="day">
+<h2>Friday</h2>
+<ul>
+<li>Harira Soup</li>
+<li>Kebab Halla</li>
+<li>Fish Sayadiah</li>
+</ul>
+</div>
+
+<a class="back" href="index.html">⬅ Back to Home</a>
+
+</div>
+
+<script>
+
+const map = {
+0:"sun",
+1:"mon",
+2:"tue",
+3:"wed",
+4:"thu",
+5:"fri",
+6:"sat"
+};
+
+function showToday(){
+let d = new Date().getDay();
+let id = map[d];
+document.getElementById(id).style.display="block";
+}
+
+showToday();
+
+function setLang(l){
+localStorage.setItem("lang",l);
+}
+
+</script>
+
+</body>
+</html>
